@@ -1,13 +1,15 @@
 
 import './css/style.css';
 import Menu from './Menu';
-import Search from './Search';
+import Center from './Center';
+import Sidebar from './Sidebar';
 
 function App() {
   return (
-    <div className="wrapper container">
+    <div className="wrapper container main">
       <Menu/>
-      <Search/>
+      <Center/>
+      <Sidebar/>
     </div>
   );
 }
