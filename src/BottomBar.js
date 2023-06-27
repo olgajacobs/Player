@@ -7,6 +7,7 @@ import Volume from './Volume';
 function BottomBar(){
     return(
       <div className ="bar bar__content">
+        <div className="bar__player-progress"/>
         <div className="bar__player-block">
             <Player/>
             <Volume/>

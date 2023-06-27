@@ -14,6 +14,7 @@ function App() {
             <Sidebar/>
         </div>
         <BottomBar/>
+        <footer className="footer"/>
     </div>
   );
 }
