@@ -350,7 +350,7 @@ body {
   width: 12px;
   height: 12px;
   fill: transparent;
-  stroke: #696969;
+  stroke: #d9d9d9;
 }
 
 .col01 {
@@ -427,7 +427,7 @@ body {
   width: 18px;
   height: 17px;
   fill: transparent;
-  stroke: #4E4E4E;
+  stroke: #d9d9d9;
 }
 
 .track__title-link {
@@ -699,7 +699,7 @@ body {
   width: 18px;
   height: 12px;
   fill: transparent;
-  stroke: #696969;
+  stroke: #d9d9d9;
 }
 
 .player__btn-shuffle {
@@ -715,7 +715,7 @@ body {
   width: 19px;
   height: 12px;
   fill: transparent;
-  stroke: #696969;
+  stroke: #d9d9d9;
 }
 
 .player__track-play {
@@ -820,7 +820,7 @@ body {
   width: 14px;
   height: 12px;
   fill: transparent;
-  stroke: #696969;
+  stroke: #d9d9d9;
 }
 
 .track-play__dislike {
@@ -831,7 +831,7 @@ body {
   width: 14.34px;
   height: 13px;
   fill: transparent;
-  stroke: #696969;
+  stroke: #d9d9d9;
 }
 
 .volume__content {
