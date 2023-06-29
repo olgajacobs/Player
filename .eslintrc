@@ -8,7 +8,9 @@
       "airbnb",
       "prettier",
       "plugin:react/jsx-runtime"
+     
     ],
+    // "parser": "babel-eslint",
     "parserOptions": {
       "ecmaFeatures": {
         "jsx": true
@@ -21,11 +23,12 @@
       "react/jsx-filename-extension": [1, { "extensions": [".js", ".jsx"] }],
       "react/prop-types": 0,
       "react/destructuring-assignment": [0]
+    //   "prettier/prettier": "error"
     },
     "settings": {
         "import/resolver": {
           "node": {          
-            "paths": ["src"],
+            "paths": ["./src"],
             "extensions": [".js", ".jsx", ".ts", ".tsx"]
           }
         }

@@ -1,9 +1,13 @@
 import {useState} from "react";
-import './css/style.css';
-import './css/filter.css';
+import './Filter.module.css';
+import './filter.css';
 
-import tempPlayList from "./tempPlayList";
 
+// Подготовка тестового плейлиста
+
+import tempPlayList from "../../../tempPlayList";
+
+const songFilter=tempPlayList.map(song=><a href="http://">{song.name}</a>);
 let yearFilter=Array.from(new Set(tempPlayList.map(song=>song.release_date.substring(0,4)))).sort();
     yearFilter=yearFilter.map(releaseData=><a href="http://">{releaseData}</a>);
 let genreFilter=Array.from(new Set(tempPlayList.map(song=>song.genre))).sort();
@@ -12,9 +16,6 @@ let genreFilter=Array.from(new Set(tempPlayList.map(song=>song.genre))).sort();
 function Filter()
 {
     const [buttons,setButtons]=useState([false,false,false])
-
-const songFilter=tempPlayList.map(song=><a href="http://">{song.name}</a>);
-
 
     function buttonClick(buttonNumber){
         const tempArray=[false,false,false]

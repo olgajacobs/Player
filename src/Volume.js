@@ -1,6 +1,6 @@
 // import React from "react";
 import './css/style.css';
-import Icon from './Icon';
+import Icon from "./Icon";
 
 function Volume(){
     return(

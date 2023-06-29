@@ -1,12 +1,12 @@
 // import React from "react";
-import './css/style.css';
+import styles from './Content.module.css';
 
-import PlayListItem from './PlayListItem'
-import Icon from "./Icon"
+import PlayListItem from '../../../PlayListItem'
+import Icon from "../../../Icon"
 
 function Content(){
     return(
-      <div className="centerblock__content">
+      <div className={styles.main}>
          <div className="content__title playlist-title">
             <div className="playlist-title__col col01">Трек</div>
             <div className="playlist-title__col col02">ИСПОЛНИТЕЛЬ</div>
