@@ -7,11 +7,11 @@ import './filter.css';
 
 import tempPlayList from "../../../tempPlayList";
 
-const songFilter=tempPlayList.map(song=><a href="http://">{song.name}</a>);
+const songFilter=tempPlayList.map(song=><a href="http://" key={song.id}>{song.name}</a>);
 let yearFilter=Array.from(new Set(tempPlayList.map(song=>song.release_date.substring(0,4)))).sort();
-    yearFilter=yearFilter.map(releaseData=><a href="http://">{releaseData}</a>);
+    yearFilter=yearFilter.map((releaseData)=><a href="http://" key={releaseData}>{releaseData}</a>);
 let genreFilter=Array.from(new Set(tempPlayList.map(song=>song.genre))).sort();
-    genreFilter=genreFilter.map(genre=><a href="http://">{genre}</a>);
+    genreFilter=genreFilter.map((genre)=><a href="http://" key={genre}>{genre}</a>);
 
 function Filter()
 {

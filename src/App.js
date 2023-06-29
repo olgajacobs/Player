@@ -9,16 +9,31 @@ import MyLoader from './MyLoader';
     
 function App() {
     const [loading, setLoading] = useState(true);
-  
+    const stopPropagation1 = () =>{
+        console.log("SSS")
+    };
     useEffect(() => {
-      setTimeout(() => setLoading(false), 3000);
+      setTimeout(() => setLoading(false), 10000);
     });
     if(loading)
     return (
-        <div className="wrapper container">
+        <div className="wrapper container" >
+            <div className="shadow" onClick={(e) => { e.stopPropagation(); stopPropagation1(); }} role='button' tabIndex="0" onKeyUp={() => {}}>
+                 <MyLoader/>
+                 <p>Loading...</p>
           
-            ?<MyLoader/>
+            
+                <div className="main">
+                    <LeftBlockMenu/>
+                    <CenterBlock/>
+                    <Sidebar/>
+            
+                 </div>
+        
+                 <BottomBar/>
             </div>
+        
+        </div>
       );
               
        
