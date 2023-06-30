@@ -1,20 +1,20 @@
 // import React from "react";
-import './css/style.css';
+import './style.css';
 
 import Player from './Player';
 import Volume from './Volume';
 
-function BottomBar(){
+function Footer(){
     return(
-      <div className ="bar bar__content">
+      <footer className ="bar bar__content">
         <div className="bar__player-progress"/>
         <div className="bar__player-block">
             <Player/>
             <Volume/>
         </div>
-      </div>
+      </footer>
         
     )
 
     }
-    export default BottomBar
+    export default Footer

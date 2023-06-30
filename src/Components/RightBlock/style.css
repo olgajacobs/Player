@@ -27,12 +27,6 @@ ul li {
   list-style: none;
 }
 
-@font-face {
-  font-family: 'StratosSkyeng';
-  src: local("StratosSkyeng"), local("StratosSkyeng"), url("../../public/fonts/Stratos-Regular.woff2") format("woff2"), url("../../public/fonts/Stratos-Regular.woff") format("woff");
-  font-weight: 400;
-  font-style: normal;
-}
 
 html,
 body {
@@ -558,6 +552,7 @@ body {
 .sidebar__item {
   width: 250px;
   height: 150px;
+  background-color: #696969;
 }
 
 .sidebar__item:not(:last-child) {
@@ -875,3 +870,4 @@ body {
     text-align: left ;
     
   }
+  
