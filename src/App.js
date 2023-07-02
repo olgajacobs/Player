@@ -1,22 +1,36 @@
-
-import './css/style.css';
-import Menu from './Menu';
-import Center from './Center';
-import Sidebar from './Sidebar';
-import BottomBar from './BottomBar';
+import { useState, useEffect } from 'react'
+import './css/style.css'
+import './shadow.css'
+import LeftBlockMenu from './Components/LeftBlockMenu/LeftBlockMenu'
+import CenterBlock from './Components/CenterBlock/CenterBlock'
+import Footer from './Components/Footer/Footer'
+import RightBlock from './Components/RightBlock/RightBlock'
 
 function App() {
+  const [loading, setLoading] = useState(true)
+
+  useEffect(() => {
+    setTimeout(() => setLoading(false), 4000)
+  })
+
   return (
     <div className="wrapper container">
-        <div className="main">
-            <Menu/>
-            <Center/>
-            <Sidebar/>
+      <div className="main">
+        <LeftBlockMenu loading={loading} />
+        <CenterBlock loading={loading} />
+        <RightBlock loading={loading} />
+      </div>
+      <Footer />
+
+      {loading && (
+        <div className="first_layer">
+          <div className="second_layer">
+            <p>Loading...</p>
+          </div>
         </div>
-        <BottomBar/>
-        <footer className="footer"/>
+      )}
     </div>
-  );
+  )
 }
 
-export default App;
+export default App
