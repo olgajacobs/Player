@@ -13,7 +13,7 @@
     opacity: 60%;
 }
   .second_layer {
-    width: 600px;
+    width: 300px;
     height: 130px;
     display: flex;
     flex-direction: column;
@@ -23,9 +23,12 @@
     overflow: hidden;
     position: absolute;
     top: calc(50% - 150px);
-    left: calc(50% - 75px); 
+    left: calc(50% - 100px); 
 }
 p{
     color: chartreuse;  
+    font-weight: 400;
+    font-size: 60px;
+    /* line-height: 24px; */
 }
 

@@ -7,11 +7,13 @@
       "plugin:react/recommended",
       "airbnb",
       "prettier",
-      "plugin:react/jsx-runtime"
+      "plugin:react/jsx-runtime",
+      "plugin:prettier/recommended"
      
     ],
-    // "parser": "babel-eslint",
+
     "parserOptions": {
+        "parser": "@babel/eslint-parser",
       "ecmaFeatures": {
         "jsx": true
       },
@@ -19,11 +21,12 @@
       "sourceType": "module"
     },
     "plugins": ["react","prettier"],
+    
     "rules": {
       "react/jsx-filename-extension": [1, { "extensions": [".js", ".jsx"] }],
       "react/prop-types": 0,
-      "react/destructuring-assignment": [0]
-    //   "prettier/prettier": "error"
+      "react/destructuring-assignment": [0],
+       "prettier/prettier": 0
     },
     "settings": {
         "import/resolver": {

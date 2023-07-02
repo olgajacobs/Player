@@ -1,17 +1,18 @@
 import {useState} from "react";
-import './Filter.module.css';
-import './filter.css';
+import styles from './Filter.module.css';
+// import './Filter.module.css';
+
 
 
 // Подготовка тестового плейлиста
 
 import tempPlayList from "../../../tempPlayList";
 
-const songFilter=tempPlayList.map(song=><a href="http://" key={song.id}>{song.name}</a>);
+const songFilter=tempPlayList.map(song=><a className={styles.filterItems} href="http://" key={song.id}>{song.name}</a>);
 let yearFilter=Array.from(new Set(tempPlayList.map(song=>song.release_date.substring(0,4)))).sort();
-    yearFilter=yearFilter.map((releaseData)=><a href="http://" key={releaseData}>{releaseData}</a>);
+    yearFilter=yearFilter.map((releaseData)=><a className={styles.filterItems} href="http://" key={releaseData}>{releaseData}</a>);
 let genreFilter=Array.from(new Set(tempPlayList.map(song=>song.genre))).sort();
-    genreFilter=genreFilter.map((genre)=><a href="http://" key={genre}>{genre}</a>);
+    genreFilter=genreFilter.map((genre)=><a className={styles.filterItems} href="http://" key={genre}>{genre}</a>);
 
 function Filter()
 {
@@ -25,24 +26,24 @@ function Filter()
 
     return(
         
-        <div className="centerblock__filter filter">
-            <div className="filter__title">Искать по:</div>
+        <div className={styles.main}>
+            <div className={styles.filter__title}>Искать по:</div>
 
-            <div className="dropdown">
-                <button type="button" className={`filter__button _btn-text ${buttons[0]?"_btn-color":""}`} onClick={()=>buttonClick(0)}>исполнителю</button>
-                <div id="myDropdown" className={`dropdown-content ${buttons[0]?"show":""}`}>
+            <div className={styles.dropdown}>
+                <button type="button" className={`${styles.filter__button} ${buttons[0]?styles.filter_btnSelected:""}`} onClick={()=>buttonClick(0)}>исполнителю</button>
+                <div id="myDropdown" className={`${styles.dropdownContent} ${buttons[0]?styles.show:""}`}>
                     {songFilter}
                 </div>
             </div>
-            <div className="dropdown">
-                <button type="button" className={`filter__button _btn-text ${buttons[1]?"_btn-color":""}`} onClick={()=>buttonClick(1)}>году выпуска</button>
-                <div id="myDropdown" className={`dropdown-content ${buttons[1]?"show":""}`}>
+            <div className={styles.dropdown}>
+                <button type="button" className={`${styles.filter__button} ${buttons[1]?styles.filter_btnSelected:""}`}onClick={()=>buttonClick(1)}>году выпуска</button>
+                <div id="myDropdown" className={`${styles.dropdownContent} ${buttons[1]?styles.show:""}`}>
                     {yearFilter}
                 </div>
             </div>
-            <div className="dropdown">
-                <button type="button" className={`filter__button _btn-text ${buttons[2]?"_btn-color":""}`} onClick={()=>buttonClick(2)}>жанру</button>
-                <div id="myDropdown" className={`dropdown-content ${buttons[2]?"show":""}`}>
+            <div className={styles.dropdown}>
+                <button type="button" className={`${styles.filter__button} ${buttons[2]?styles.filter_btnSelected:""}`} onClick={()=>buttonClick(2)}>жанру</button>
+                <div id="myDropdown" className={`${styles.dropdownContent} ${buttons[2]?styles.show:""}`}>
                     {genreFilter}
                 </div>
             </div>
