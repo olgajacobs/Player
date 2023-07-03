@@ -1,5 +1,5 @@
 // import React from "react";
-import './style.css';
+import './PlayerControls.module.css';
 import Icon from '../../../Icon/Icon'
 
 
