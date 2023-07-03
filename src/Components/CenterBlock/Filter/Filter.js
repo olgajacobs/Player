@@ -1,5 +1,6 @@
 import {useState} from "react";
 import styles from './Filter.module.css';
+import FilterItem from "./FilterItem";
 // import './Filter.module.css';
 
 
@@ -28,13 +29,8 @@ function Filter()
         
         <div className={styles.main}>
             <div className={styles.filter__title}>Искать по:</div>
-
-            <div className={styles.dropdown}>
-                <button type="button" className={`${styles.filter__button} ${buttons[0]?styles.filter_btnSelected:""}`} onClick={()=>buttonClick(0)}>исполнителю</button>
-                <div id="myDropdown" className={`${styles.dropdownContent} ${buttons[0]?styles.show:""}`}>
-                    {songFilter}
-                </div>
-            </div>
+            <FilterItem buttons={buttons} setButtons={setButtons} id={0} menuList= {songFilter}/>
+        
             <div className={styles.dropdown}>
                 <button type="button" className={`${styles.filter__button} ${buttons[1]?styles.filter_btnSelected:""}`}onClick={()=>buttonClick(1)}>году выпуска</button>
                 <div id="myDropdown" className={`${styles.dropdownContent} ${buttons[1]?styles.show:""}`}>
