@@ -1,6 +1,6 @@
 // import React from "react";
 import styles from './PlayListItem.module.css';
-import Icon from '../../../../Icon'
+import Icon from '../../../Icon/Icon'
 
 function PlayListItem({loading=false, titleName="",authorName="",albumName="",commentName="",hrefTitle="",hrefAuthor="",hrefAlbum="",time=""}){
 

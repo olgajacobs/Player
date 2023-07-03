@@ -1,6 +1,6 @@
 // import React from "react";
 import styles from'./TrackPlay.module.css';
-import Icon from '../../../../Icon'
+import Icon from '../../../Icon/Icon'
 
 function TrackPlay({loading}){
     const author =loading? "    ":"Ты та."

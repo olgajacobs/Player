@@ -2,7 +2,7 @@
 import styles from './PlayList.module.css';
 
 import PlayListItem from './PlayListItem/PlayListItem'
-import Icon from "../../../Icon"
+import Icon from "../../Icon/Icon"
 
 function PlayList({loading}){
     return(

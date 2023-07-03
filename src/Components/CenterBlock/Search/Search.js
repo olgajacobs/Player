@@ -1,4 +1,4 @@
-import Icon from '../../../Icon'
+import Icon from '../../Icon/Icon'
 import styles from "./Search.module.css";
 
 function Search(){

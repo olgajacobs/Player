@@ -1,6 +1,6 @@
 import {useState} from "react";
 import styles from './Filter.module.css';
-import FilterItem from "./FilterItem";
+import FilterItem from "./FilterItem/FilterItem";
 // import './Filter.module.css';
 
 
@@ -19,33 +19,16 @@ function Filter()
 {
     const [buttons,setButtons]=useState([false,false,false])
 
-    function buttonClick(buttonNumber){
-        const tempArray=[false,false,false]
-        tempArray[buttonNumber]=!buttons[buttonNumber];
-        setButtons(tempArray);
-    }
+   
 
     return(
         
         <div className={styles.main}>
             <div className={styles.filter__title}>Искать по:</div>
-            <FilterItem buttons={buttons} setButtons={setButtons} id={0} menuList= {songFilter}/>
-        
-            <div className={styles.dropdown}>
-                <button type="button" className={`${styles.filter__button} ${buttons[1]?styles.filter_btnSelected:""}`}onClick={()=>buttonClick(1)}>году выпуска</button>
-                <div id="myDropdown" className={`${styles.dropdownContent} ${buttons[1]?styles.show:""}`}>
-                    {yearFilter}
-                </div>
-            </div>
-            <div className={styles.dropdown}>
-                <button type="button" className={`${styles.filter__button} ${buttons[2]?styles.filter_btnSelected:""}`} onClick={()=>buttonClick(2)}>жанру</button>
-                <div id="myDropdown" className={`${styles.dropdownContent} ${buttons[2]?styles.show:""}`}>
-                    {genreFilter}
-                </div>
-            </div>
-          
+            <FilterItem buttons={buttons} setButtons={setButtons} id={0} menuList= {songFilter} buttonName="исполнителю"/>
+            <FilterItem buttons={buttons} setButtons={setButtons} id={1} menuList= {yearFilter} buttonName="году выпуска"/>
+            <FilterItem buttons={buttons} setButtons={setButtons} id={2} menuList= {genreFilter} buttonName="жанру"/>
         </div>
     )
-
 }
 export default Filter
