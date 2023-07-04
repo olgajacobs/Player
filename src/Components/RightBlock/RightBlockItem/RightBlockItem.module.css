@@ -1,0 +1,19 @@
+.playlist {
+  width: 250px;
+  height: 150px;
+  background-color: #696969;
+}
+
+.playlist:not(:last-child) {
+  margin-bottom: 30px;
+}
+
+.playlist__link {
+  width: 100%;
+  height: 100%;
+}
+
+.playlist__img {
+  width: 100%;
+  height: auto;
+}

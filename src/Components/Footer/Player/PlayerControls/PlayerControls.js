@@ -1,6 +1,6 @@
 // import React from "react";
-import './style.css'
-import Icon from '../../Icon'
+import './styles.css'
+import Icon from '../../../Icon/Icon'
 
 function PlayerControls() {
   return (

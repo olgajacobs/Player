@@ -1,17 +1,17 @@
 // import React from "react";
-import RightBlockItem from './RigthBlockItem'
-import './style.css'
+import RightBlockItem from './RightBlockItem/RigthBlockItem'
+import styles from './RightBlock.module.css'
 
 function RightBlock({ loading }) {
   const personal = loading ? '' : 'Sergey.Ivanov'
-  console.log(loading)
+
   return (
-    <div className="main__sidebar sidebar">
-      <div className="sidebar__personal">
-        <p className="sidebar__personal-name">{personal}</p>
-        <div className="sidebar__avatar" />
+    <div className={styles.main}>
+      <div className={styles.user}>
+        <p className={styles.user__name}>{personal}</p>
+        <div className={styles.user__avatar} />
       </div>
-      <div className="sidebar__block">
+      <div className={styles.playlist__block}>
         <RightBlockItem
           loading={loading}
           fileName="playlist01"

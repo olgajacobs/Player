@@ -1,15 +1,14 @@
-// import React from "react";
-import './style.css'
+import styles from './Footer.module.css'
 
-import Player from './Player'
-import Volume from './Volume'
+import Player from './Player/Player'
+import Volume from './Volume/Volume'
 
-function Footer() {
+function Footer({ loading }) {
   return (
-    <footer className="bar bar__content">
-      <div className="bar__player-progress" />
-      <div className="bar__player-block">
-        <Player />
+    <footer className={styles.main}>
+      <div className={styles.player__progress} />
+      <div className={styles.player__block}>
+        <Player loading={loading} />
         <Volume />
       </div>
     </footer>

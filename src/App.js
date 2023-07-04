@@ -1,6 +1,5 @@
 import { useState, useEffect } from 'react'
-import './css/style.css'
-import './shadow.css'
+import styles from './App.module.css'
 import LeftBlockMenu from './Components/LeftBlockMenu/LeftBlockMenu'
 import CenterBlock from './Components/CenterBlock/CenterBlock'
 import Footer from './Components/Footer/Footer'
@@ -12,21 +11,18 @@ function App() {
   useEffect(() => {
     setTimeout(() => setLoading(false), 4000)
   })
-
   return (
-    <div className="wrapper container">
-      <div className="main">
+    <div className={styles.container}>
+      <div className={styles.main}>
         <LeftBlockMenu loading={loading} />
         <CenterBlock loading={loading} />
         <RightBlock loading={loading} />
       </div>
-      <Footer />
+      <Footer loading={loading} />
 
       {loading && (
-        <div className="first_layer">
-          <div className="second_layer">
-            <p>Loading...</p>
-          </div>
+        <div className={styles.shadow}>
+          <p>Loading...</p>
         </div>
       )}
     </div>

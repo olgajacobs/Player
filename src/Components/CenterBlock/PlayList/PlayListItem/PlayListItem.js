@@ -1,9 +1,9 @@
 // import React from "react";
 import styles from './PlayListItem.module.css'
-import Icon from '../../../../Icon'
+import Icon from '../../../Icon/Icon'
 
 function PlayListItem({
-  loading,
+  loading = false,
   titleName = '',
   authorName = '',
   albumName = '',
@@ -13,73 +13,61 @@ function PlayListItem({
   hrefAlbum = '',
   time = '',
 }) {
-  const trackName = '. 1                       '
-  const trackAuthor = '.2                  '
-  const trackAlbom = '.3                  '
-  const trackTime = '00:00'
-
   if (loading)
     return (
       <div className={styles.main}>
-        <div className="playlist__track track">
-          <div className={`${styles.track__title} ${styles.grey}`}>
+        <div className={styles.playlist__track}>
+          <div className={styles.track__titleBlock}>
             <Icon
               classDiv="track__title-image"
               classSvg="track__title-svg"
               iconName="note"
               alt="music"
             />
-            <div className="track__title-text">{trackName} </div>
+            <div className={`${styles.track__title} ${styles.grey}`} />
           </div>
-          <div className={`${styles.track__author} ${styles.grey}`}>
-            {trackAuthor}
-          </div>
-          <div className={`${styles.track__album} ${styles.grey}`}>
-            {trackAlbom}
-          </div>
-          <div className="">
+          <div className={`${styles.track__author} ${styles.grey}`} />
+          <div className={`${styles.track__album} ${styles.grey}`} />
+          <div className={styles.track__timeBlock}>
             <Icon
               classDiv=""
               classSvg="track__time-svg"
               iconName="like"
               alt="time"
             />
-
-            <span className={`${styles.track__time} ${styles.grey}`}>
-              {trackTime}
-            </span>
+            <span className={`${styles.track__time} ${styles.grey}`} />
           </div>
         </div>
       </div>
     )
   return (
     <div className={styles.main}>
-      <div className="playlist__track track">
-        <div className="track__title">
+      <div className={styles.playlist__track}>
+        <div className={styles.track__titleBlock}>
           <Icon
             classDiv="track__title-image"
             classSvg="track__title-svg"
             iconName="note"
             alt="music"
           />
-          <div className="track__title-text">
-            <a className="track__title-link" href={hrefTitle}>
+          <div className={styles.track__title}>
+            <a className={styles.track__titleLink} href={hrefTitle}>
               {titleName}{' '}
               <span className="track__title-span">{commentName}</span>
             </a>
           </div>
         </div>
         <div className={styles.track__author}>
-          <a className="track__author-link" href={hrefAuthor}>
+          <a className={styles.track__authorLink} href={hrefAuthor}>
             {authorName}
           </a>
         </div>
-        <div className="track__album">
-          <a className="track__album-link" href={hrefAlbum}>
+        <div className={styles.track__album}>
+          <a className={styles.track__albumLink} href={hrefAlbum}>
             {albumName}
           </a>
         </div>
-        <div className="">
+        <div className={styles.track__timeBlock}>
           <Icon
             classDiv=""
             classSvg="track__time-svg"
@@ -87,7 +75,7 @@ function PlayListItem({
             alt="time"
           />
 
-          <span className="track__time">{time}</span>
+          <span className={styles.track__time}>{time}</span>
         </div>
       </div>
     </div>

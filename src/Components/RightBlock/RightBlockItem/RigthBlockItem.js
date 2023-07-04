@@ -1,5 +1,4 @@
-// import React from "react";
-import './style.css'
+import styles from './RightBlockItem.module.css'
 
 function RightBlockItem({
   loading,
@@ -7,12 +6,12 @@ function RightBlockItem({
   fileName = '',
   altName = '',
 }) {
-  if (loading) return <div className="sidebar__item" />
+  if (loading) return <div className={styles.playlist} />
   return (
-    <div className="sidebar__item">
-      <a className="sidebar__link" href={href}>
+    <div className={styles.playlist}>
+      <a className={styles.playlist__link} href={href}>
         <img
-          className="sidebar__img"
+          className={styles.playlist__img}
           src={`img/${fileName}.png`}
           alt={altName}
         />
