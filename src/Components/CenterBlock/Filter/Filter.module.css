@@ -1,5 +1,4 @@
- .main {
- 
+.main {
   display: flex;
   flex-direction: row;
   align-items: center;
@@ -9,24 +8,24 @@
 }
 
 .filter__title {
-    font-style: normal;
-    font-weight: 400;
-    font-size: 16px;
-    line-height: 24px;
-    margin-right: 15px;
-  }
+  font-style: normal;
+  font-weight: 400;
+  font-size: 16px;
+  line-height: 24px;
+  margin-right: 15px;
+}
 
-.filterItems{
-    color: rgb(249, 247, 247);
-    padding: 5px 12px;
-    text-decoration: none;
-    display: block;
-    background-color: #383838;
+.filterItems {
+  color: rgb(249, 247, 247);
+  padding: 5px 12px;
+  text-decoration: none;
+  display: block;
+  background-color: #383838;
 }
 
 .filterItems:hover {
-    border-color: #D9B6FF;
-    background-color: #4b4a4a;
-    color: #D9B6FF;
-    text-decoration: underline;
+  border-color: #d9b6ff;
+  background-color: #4b4a4a;
+  color: #d9b6ff;
+  text-decoration: underline;
 }
