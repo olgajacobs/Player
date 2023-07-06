@@ -20,38 +20,44 @@ function PlayList({ loading }) {
     else secStr = sec.toString();
     return `${minStr}:${secStr}`;
   }
-  const playList = tempPlayList.map((song) => (
-    <PlayListItem
-      titleName={song.name}
-      authorName={song.author}
-      albumName={song.album}
-      time={timeFormat(song.duration_in_seconds)}
-      key={song.id}
-    />
-  ));
+  let playList;
+
+  // const emptyArray = new Array(8).fill('');
+  playList = loading
+    ? Array(8)
+        .fill('')
+        .map(() => <PlayListItem loading={loading} />)
+    : (playList = tempPlayList.map((song) => (
+        <PlayListItem
+          titleName={song.name}
+          authorName={song.author}
+          albumName={song.album}
+          time={timeFormat(song.duration_in_seconds)}
+          key={song.id}
+        />
+      )));
 
   return (
     <div className={styles.main}>
       <div className={styles.content__title}>
-        <div className={`${styles.content__titleCol} ${styles.col01}`}>ТРЕК</div>
-        <div className={`${styles.content__titleCol} ${styles.col02}`}>ИСПОЛНИТЕЛЬ</div>
-        <div className={`${styles.content__titleCol} ${styles.col03}`}>АЛЬБОМ</div>
-        <Icon classDiv={`${styles.content__titleCol} ${styles.col04}`} classSvg='playlist-title__svg' iconName='watch' alt='time' />
-      </div>
-      {loading ? (
-        <div className={styles.content__playlist}>
-          <PlayListItem loading={loading} />
-          <PlayListItem loading={loading} />
-          <PlayListItem loading={loading} />
-          <PlayListItem loading={loading} />
-          <PlayListItem loading={loading} />
-          <PlayListItem loading={loading} />
-          <PlayListItem loading={loading} />
-          <PlayListItem loading={loading} />
+        <div className={`${styles.content__titleCol} ${styles.col01}`}>
+          ТРЕК
         </div>
-      ) : (
-        <div className={styles.content__playlist}>{playList}</div>
-      )}
+        <div className={`${styles.content__titleCol} ${styles.col02}`}>
+          ИСПОЛНИТЕЛЬ
+        </div>
+        <div className={`${styles.content__titleCol} ${styles.col03}`}>
+          АЛЬБОМ
+        </div>
+        <Icon
+          classDiv={`${styles.content__titleCol} ${styles.col04}`}
+          classSvg="playlist-title__svg"
+          iconName="watch"
+          alt="time"
+        />
+      </div>
+
+      <div className={styles.content__playlist}>{playList}</div>
     </div>
   );
 }
