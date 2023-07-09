@@ -1,6 +1,6 @@
 import { useState, useEffect } from 'react'
 import styles from './App.module.css'
-import LeftBlockMenu from './Components/LeftBlockMenu/LeftBlockMenu'
+import LeftBlockMenu from './Components/LeftBlockMenu/LeftBlockMenu.jsx'
 import CenterBlock from './Components/CenterBlock/CenterBlock'
 import Footer from './Components/Footer/Footer'
 import RightBlock from './Components/RightBlock/RightBlock'
