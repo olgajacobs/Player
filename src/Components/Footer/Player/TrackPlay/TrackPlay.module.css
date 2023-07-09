@@ -1,19 +1,13 @@
 .main {
-  display: -webkit-box;
-  display: -ms-flexbox;
   display: flex;
-  -webkit-box-orient: horizontal;
-  -webkit-box-direction: normal;
-  -ms-flex-direction: row;
   flex-direction: row;
 }
 
 .track__playBlock {
   width: auto;
-
   display: grid;
   grid-template-columns: auto 1fr;
-  grid-template-areas: "image author" "image album";
+  grid-template-areas: 'image author' 'image album';
   align-items: center;
 }
 
@@ -21,7 +15,6 @@
   grid-row: 1;
   grid-column: 2;
   grid-area: author;
-
   min-width: 49px;
 }
 

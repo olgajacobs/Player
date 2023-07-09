@@ -1,9 +1,10 @@
-.player__controls {
+.main {
   display: flex;
 
   flex-direction: row;
   padding: 0 27px 0 31px;
 }
+/* 
 
 ._btn-text:hover {
   border-color: #d9b6ff;
@@ -548,7 +549,7 @@
   margin-right: 23px;
 }
 
-.player__btn-prev-svg {
+.player__btn_prev_svg {
   width: 15px;
   height: 14px;
 }
@@ -755,6 +756,6 @@
   width: 109px;
 }
 /* Изменения */
-.menu__list {
+/* .menu__list {
   text-align: left;
-}
+} */

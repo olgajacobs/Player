@@ -1,18 +1,17 @@
-// import React from "react";
-import "./styles.css";
-import Icon from "../../../Icon/Icon";
+import styles from './PlayerControls.module.css'
+import Icon from '../../../Icon/Icon'
 
 function PlayerControls() {
   return (
-    <div className="player__controls">
+    <div className={styles.main}>
       <Icon
         classDiv="player__btn-prev"
-        classSvg="player__btn-prev-svg"
+        classSvg="player__btn_prev_svg"
         iconName="prev"
         alt="prev"
       />
       <Icon
-        classDiv="player__btn-play _btn"
+        classDiv="player__btn-play"
         classSvg="player__btn-play-svg"
         iconName="play"
         alt="play"
@@ -30,12 +29,12 @@ function PlayerControls() {
         alt="repeat"
       />
       <Icon
-        classDiv="player__btn-shuffle _btn-icon"
+        classDiv="player__btn-shuffle"
         classSvg="player__btn-shuffle-svg"
         iconName="shuffle"
         alt="shuffle"
       />
     </div>
-  );
+  )
 }
-export default PlayerControls;
+export default PlayerControls

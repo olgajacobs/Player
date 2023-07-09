@@ -40,7 +40,17 @@ export const Menu = styled.div`
   visibility: visible;
 `
 export const MenuItems = styled.ul`
-.menu__items {
   padding: 18px 0 10px 0;
   text-align: left;
+`
+export const MenuItem = styled.li`
+  padding: 5px 0;
+  margin-bottom: 16px;
+`
+
+export const MenuLink = styled.a`
+  color: #ffffff;
+  font-weight: 400;
+  font-size: 16px;
+  line-height: 24px;
 `

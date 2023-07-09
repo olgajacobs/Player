@@ -1,13 +1,9 @@
 .main {
   width: auto;
+  padding: 0 92px 0 0;
   display: flex;
   align-items: center;
-  padding: 0 92px 0 0;
   flex-direction: row;
-
-  align-items: center;
-
-  justify-content: end;
 }
 
 .image {

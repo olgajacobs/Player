@@ -20,9 +20,9 @@ function LeftBlockMenu({ loading = false }) {
           </S.Burger>
           <S.Menu>
             <S.MenuItems>
-              <li className="menu__item">Главное</li>
-              <li className="menu__item">Mой плейлист</li>
-              <li className="menu__item">Войти</li>
+              <S.MenuItem>Главное</S.MenuItem>
+              <S.MenuItem>Mой плейлист</S.MenuItem>
+              <S.MenuItem>Войти</S.MenuItem>
             </S.MenuItems>
           </S.Menu>
         </section>
@@ -41,21 +41,15 @@ function LeftBlockMenu({ loading = false }) {
           {visible && (
             <S.Menu>
               <S.MenuItems>
-                <li className="menu__item">
-                  <a href="http://" className="menu__link">
-                    Главное
-                  </a>
-                </li>
-                <li className="menu__item">
-                  <a href="http://" className="menu__link">
-                    Мой плейлист
-                  </a>
-                </li>
-                <li className="menu__item">
-                  <a href="http://" className="menu__link">
-                    Войти
-                  </a>
-                </li>
+                <S.MenuItem>
+                  <S.MenuLink href="http://"> Главное</S.MenuLink>
+                </S.MenuItem>
+                <S.MenuItem>
+                  <S.MenuLink href="http://">Мой плейлист</S.MenuLink>
+                </S.MenuItem>
+                <S.MenuItem>
+                  <S.MenuLink href="http://">Войти</S.MenuLink>
+                </S.MenuItem>
               </S.MenuItems>
             </S.Menu>
           )}
