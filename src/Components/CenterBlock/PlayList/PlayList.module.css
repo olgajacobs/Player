@@ -20,22 +20,21 @@
 
 .col01 {
   width: 447px;
+  /* background-color: #988d8d; */
 }
 
 .col02 {
   width: 321px;
+  /* background-color: #988d8d; */
 }
 
 .col03 {
   width: 245px;
+  /* background-color: #988d8d; */
 }
 
-.col04 {
-  width: 60px;
-  text-align: end;
-}
 .content__playlist {
   display: flex;
   flex-direction: column;
-  overflow-y: auto;
+  /* overflow-y: auto; */
 }

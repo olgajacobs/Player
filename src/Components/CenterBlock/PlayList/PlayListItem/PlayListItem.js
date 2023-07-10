@@ -1,17 +1,17 @@
 // import React from "react";
-import styles from "./PlayListItem.module.css";
-import Icon from "../../../Icon/Icon";
+import styles from './PlayListItem.module.css'
+import Icon from '../../../Icon/Icon'
 
 function PlayListItem({
   loading = false,
-  titleName = "",
-  authorName = "",
-  albumName = "",
-  commentName = "",
-  hrefTitle = "",
-  hrefAuthor = "",
-  hrefAlbum = "",
-  time = "",
+  titleName = '',
+  authorName = '',
+  albumName = '',
+  commentName = '',
+  hrefTitle = '',
+  hrefAuthor = '',
+  hrefAlbum = '',
+  time = '',
 }) {
   if (loading)
     return (
@@ -39,7 +39,7 @@ function PlayListItem({
           </div>
         </div>
       </div>
-    );
+    )
   return (
     <div className={styles.main}>
       <div className={styles.playlist__track}>
@@ -52,7 +52,7 @@ function PlayListItem({
           />
           <div className={styles.track__title}>
             <a className={styles.track__titleLink} href={hrefTitle}>
-              {titleName}{" "}
+              {titleName}
               <span className="track__title-span">{commentName}</span>
             </a>
           </div>
@@ -79,6 +79,6 @@ function PlayListItem({
         </div>
       </div>
     </div>
-  );
+  )
 }
-export default PlayListItem;
+export default PlayListItem

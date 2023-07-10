@@ -68,6 +68,12 @@
   fill: transparent;
   stroke: #d9d9d9;
 }
+.volume__image {
+  width: 13px;
+  height: 18px;
+  margin-right: 17px;
+}
+
 .volume__svg {
   width: 13px;
   height: 18px;
@@ -87,6 +93,12 @@
   justify-content: center;
   margin-right: 17px;
 }
+.track__title-svg {
+  width: 18px;
+  height: 17px;
+  fill: transparent;
+  stroke: #d9d9d9;
+}
 .content__titleCol {
   font-style: normal;
   font-weight: 400;
@@ -94,10 +106,6 @@
   line-height: 24px;
   letter-spacing: 2px;
   color: #4e4e4e;
-}
-.col04 {
-  width: 60px;
-  text-align: end;
 }
 
 .playlist-title__svg {
@@ -194,4 +202,9 @@
   width: 13px;
   height: 18px;
   margin-right: 17px;
+}
+.col04 {
+  width: 75px;
+  text-align: end;
+  padding-right: 15px;
 }

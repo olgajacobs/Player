@@ -1,12 +1,12 @@
 // import React from "react";
-import styles from "./Volume.module.css";
-import Icon from "../../Icon/Icon";
+import styles from './Volume.module.css'
+import Icon from '../../Icon/Icon'
 
 function Volume() {
   return (
     <div className={styles.main}>
       <Icon
-        classDiv={styles.image}
+        classDiv="volume__image"
         classSvg="volume__svg"
         iconName="volume"
         alt="volume"
@@ -19,6 +19,6 @@ function Volume() {
         />
       </div>
     </div>
-  );
+  )
 }
-export default Volume;
+export default Volume
