@@ -1,3 +1,7 @@
+button,
+._btn {
+  cursor: pointer;
+}
 ._btn-icon:hover svg {
   fill: transparent;
   stroke: #acacac;
@@ -15,6 +19,7 @@
   stroke: #ffffff;
   cursor: pointer;
 }
+
 .search__svg {
   width: 17px;
   height: 17px;
@@ -158,23 +163,6 @@
   flex-direction: row;
 }
 
-._btn-icon:active svg {
-  fill: transparent;
-  stroke: #ffffff;
-  cursor: pointer;
-}
-
-._btn-icon:active .track-play__like-svg,
-._btn-icon:active .track-play__dislike-svg {
-  fill: #696969;
-  stroke: #ffffff;
-  cursor: pointer;
-}
-._btn-icon:hover svg {
-  fill: transparent;
-  stroke: #acacac;
-  cursor: pointer;
-}
 .track-play__image {
   width: 51px;
   height: 51px;

@@ -69,7 +69,7 @@ function PlayListItem({
         </div>
         <div className={styles.track__timeBlock}>
           <Icon
-            classDiv=""
+            classDiv="_btn-icon"
             classSvg="track__time-svg"
             iconName="like"
             alt="time"
