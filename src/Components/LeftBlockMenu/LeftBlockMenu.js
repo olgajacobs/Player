@@ -1,69 +1,56 @@
-// import React from "react";
-import { useState } from 'react'
-import styles from './LeftBlockMenu.module.css'
+import styled from 'styled-components'
 
-function LeftBlockMenu({ loading = false }) {
-  const [visible, setVisible] = useState(true)
-  const toggleVisibility = () => setVisible(!visible)
+export const Nav = styled.nav`
+  width: 244px;
+  background-color: #181818;
+  padding: 20px 0 20px 36px;
+`
 
-  return (
-    <nav className={styles.main}>
-      <div className={styles.logo}>
-        <img className={styles.logo__image} src="../img/logo.png" alt="logo" />
-      </div>
-      {loading ? (
-        <section>
-          <div className={styles.burger}>
-            <span className={styles.burger__line} />
-            <span className={styles.burger__line} />
-            <span className={styles.burger__line} />
-          </div>
-          <div className={styles.menu}>
-            <ul className={styles.menu__items}>
-              <li className="menu__item">Главное</li>
-              <li className="menu__item">Mой плейлист</li>
-              <li className="menu__item">Войти</li>
-            </ul>
-          </div>
-        </section>
-      ) : (
-        <section>
-          <div
-            className={styles.burger}
-            onClick={toggleVisibility}
-            role="button"
-            tabIndex="0"
-            onKeyUp={() => {}}
-          >
-            <span className={styles.burger__line} />
-            <span className={styles.burger__line} />
-            <span className={styles.burger__line} />
-          </div>
-          {visible && (
-            <div className={styles.menu}>
-              <ul className={styles.menu__items}>
-                <li className="menu__item">
-                  <a href="http://" className="menu__link">
-                    Главное
-                  </a>
-                </li>
-                <li className="menu__item">
-                  <a href="http://" className="menu__link">
-                    Мой плейлист
-                  </a>
-                </li>
-                <li className="menu__item">
-                  <a href="http://" className="menu__link">
-                    Войти
-                  </a>
-                </li>
-              </ul>
-            </div>
-          )}
-        </section>
-      )}
-    </nav>
-  )
-}
+export const Logo = styled.div`
+  width: 113.33px;
+  height: 43px;
+  padding: 13px 0 13px 0;
+  background-color: transparent;
+  margin-bottom: 20px;
+`
 
-export default LeftBlockMenu
+export const LogoImage = styled.img`
+  width: 113.33px;
+  height: 17px;
+  color: #181818;
+`
+export const Burger = styled.div`
+  width: 20px;
+  height: 36px;
+  padding: 13px 0;
+  display: flex;
+  flex-direction: column;
+  justify-content: space-between;
+  cursor: pointer;
+`
+export const BurgerLine = styled.span`
+  display: inline-block;
+  width: 100%;
+  height: 1px;
+  background-color: #d3d3d3;
+`
+
+export const Menu = styled.div`
+  display: block;
+  visibility: visible;
+`
+export const MenuItems = styled.ul`
+  padding: 18px 0 10px 0;
+  text-align: left;
+`
+export const MenuItem = styled.li`
+  padding: 5px 0;
+  margin-bottom: 16px;
+`
+
+export const MenuLink = styled.a`
+  color: #ffffff;
+  font-weight: 400;
+  font-size: 16px;
+  line-height: 24px;
+`

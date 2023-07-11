@@ -1,34 +1,34 @@
-import { useState } from 'react'
-import styles from './Filter.module.css'
-import FilterItem from './FilterItem/FilterItem'
+import { useState } from "react";
+import styles from "./Filter.module.css";
+import FilterItem from "./FilterItem/FilterItem";
 
 // Подготовка тестового плейлиста
-import tempPlayList from '../../../tempPlayList'
+import tempPlayList from "../../../tempPlayList";
 
 const songFilter = tempPlayList.map((song) => (
   <a className={styles.filterItems} href="http://" key={song.id}>
     {song.name}
   </a>
-))
+));
 let yearFilter = Array.from(
   new Set(tempPlayList.map((song) => song.release_date.substring(0, 4)))
-).sort()
+).sort();
 yearFilter = yearFilter.map((releaseData) => (
   <a className={styles.filterItems} href="http://" key={releaseData}>
     {releaseData}
   </a>
-))
+));
 let genreFilter = Array.from(
   new Set(tempPlayList.map((song) => song.genre))
-).sort()
+).sort();
 genreFilter = genreFilter.map((genre) => (
   <a className={styles.filterItems} href="http://" key={genre}>
     {genre}
   </a>
-))
+));
 
 function Filter() {
-  const [buttons, setButtons] = useState([false, false, false])
+  const [buttons, setButtons] = useState([false, false, false]);
   return (
     <div className={styles.main}>
       <div className={styles.filter__title}>Искать по:</div>
@@ -54,6 +54,6 @@ function Filter() {
         buttonName="жанру"
       />
     </div>
-  )
+  );
 }
-export default Filter
+export default Filter;

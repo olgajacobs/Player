@@ -1,8 +1,8 @@
-import Search from './Search/Search'
-import Filter from './Filter/Filter'
-import PlayList from './PlayList/PlayList'
+import Search from "./Search/Search";
+import Filter from "./Filter/Filter";
+import PlayList from "./PlayList/PlayList";
 
-import styles from './CenterBlock.module.css'
+import styles from "./CenterBlock.module.css";
 
 function CenterBlock({ loading }) {
   return (
@@ -13,6 +13,6 @@ function CenterBlock({ loading }) {
       <Filter />
       <PlayList loading={loading} />
     </div>
-  )
+  );
 }
-export default CenterBlock
+export default CenterBlock;

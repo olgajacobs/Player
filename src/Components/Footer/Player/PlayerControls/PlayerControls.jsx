@@ -1,30 +1,29 @@
-// import React from "react";
-import './styles.css'
+import styles from './PlayerControls.module.css'
 import Icon from '../../../Icon/Icon'
 
 function PlayerControls() {
   return (
-    <div className="player__controls">
+    <div className={styles.main}>
       <Icon
-        classDiv="player__btn-prev"
-        classSvg="player__btn-prev-svg"
+        classDiv="player__btn-prev _btn-icon"
+        classSvg="player__btn_prev_svg"
         iconName="prev"
         alt="prev"
       />
       <Icon
-        classDiv="player__btn-play _btn"
+        classDiv="player__btn-play _btn-icon"
         classSvg="player__btn-play-svg"
         iconName="play"
         alt="play"
       />
       <Icon
-        classDiv="player__btn-next"
+        classDiv="player__btn-next _btn-icon"
         classSvg="player__btn-next-svg"
         iconName="next"
         alt="next"
       />
       <Icon
-        classDiv="player__btn-repeat"
+        classDiv="player__btn-repeat _btn-icon"
         classSvg="player__btn-repeat-svg"
         iconName="repeat"
         alt="repeat"

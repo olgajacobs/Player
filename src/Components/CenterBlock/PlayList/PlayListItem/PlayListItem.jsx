@@ -52,7 +52,7 @@ function PlayListItem({
           />
           <div className={styles.track__title}>
             <a className={styles.track__titleLink} href={hrefTitle}>
-              {titleName}{' '}
+              {titleName}
               <span className="track__title-span">{commentName}</span>
             </a>
           </div>
@@ -69,7 +69,7 @@ function PlayListItem({
         </div>
         <div className={styles.track__timeBlock}>
           <Icon
-            classDiv=""
+            classDiv="_btn-icon"
             classSvg="track__time-svg"
             iconName="like"
             alt="time"

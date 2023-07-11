@@ -1,5 +1,5 @@
-import Icon from '../../Icon/Icon'
-import styles from './Search.module.css'
+import Icon from "../../Icon/Icon";
+import styles from "./Search.module.css";
 
 function Search() {
   return (
@@ -12,6 +12,6 @@ function Search() {
         name="search"
       />
     </div>
-  )
+  );
 }
-export default Search
+export default Search;

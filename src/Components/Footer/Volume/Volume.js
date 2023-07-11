@@ -6,7 +6,7 @@ function Volume() {
   return (
     <div className={styles.main}>
       <Icon
-        classDiv={styles.image}
+        classDiv="volume__image"
         classSvg="volume__svg"
         iconName="volume"
         alt="volume"
