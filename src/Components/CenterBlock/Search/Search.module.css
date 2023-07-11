@@ -3,8 +3,6 @@
   border-bottom: 1px solid #4e4e4e;
   margin-bottom: 51px;
   display: flex;
-  box-orient: horizontal;
-  box-direction: normal;
   flex-direction: row;
   box-align: center;
   align-items: center;
