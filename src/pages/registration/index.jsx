@@ -6,7 +6,7 @@ function Registration() {
 
   return (
     <div className={styles.registration}>
-      <div className={styles.main} />
+      <div />
     </div>
   )
 }

@@ -6,7 +6,7 @@ function Login() {
 
   return (
     <div className={styles.login}>
-      <div className={styles.main} />
+      <div>Логин</div>
     </div>
   )
 }
