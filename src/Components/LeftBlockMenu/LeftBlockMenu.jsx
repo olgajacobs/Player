@@ -1,4 +1,5 @@
 import { useState } from 'react'
+import { NavLink } from 'react-router-dom'
 import styles from './LeftBlockMenu.module.css'
 
 function LeftBlockMenu({ loading = false }) {
@@ -42,19 +43,19 @@ function LeftBlockMenu({ loading = false }) {
             <div className={styles.menu}>
               <ul className={styles.menu__items}>
                 <li className="menu__item">
-                  <a href="http://" className="menu__link">
+                  <NavLink className={styles.menu__link} to="/">
                     Главное
-                  </a>
+                  </NavLink>
                 </li>
                 <li className="menu__item">
-                  <a href="http://" className="menu__link">
+                  <NavLink className="menu__link" to="/registration">
                     Мой плейлист
-                  </a>
+                  </NavLink>
                 </li>
                 <li className="menu__item">
-                  <a href="http://" className="menu__link">
+                  <NavLink className="menu__link" to="/login">
                     Войти
-                  </a>
+                  </NavLink>
                 </li>
               </ul>
             </div>
