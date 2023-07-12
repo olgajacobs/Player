@@ -20,9 +20,9 @@ function LeftBlockMenu({ loading = false }) {
           </div>
           <div className={styles.menu}>
             <ul className={styles.menu__items}>
-              <li className="menu__item">Главное</li>
-              <li className="menu__item">Mой плейлист</li>
-              <li className="menu__item">Войти</li>
+              <li className={styles.menu__item}>Главное</li>
+              <li className={styles.menu__item}>Mой плейлист</li>
+              <li className={styles.menu__item}>Войти</li>
             </ul>
           </div>
         </section>
@@ -42,18 +42,18 @@ function LeftBlockMenu({ loading = false }) {
           {visible && (
             <div className={styles.menu}>
               <ul className={styles.menu__items}>
-                <li className="menu__item">
+                <li className={styles.menu__item}>
                   <NavLink className={styles.menu__link} to="/">
                     Главное
                   </NavLink>
                 </li>
-                <li className="menu__item">
-                  <NavLink className="menu__link" to="/registration">
+                <li className={styles.menu__item}>
+                  <NavLink className={styles.menu__link} to="/registration">
                     Мой плейлист
                   </NavLink>
                 </li>
-                <li className="menu__item">
-                  <NavLink className="menu__link" to="/login">
+                <li className={styles.menu__item}>
+                  <NavLink className={styles.menu__link} to="/login">
                     Войти
                   </NavLink>
                 </li>
