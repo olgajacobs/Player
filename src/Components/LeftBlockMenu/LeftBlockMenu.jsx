@@ -1,61 +1,67 @@
-// import React from "react";
 import { useState } from 'react'
-import * as S from './LeftBlockMenu'
+import styles from './LeftBlockMenu.module.css'
 
 function LeftBlockMenu({ loading = false }) {
   const [visible, setVisible] = useState(true)
   const toggleVisibility = () => setVisible(!visible)
 
   return (
-    <S.Nav>
-      <S.Logo>
-        <S.LogoImage src="../img/logo.png" alt="logo" />
-      </S.Logo>
+    <nav className={styles.main}>
+      <div className={styles.logo}>
+        <img className={styles.logo__image} src="../img/logo.png" alt="logo" />
+      </div>
       {loading ? (
         <section>
-          <S.Burger>
-            <S.BurgerLine />
-            <S.BurgerLine />
-            <S.BurgerLine />
-          </S.Burger>
-          <S.Menu>
-            <S.MenuItems>
-              <S.MenuItem>Главное</S.MenuItem>
-              <S.MenuItem>Mой плейлист</S.MenuItem>
-              <S.MenuItem>Войти</S.MenuItem>
-            </S.MenuItems>
-          </S.Menu>
+          <div className={styles.burger}>
+            <span className={styles.burger__line} />
+            <span className={styles.burger__line} />
+            <span className={styles.burger__line} />
+          </div>
+          <div className={styles.menu}>
+            <ul className={styles.menu__items}>
+              <li className="menu__item">Главное</li>
+              <li className="menu__item">Mой плейлист</li>
+              <li className="menu__item">Войти</li>
+            </ul>
+          </div>
         </section>
       ) : (
         <section>
-          <S.Burger
+          <div
+            className={styles.burger}
             onClick={toggleVisibility}
             role="button"
             tabIndex="0"
             onKeyUp={() => {}}
           >
-            <S.BurgerLine />
-            <S.BurgerLine />
-            <S.BurgerLine />
-          </S.Burger>
+            <span className={styles.burger__line} />
+            <span className={styles.burger__line} />
+            <span className={styles.burger__line} />
+          </div>
           {visible && (
-            <S.Menu>
-              <S.MenuItems>
-                <S.MenuItem>
-                  <S.MenuLink href="http://"> Главное</S.MenuLink>
-                </S.MenuItem>
-                <S.MenuItem>
-                  <S.MenuLink href="http://">Мой плейлист</S.MenuLink>
-                </S.MenuItem>
-                <S.MenuItem>
-                  <S.MenuLink href="http://">Войти</S.MenuLink>
-                </S.MenuItem>
-              </S.MenuItems>
-            </S.Menu>
+            <div className={styles.menu}>
+              <ul className={styles.menu__items}>
+                <li className="menu__item">
+                  <a href="http://" className="menu__link">
+                    Главное
+                  </a>
+                </li>
+                <li className="menu__item">
+                  <a href="http://" className="menu__link">
+                    Мой плейлист
+                  </a>
+                </li>
+                <li className="menu__item">
+                  <a href="http://" className="menu__link">
+                    Войти
+                  </a>
+                </li>
+              </ul>
+            </div>
           )}
         </section>
       )}
-    </S.Nav>
+    </nav>
   )
 }
 
