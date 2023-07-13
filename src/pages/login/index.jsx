@@ -5,7 +5,7 @@ function Login() {
   //   const [loading, setLoading] = useState(true)
 
   return (
-    <div className={styles.login}>
+    <div className={styles.main}>
       <div>Логин</div>
     </div>
   )
