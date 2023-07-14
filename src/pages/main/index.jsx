@@ -17,7 +17,6 @@ function Main() {
     <div className={styles.container}>
       <div className={styles.main}>
         <LeftBlockMenu loading={loading} />
-
         <CenterBlock loading={loading} />
         <RightBlock loading={loading} />
       </div>

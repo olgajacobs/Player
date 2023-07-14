@@ -15,7 +15,7 @@
 }
 
 .main {
-  width: 500px;
+  width: 400px;
   height: 400px;
   display: flex;
   flex-direction: column;
@@ -26,11 +26,22 @@
   font-size: 20px;
   margin: 10px;
 }
-
+.button {
+  color: black;
+  font-size: 25px;
+  line-height: 24px;
+  border: 1px solid #ffffff;
+  border-radius: 60px;
+  padding: 6px 20px;
+  margin-top: 20px;
+  margin-bottom: 25px;
+}
+.button:hover {
+  color: rgb(157, 106, 148);
+}
 .link {
   color: white;
   font-size: 16px;
-  margin-top: 25px;
   text-decoration: underline;
 }
 .link:hover {

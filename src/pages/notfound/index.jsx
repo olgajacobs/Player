@@ -1,11 +1,16 @@
-// import { useState, useEffect } from 'react'
+import { NavLink } from 'react-router-dom'
+import styles from './notfound.module.css'
 
 function NotFound() {
-  //   const [loading, setLoading] = useState(true)
-
   return (
-    <div>
-      <h1> Page was not found</h1>
+    <div className={styles.container}>
+      <div className={styles.main}>
+        <h1>404 ошибка !</h1>
+        <h2>Запрошенная страница не найдена</h2>
+        <NavLink className={styles.link} to="/">
+          Перейти на главную страницу
+        </NavLink>
+      </div>
     </div>
   )
 }
