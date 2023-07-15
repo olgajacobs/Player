@@ -1,33 +1,23 @@
-import { useState, useEffect } from 'react'
+// import { useState, useEffect } from 'react'
+// import { useState } from 'react'
+
+import Cookies from 'js-cookie'
+import AppRouts from './routes'
 import styles from './App.module.css'
-import LeftBlockMenu from './Components/LeftBlockMenu/LeftBlockMenu.jsx'
-import CenterBlock from './Components/CenterBlock/CenterBlock'
-import Footer from './Components/Footer/Footer'
-import RightBlock from './Components/RightBlock/RightBlock'
 
 function App() {
-  const [loading, setLoading] = useState(true)
+  //   const [user, setUser] = useState(Cookies.get('token'))
 
-  useEffect(() => {
-    const timer = setTimeout(() => setLoading(false), 4000)
-    return () => clearTimeout(timer)
-  })
-
+  //   useEffect(() => {
+  //     const cookies = Cookies.get('token')
+  //     // if (cookies !== user) setUser(cookies)
+  //     console.log(`App uE: cookies- ${cookies} user- ${user}`)
+  //   })
+  const isLogined = Boolean(Cookies.get('token'))
+  console.log(`App: isLogined- ${isLogined} `)
   return (
     <div className={styles.container}>
-      <div className={styles.main}>
-        <LeftBlockMenu loading={loading} />
-
-        <CenterBlock loading={loading} />
-        <RightBlock loading={loading} />
-      </div>
-      <Footer loading={loading} />
-
-      {loading && (
-        <div className={styles.shadow}>
-          <p>Loading...</p>
-        </div>
-      )}
+      <AppRouts />
     </div>
   )
 }

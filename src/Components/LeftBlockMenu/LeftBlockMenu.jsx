@@ -1,61 +1,90 @@
-// import React from "react";
 import { useState } from 'react'
-import * as S from './LeftBlockMenu'
 
-function LeftBlockMenu({ loading = false }) {
+import { NavLink } from 'react-router-dom'
+// import { NavLink, useNavigate } from 'react-router-dom'
+
+import Cookies from 'js-cookie'
+import styles from './LeftBlockMenu.module.css'
+
+function LeftBlockMenu({ loading = false, setUser }) {
   const [visible, setVisible] = useState(true)
+  //   const navigate = useNavigate()
   const toggleVisibility = () => setVisible(!visible)
-
+  const logout = () => {
+    if (Cookies.get('token')) {
+      const cookies = Cookies.get('token')
+      console.log(`LogOut before:  cookies- ${cookies} `)
+      Cookies.remove('token')
+      // Обеспечивает перезагрузку цепочки App->AppRouts
+      setUser(undefined)
+      //   navigate('/login')
+      const cookies2 = Cookies.get('token')
+      console.log(`LogOut after:  cookies2- ${cookies2} `)
+    }
+  }
   return (
-    <S.Nav>
-      <S.Logo>
-        <S.LogoImage src="../img/logo.png" alt="logo" />
-      </S.Logo>
+    <nav className={styles.main}>
+      <div className={styles.logo}>
+        <img className={styles.logo__image} src="../img/logo.png" alt="logo" />
+      </div>
       {loading ? (
         <section>
-          <S.Burger>
-            <S.BurgerLine />
-            <S.BurgerLine />
-            <S.BurgerLine />
-          </S.Burger>
-          <S.Menu>
-            <S.MenuItems>
-              <S.MenuItem>Главное</S.MenuItem>
-              <S.MenuItem>Mой плейлист</S.MenuItem>
-              <S.MenuItem>Войти</S.MenuItem>
-            </S.MenuItems>
-          </S.Menu>
+          <div className={styles.burger}>
+            <span className={styles.burger__line} />
+            <span className={styles.burger__line} />
+            <span className={styles.burger__line} />
+          </div>
+          <div className={styles.menu}>
+            <ul className={styles.menu__items}>
+              <li className={styles.menu__item}>Главная</li>
+              <li className={styles.menu__item}>Mой плейлист</li>
+              <li className={styles.menu__item}>Войти</li>
+            </ul>
+          </div>
         </section>
       ) : (
         <section>
-          <S.Burger
+          <div
+            className={styles.burger}
             onClick={toggleVisibility}
             role="button"
             tabIndex="0"
             onKeyUp={() => {}}
           >
-            <S.BurgerLine />
-            <S.BurgerLine />
-            <S.BurgerLine />
-          </S.Burger>
+            <span className={styles.burger__line} />
+            <span className={styles.burger__line} />
+            <span className={styles.burger__line} />
+          </div>
           {visible && (
-            <S.Menu>
-              <S.MenuItems>
-                <S.MenuItem>
-                  <S.MenuLink href="http://"> Главное</S.MenuLink>
-                </S.MenuItem>
-                <S.MenuItem>
-                  <S.MenuLink href="http://">Мой плейлист</S.MenuLink>
-                </S.MenuItem>
-                <S.MenuItem>
-                  <S.MenuLink href="http://">Войти</S.MenuLink>
-                </S.MenuItem>
-              </S.MenuItems>
-            </S.Menu>
+            <div className={styles.menu}>
+              <ul className={styles.menu__items}>
+                <li className={styles.menu__item}>
+                  <NavLink className={styles.menu__link} to="/">
+                    Главная
+                  </NavLink>
+                </li>
+                <li className={styles.menu__item}>
+                  <NavLink className={styles.menu__link} to="/favorites">
+                    Мой плейлист
+                  </NavLink>
+                </li>
+                <li className={styles.menu__item}>
+                  <NavLink
+                    className={styles.menu__link}
+                    to="/login"
+                    onClick={() => {
+                      logout()
+                    }}
+                  >
+                    Выйти
+                  </NavLink>
+                </li>
+              </ul>
+            </div>
           )}
         </section>
       )}
-    </S.Nav>
+    </nav>
   )
 }
 

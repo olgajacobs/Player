@@ -12,21 +12,9 @@ function RightBlock({ loading }) {
         <div className={styles.user__avatar} />
       </div>
       <div className={styles.playlist__block}>
-        <RightBlockItem
-          loading={loading}
-          fileName="playlist01"
-          altName="day's playlist"
-        />
-        <RightBlockItem
-          loading={loading}
-          fileName="playlist02"
-          altName="day's playlist"
-        />
-        <RightBlockItem
-          loading={loading}
-          fileName="playlist03"
-          altName="day's playlist"
-        />
+        <RightBlockItem loading={loading} id="1" altName="day's playlist" />
+        <RightBlockItem loading={loading} id="2" altName="day's playlist" />
+        <RightBlockItem loading={loading} id="3" altName="day's playlist" />
       </div>
     </div>
   )

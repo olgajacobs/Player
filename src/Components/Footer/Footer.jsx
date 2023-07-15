@@ -1,7 +1,7 @@
-import styles from './Footer.module.css'
+import styles from './Footer.module.css';
 
-import Player from './Player/Player'
-import Volume from './Volume/Volume'
+import Player from './Player/Player';
+import Volume from './Volume/Volume';
 
 function Footer({ loading }) {
   return (
@@ -12,6 +12,6 @@ function Footer({ loading }) {
         <Volume />
       </div>
     </footer>
-  )
+  );
 }
-export default Footer
+export default Footer;
