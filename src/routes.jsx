@@ -5,7 +5,7 @@ import Main from './pages/main'
 import Registration from './pages/registration'
 import Login from './pages/login'
 import NotFound from './pages/notfound'
-import Category from './pages/category'
+import PlayList from './pages/playlist'
 import Favorites from './pages/favorites'
 import ProtectedRoute from './Components/protected-route'
 
@@ -24,7 +24,7 @@ function AppRouts({ setUser, user }) {
       <Route path="/login" element={<Login setUser={setUser} />} />
 
       <Route path="/registration" element={<Registration />} />
-      <Route path="/category" element={<Category />} />
+      <Route path="/playlist/:id" element={<PlayList />} />
       <Route path="/favorites" element={<Favorites />} />
       <Route path="*" element={<NotFound />} />
     </Routes>

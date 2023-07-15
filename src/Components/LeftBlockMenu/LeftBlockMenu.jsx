@@ -44,17 +44,17 @@ function LeftBlockMenu({ loading = false }) {
               <ul className={styles.menu__items}>
                 <li className={styles.menu__item}>
                   <NavLink className={styles.menu__link} to="/">
-                    Главное
+                    Главная
                   </NavLink>
                 </li>
                 <li className={styles.menu__item}>
-                  <NavLink className={styles.menu__link} to="/registration">
+                  <NavLink className={styles.menu__link} to="/favorites">
                     Мой плейлист
                   </NavLink>
                 </li>
                 <li className={styles.menu__item}>
                   <NavLink className={styles.menu__link} to="/login">
-                    Войти
+                    Выйти
                   </NavLink>
                 </li>
               </ul>
