@@ -9,13 +9,14 @@ import PlayList from './pages/playlist'
 import Favorites from './pages/favorites'
 import ProtectedRoute from './Components/protected-route'
 
-function AppRouts({ setUser, user }) {
-  //   console.log(`AppRouts: user- ${user}`)
+function AppRouts({ setUser, isLogined }) {
+  console.log(`AppRouts: isLogined- ${isLogined}`)
   return (
     <Routes>
       <Route path="/login" element={<Login setUser={setUser} />} />
       <Route path="/registration" element={<Registration />} />
-      <Route element={<ProtectedRoute isLogined={Boolean(user)} />}>
+      <Route element={<ProtectedRoute isLogined={isLogined} />}>
+        {/* <Route element={<ProtectedRoute isLogined={Boolean(user)} />}> */}
         <Route path="/" element={<Main setUser={setUser} />} />
         <Route path="/playlist/:id" element={<PlayList />} />
         <Route path="/favorites" element={<Favorites />} />

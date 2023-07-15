@@ -1,19 +1,25 @@
 import { useState } from 'react'
 
-import { NavLink, useNavigate } from 'react-router-dom'
+import { NavLink } from 'react-router-dom'
+// import { NavLink, useNavigate } from 'react-router-dom'
 
 import Cookies from 'js-cookie'
 import styles from './LeftBlockMenu.module.css'
 
 function LeftBlockMenu({ loading = false, setUser }) {
   const [visible, setVisible] = useState(true)
-  const navigate = useNavigate()
+  //   const navigate = useNavigate()
   const toggleVisibility = () => setVisible(!visible)
   const logout = () => {
     if (Cookies.get('token')) {
+      const cookies = Cookies.get('token')
+      console.log(`LogOut before:  cookies- ${cookies} `)
       Cookies.remove('token')
-      setUser(null)
-      navigate('/login')
+      // Обеспечивает перезагрузку цепочки App->AppRouts
+      setUser(undefined)
+      //   navigate('/login')
+      const cookies2 = Cookies.get('token')
+      console.log(`LogOut after:  cookies2- ${cookies2} `)
     }
   }
   return (

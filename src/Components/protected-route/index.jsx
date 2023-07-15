@@ -1,6 +1,10 @@
 import { Navigate, Outlet } from 'react-router-dom'
+import Cookies from 'js-cookie'
 
 function ProtectedRoute({ redirectPath = '/login', isLogined }) {
+  const cookies = Cookies.get('token')
+  console.log(`Prot: cookies- ${cookies} isLogined- ${isLogined}`)
+
   if (!isLogined) {
     return <Navigate to={redirectPath} replace />
   }

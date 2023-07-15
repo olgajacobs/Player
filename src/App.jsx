@@ -10,13 +10,18 @@ function App() {
 
   useEffect(() => {
     const cookies = Cookies.get('token')
-    if (cookies !== user) setUser(cookies)
-    // console.log(`App ue: cookies- ${cookies} user- ${user}`)
+    // if (cookies !== user) setUser(cookies)
+    console.log(`App uE: cookies- ${cookies} user- ${user}`)
   })
-
+  const isLogined = Boolean(Cookies.get('token'))
+  console.log(`App: isLogined- ${isLogined} user- ${user}`)
   return (
     <div className={styles.container}>
-      <AppRouts setUser={setUser} user={user} />
+      <AppRouts
+        setUser={setUser}
+        user={user}
+        isLogined={Boolean(Cookies.get('token'))}
+      />
     </div>
   )
 }
