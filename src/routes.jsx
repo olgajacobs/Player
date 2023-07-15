@@ -1,6 +1,6 @@
 import { Routes, Route } from 'react-router-dom'
-
-// import Cookies from 'js-cookie'
+import { useState } from 'react'
+import Cookies from 'js-cookie'
 import Main from './pages/main'
 import Registration from './pages/registration'
 import Login from './pages/login'
@@ -9,13 +9,17 @@ import PlayList from './pages/playlist'
 import Favorites from './pages/favorites'
 import ProtectedRoute from './Components/protected-route'
 
-function AppRouts({ setUser, isLogined }) {
-  console.log(`AppRouts: isLogined- ${isLogined}`)
+function AppRouts() {
+  const [user, setUser] = useState(Cookies.get('token'))
+  const isLogined = Boolean(Cookies.get('token'))
+  console.log(`AppRouts: isLogined- ${isLogined} user- ${user}`)
   return (
     <Routes>
       <Route path="/login" element={<Login setUser={setUser} />} />
       <Route path="/registration" element={<Registration />} />
-      <Route element={<ProtectedRoute isLogined={isLogined} />}>
+      <Route
+        element={<ProtectedRoute isLogined={Boolean(Cookies.get('token'))} />}
+      >
         {/* <Route element={<ProtectedRoute isLogined={Boolean(user)} />}> */}
         <Route path="/" element={<Main setUser={setUser} />} />
         <Route path="/playlist/:id" element={<PlayList />} />
