@@ -39,3 +39,16 @@
 .playlistname {
   color: rgb(237, 147, 111);
 }
+.button {
+  color: black;
+  font-size: 25px;
+  line-height: 24px;
+  border: 1px solid #ffffff;
+  border-radius: 60px;
+  padding: 6px 20px;
+  margin-top: 20px;
+  margin-bottom: 25px;
+}
+.button:hover {
+  color: rgb(157, 106, 148);
+}

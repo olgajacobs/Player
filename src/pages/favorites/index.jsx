@@ -8,7 +8,7 @@ function Favorites() {
         <h1>Мой плейлист</h1>
 
         <NavLink className={styles.link} to="/">
-          Перейти на главную страницу
+          Вернуться на главную страницу
         </NavLink>
       </div>
     </div>

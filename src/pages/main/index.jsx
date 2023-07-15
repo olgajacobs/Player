@@ -5,7 +5,7 @@ import Footer from '../../Components/Footer/Footer'
 import RightBlock from '../../Components/RightBlock/RightBlock'
 import styles from './main.module.css'
 
-function Main() {
+function Main({ setUser }) {
   const [loading, setLoading] = useState(true)
 
   useEffect(() => {
@@ -16,7 +16,7 @@ function Main() {
   return (
     <div className={styles.container}>
       <div className={styles.main}>
-        <LeftBlockMenu loading={loading} />
+        <LeftBlockMenu loading={loading} setUser={setUser} />
         <CenterBlock loading={loading} />
         <RightBlock loading={loading} />
       </div>

@@ -1,34 +1,21 @@
-import { useEffect, useState } from 'react'
+import { useState, useEffect } from 'react'
 // import { useState } from 'react'
 
 import Cookies from 'js-cookie'
 import AppRouts from './routes'
 import styles from './App.module.css'
-// import NavBar from './Components/protected-route'
 
 function App() {
-  const [user, setUser] = useState(Cookies.get('RegisteredUser'))
+  const [user, setUser] = useState(Cookies.get('token'))
 
-  if (!Cookies.get('FirstLoading')) Cookies.set('FirstLoading', true)
-  //   if (Cookies.get('RegisteredUser')) Cookies.remove('RegisteredUser')
-
-  useEffect(
-    () => () => {
-      if (Cookies.get('RegisteredUser')) Cookies.remove('RegisteredUser')
-      if (Cookies.get('FirstLoading')) Cookies.remove('FirstLoading')
-    },
-    []
-  )
-
-  //   const handleLogin = () => setUser({ login: 'tradam' })
-  //   const handleLogout = () => setUser(null)
+  useEffect(() => {
+    const cookies = Cookies.get('token')
+    if (cookies !== user) setUser(cookies)
+    // console.log(`App ue: cookies- ${cookies} user- ${user}`)
+  })
 
   return (
     <div className={styles.container}>
-      {/* <NavBar
-        user={user}
-        onAuthButtonClick={user ? handleLogout : handleLogin}
-      /> */}
       <AppRouts setUser={setUser} user={user} />
     </div>
   )

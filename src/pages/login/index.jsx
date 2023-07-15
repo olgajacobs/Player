@@ -6,7 +6,7 @@ import styles from './login.module.css'
 function Login({ setUser }) {
   const navigate = useNavigate()
   const buttonClick = () => {
-    if (!Cookies.get('RegisteredUser')) Cookies.set('RegisteredUser', 'Ivanov')
+    if (!Cookies.get('token')) Cookies.set('token', 'Ivanov')
     setUser('Ivanov')
     navigate('/')
   }

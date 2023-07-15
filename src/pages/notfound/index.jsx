@@ -8,7 +8,7 @@ function NotFound() {
         <h1>404 ошибка !</h1>
         <h2>Запрошенная страница не найдена</h2>
         <NavLink className={styles.link} to="/">
-          Перейти на главную страницу
+          Вернуться на главную страницу
         </NavLink>
       </div>
     </div>

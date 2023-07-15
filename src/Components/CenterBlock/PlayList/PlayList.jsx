@@ -1,4 +1,5 @@
 // import React from "react";
+import { v4 as uuidv4 } from 'uuid'
 import styles from './PlayList.module.css'
 import PlayListItem from './PlayListItem/PlayListItem'
 import Icon from '../../Icon/Icon'
@@ -26,7 +27,7 @@ function PlayList({ loading }) {
   playList = loading
     ? Array(4)
         .fill('')
-        .map(() => <PlayListItem loading={loading} />)
+        .map(() => <PlayListItem loading={loading} key={uuidv4()} />)
     : (playList = tempPlayList.map((song) => (
         <PlayListItem
           titleName={song.name}
