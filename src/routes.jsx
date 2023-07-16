@@ -10,9 +10,9 @@ import Favorites from './pages/favorites'
 import ProtectedRoute from './Components/protected-route'
 
 function AppRouts() {
-  const [user, setUser] = useState(Cookies.get('token'))
-  const isLogined = Boolean(Cookies.get('token'))
-  console.log(`AppRouts: isLogined- ${isLogined} user- ${user}`)
+  const setUser = useState(Cookies.get('token'))[1]
+
+  //   console.log(`AppRouts: isLogined- ${isLogined} user- ${user}`)
   return (
     <Routes>
       <Route path="/login" element={<Login setUser={setUser} />} />
@@ -20,7 +20,6 @@ function AppRouts() {
       <Route
         element={<ProtectedRoute isLogined={Boolean(Cookies.get('token'))} />}
       >
-        {/* <Route element={<ProtectedRoute isLogined={Boolean(user)} />}> */}
         <Route path="/" element={<Main setUser={setUser} />} />
         <Route path="/playlist/:id" element={<PlayList />} />
         <Route path="/favorites" element={<Favorites />} />
@@ -29,5 +28,5 @@ function AppRouts() {
     </Routes>
   )
 }
-//   <ProtectedRoute isLogined={Boolean(Cookies.get('RegisteredUser'))}>
+
 export default AppRouts
