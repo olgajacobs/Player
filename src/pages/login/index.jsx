@@ -5,14 +5,14 @@ import styles from './login.module.css'
 
 function Login({ setUser }) {
   const navigate = useNavigate()
+
   const buttonClick = () => {
     if (!Cookies.get('token')) Cookies.set('token', 'Ivanov')
-    const cookies = Cookies.get('token')
     setUser('Ivanov')
-    console.log(`Login before: cookies- ${cookies} `)
-    navigate('/')
-    const cookies2 = Cookies.get('token')
-    console.log(`Login after:  cookies2- ${cookies2} `)
+    navigate('/', { replace: true })
+
+    // const cookies2 = Cookies.get('token')
+    // console.log(`Login after:  cookies2- ${cookies2} `)
   }
 
   return (

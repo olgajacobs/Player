@@ -1,10 +1,10 @@
 // import React from "react";
-import styles from "./TrackPlay.module.css";
-import Icon from "../../../Icon/Icon";
+import styles from './TrackPlay.module.css'
+import Icon from '../../../Icon/Icon'
 
 function TrackPlay({ loading }) {
-  const author = loading ? "    " : "Ты та.";
-  const album = loading ? "     " : "Баста";
+  const author = loading ? '    ' : 'Ты та.'
+  const album = loading ? '     ' : 'Баста'
   if (loading)
     return (
       <div className={styles.main}>
@@ -33,7 +33,7 @@ function TrackPlay({ loading }) {
           />
         </div>
       </div>
-    );
+    )
   return (
     <div className={styles.main}>
       <div className={styles.track__playBlock}>
@@ -69,6 +69,6 @@ function TrackPlay({ loading }) {
         />
       </div>
     </div>
-  );
+  )
 }
-export default TrackPlay;
+export default TrackPlay
