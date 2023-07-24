@@ -33,8 +33,13 @@
   font-weight: 400;
   font-size: 60px;
 }
-p {
+.loading {
   color: chartreuse;
   font-weight: 400;
   font-size: 60px;
+}
+.error {
+  color: rgb(243, 24, 75);
+  font-weight: 400;
+  font-size: 30px;
 }

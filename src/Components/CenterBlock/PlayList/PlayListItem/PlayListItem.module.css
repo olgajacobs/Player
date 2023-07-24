@@ -57,3 +57,7 @@
 a {
   color: white;
 }
+.currentSong {
+  background-color: gray;
+  color: crimson;
+}

@@ -4,7 +4,7 @@ import styles from './PlayList.module.css'
 import PlayListItem from './PlayListItem/PlayListItem'
 import Icon from '../../Icon/Icon'
 
-function PlayList({ isLoading, playList, setCurrentSong }) {
+function PlayList({ isLoading, playList, currentSong, setCurrentSong }) {
   const playListItems = isLoading
     ? Array(4)
         .fill('')
@@ -12,11 +12,8 @@ function PlayList({ isLoading, playList, setCurrentSong }) {
     : playList.map((song) => (
         <PlayListItem
           song={song}
-          //   titleName={song.name}
-          //   authorName={song.author}
-          //   albumName={song.album}
-          //   time={timeFormat(song.duration_in_seconds)}
           key={song.id}
+          currentSong={currentSong}
           setCurrentSong={setCurrentSong}
         />
       ))

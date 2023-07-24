@@ -4,7 +4,7 @@ import PlayList from './PlayList/PlayList'
 
 import styles from './CenterBlock.module.css'
 
-function CenterBlock({ isLoading, playList, setCurrentSong }) {
+function CenterBlock({ isLoading, playList, currentSong, setCurrentSong }) {
   return (
     <div className={styles.main}>
       <Search />
@@ -14,6 +14,7 @@ function CenterBlock({ isLoading, playList, setCurrentSong }) {
       <PlayList
         isLoading={isLoading}
         playList={playList}
+        currentSong={currentSong}
         setCurrentSong={setCurrentSong}
       />
     </div>

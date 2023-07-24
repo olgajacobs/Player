@@ -52,3 +52,10 @@
   font-size: 16px;
   line-height: 24px;
 }
+.leftBlock {
+  height: 300px;
+
+  display: flex;
+  flex-direction: column;
+  justify-content: space-between;
+}

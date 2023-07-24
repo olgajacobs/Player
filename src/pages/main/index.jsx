@@ -29,10 +29,15 @@ function Main({ setUser }) {
   return (
     <div className={styles.container}>
       <div className={styles.main}>
-        <LeftBlockMenu loading={isLoading} setUser={setUser} />
+        <LeftBlockMenu
+          loading={isLoading}
+          setUser={setUser}
+          currentSong={currentSong}
+        />
         <CenterBlock
           isLoading={isLoading}
           playList={playList}
+          currentSong={currentSong}
           setCurrentSong={setCurrentSong}
         />
         <RightBlock loading={isLoading} />
@@ -41,13 +46,17 @@ function Main({ setUser }) {
 
       {isLoading && !errorMessage && (
         <div className={styles.shadow}>
-          <p>Loading...</p>
+          <p className={styles.loading}>Loading...</p>
         </div>
       )}
       {errorMessage && (
         <div className={styles.shadow}>
-          <p>Ошибка при загрузке плейлиста</p>
-          <p>{errorMessage}</p>
+          <div>
+            <p className={styles.error}>
+              Не удалось загрузить плейлист, попробуйте позже!
+            </p>
+            <p className={styles.error}>{`Ошибка: ${errorMessage}`}</p>
+          </div>
         </div>
       )}
     </div>

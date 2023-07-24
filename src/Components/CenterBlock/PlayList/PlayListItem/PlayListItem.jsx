@@ -17,8 +17,8 @@ function timeFormat(timeInSeconds) {
   return `${minStr}:${secStr}`
 }
 
-function PlayListItem({ isLoading, song, setCurrentSong }) {
-  console.log(song)
+function PlayListItem({ isLoading, song, currentSong, setCurrentSong }) {
+  const isCurrentSong = () => currentSong && currentSong.id === song.id
   const chooseCurrentSong = () => {
     setCurrentSong(song)
   }
@@ -52,7 +52,9 @@ function PlayListItem({ isLoading, song, setCurrentSong }) {
   return (
     <div className={styles.main}>
       <div
-        className={styles.playlist__track}
+        className={`${styles.playlist__track} ${
+          isCurrentSong() ? styles.currentSong : ''
+        }`}
         onClick={chooseCurrentSong}
         role="button"
         tabIndex="0"
