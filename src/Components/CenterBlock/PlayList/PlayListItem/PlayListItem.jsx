@@ -2,18 +2,27 @@
 import styles from './PlayListItem.module.css'
 import Icon from '../../../Icon/Icon'
 
-function PlayListItem({
-  loading = false,
-  titleName = '',
-  authorName = '',
-  albumName = '',
-  commentName = '',
-  hrefTitle = '',
-  hrefAuthor = '',
-  hrefAlbum = '',
-  time = '',
-}) {
-  if (loading)
+function timeFormat(timeInSeconds) {
+  const min = Math.floor(timeInSeconds / 60)
+  let minStr = ''
+  if (min === 0) minStr = '00'
+  else if (min < 10) minStr = `0${min.toString()}`
+  else minStr = min.toString()
+
+  const sec = timeInSeconds - min * 60
+  let secStr = ''
+  if (sec === 0) secStr = '00'
+  else if (sec < 10) secStr = `0${sec.toString()}`
+  else secStr = sec.toString()
+  return `${minStr}:${secStr}`
+}
+
+function PlayListItem({ isLoading, song, currentSong, setCurrentSong }) {
+  const isCurrentSong = () => currentSong && currentSong.id === song.id
+  const chooseCurrentSong = () => {
+    setCurrentSong(song)
+  }
+  if (isLoading)
     return (
       <div className={styles.main}>
         <div className={styles.playlist__track}>
@@ -42,7 +51,15 @@ function PlayListItem({
     )
   return (
     <div className={styles.main}>
-      <div className={styles.playlist__track}>
+      <div
+        className={`${styles.playlist__track} ${
+          isCurrentSong() ? styles.currentSong : ''
+        }`}
+        onClick={chooseCurrentSong}
+        role="button"
+        tabIndex="0"
+        onKeyUp={() => {}}
+      >
         <div className={styles.track__titleBlock}>
           <Icon
             classDiv="track__title-image"
@@ -50,22 +67,15 @@ function PlayListItem({
             iconName="note"
             alt="music"
           />
-          <div className={styles.track__title}>
-            <a className={styles.track__titleLink} href={hrefTitle}>
-              {titleName}
-              <span className="track__title-span">{commentName}</span>
-            </a>
+          <div className={`${styles.track__title} ${styles.track__link}`}>
+            {song.name}
           </div>
         </div>
-        <div className={styles.track__author}>
-          <a className={styles.track__authorLink} href={hrefAuthor}>
-            {authorName}
-          </a>
+        <div className={`${styles.track__author} ${styles.track__link}`}>
+          {song.author}
         </div>
-        <div className={styles.track__album}>
-          <a className={styles.track__albumLink} href={hrefAlbum}>
-            {albumName}
-          </a>
+        <div className={`${styles.track__album} ${styles.track__link}`}>
+          {song.album}
         </div>
         <div className={styles.track__timeBlock}>
           <Icon
@@ -75,7 +85,9 @@ function PlayListItem({
             alt="time"
           />
 
-          <span className={styles.track__time}>{time}</span>
+          <span className={styles.track__time}>
+            {timeFormat(song.duration_in_seconds)}
+          </span>
         </div>
       </div>
     </div>

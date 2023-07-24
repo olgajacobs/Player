@@ -2,8 +2,8 @@
 import RightBlockItem from './RightBlockItem/RigthBlockItem'
 import styles from './RightBlock.module.css'
 
-function RightBlock({ loading }) {
-  const personal = loading ? '' : 'Sergey.Ivanov'
+function RightBlock({ isLoading }) {
+  const personal = isLoading ? '' : 'Sergey.Ivanov'
 
   return (
     <div className={styles.main}>
@@ -12,9 +12,9 @@ function RightBlock({ loading }) {
         <div className={styles.user__avatar} />
       </div>
       <div className={styles.playlist__block}>
-        <RightBlockItem loading={loading} id="1" altName="day's playlist" />
-        <RightBlockItem loading={loading} id="2" altName="day's playlist" />
-        <RightBlockItem loading={loading} id="3" altName="day's playlist" />
+        <RightBlockItem loading={isLoading} id="1" altName="day's playlist" />
+        <RightBlockItem loading={isLoading} id="2" altName="day's playlist" />
+        <RightBlockItem loading={isLoading} id="3" altName="day's playlist" />
       </div>
     </div>
   )
