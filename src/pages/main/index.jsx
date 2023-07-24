@@ -8,28 +8,22 @@ import styles from './main.module.css'
 
 function Main({ setUser }) {
   const [isLoading, setLoading] = useState(true)
-  const [isFooterClosed, setFooterClosed] = useState(true)
+  //   const [isFooterClosed, setFooterClosed] = useState(true)
   const [playList, setPlayList] = useState({})
+  const [currentSong, setCurrentSong] = useState(null)
+  const [errorMessage, setErrorMessage] = useState(null)
 
   const fillPlayList = async () => {
     try {
       setPlayList(await getPlayList())
-      console.log('fillPlayList------------------')
-      console.log(playList)
-      console.log('fillPlayList-------------------')
-      console.log('isLoading-------------------')
       setLoading(false)
-      console.log('isLoading-------------------')
     } catch (error) {
-      alert(error.message)
+      setErrorMessage(error.message)
     }
   }
 
   useEffect(() => {
     fillPlayList()
-    console.log('Main-------------------')
-    console.log(playList)
-    console.log('Main-------------------')
   }, [])
 
   return (
@@ -39,15 +33,21 @@ function Main({ setUser }) {
         <CenterBlock
           isLoading={isLoading}
           playList={playList}
-          setFooterClosed={setFooterClosed}
+          setCurrentSong={setCurrentSong}
         />
         <RightBlock loading={isLoading} />
       </div>
-      {isFooterClosed && <Footer isLoading={isLoading} />}
+      {currentSong && <Footer />}
 
-      {isLoading && (
+      {isLoading && !errorMessage && (
         <div className={styles.shadow}>
           <p>Loading...</p>
+        </div>
+      )}
+      {errorMessage && (
+        <div className={styles.shadow}>
+          <p>Ошибка при загрузке плейлиста</p>
+          <p>{errorMessage}</p>
         </div>
       )}
     </div>
