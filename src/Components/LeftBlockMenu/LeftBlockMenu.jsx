@@ -3,7 +3,7 @@ import { NavLink } from 'react-router-dom'
 import Cookies from 'js-cookie'
 import styles from './LeftBlockMenu.module.css'
 
-function LeftBlockMenu({ loading = false, setUser }) {
+function LeftBlockMenu({ isLoading = false, setUser }) {
   const [visible, setVisible] = useState(true)
   const toggleVisibility = () => setVisible(!visible)
   const logout = () => {
@@ -20,7 +20,7 @@ function LeftBlockMenu({ loading = false, setUser }) {
       <div className={styles.logo}>
         <img className={styles.logo__image} src="../img/logo.png" alt="logo" />
       </div>
-      {loading ? (
+      {isLoading ? (
         <section>
           <div className={styles.burger}>
             <span className={styles.burger__line} />

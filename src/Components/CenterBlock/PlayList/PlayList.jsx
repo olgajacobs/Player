@@ -3,10 +3,8 @@ import { v4 as uuidv4 } from 'uuid'
 import styles from './PlayList.module.css'
 import PlayListItem from './PlayListItem/PlayListItem'
 import Icon from '../../Icon/Icon'
-// Подготовка тестового плейлиста
-import tempPlayList from '../../../tempPlayList'
 
-function PlayList({ loading }) {
+function PlayList({ isLoading, playList }) {
   function timeFormat(timeInSeconds) {
     const min = Math.floor(timeInSeconds / 60)
     let minStr = ''
@@ -21,14 +19,15 @@ function PlayList({ loading }) {
     else secStr = sec.toString()
     return `${minStr}:${secStr}`
   }
-  let playList
+  console.log('+++++++++++++++++++')
+  console.log(isLoading, playList)
+  console.log('+++++++++++++++++++')
 
-  // const emptyArray = new Array(8).fill('');
-  playList = loading
+  const playListItems = isLoading
     ? Array(4)
         .fill('')
-        .map(() => <PlayListItem loading={loading} key={uuidv4()} />)
-    : (playList = tempPlayList.map((song) => (
+        .map(() => <PlayListItem loading={isLoading} key={uuidv4()} />)
+    : playList.map((song) => (
         <PlayListItem
           titleName={song.name}
           authorName={song.author}
@@ -36,7 +35,7 @@ function PlayList({ loading }) {
           time={timeFormat(song.duration_in_seconds)}
           key={song.id}
         />
-      )))
+      ))
 
   return (
     <div className={styles.main}>
@@ -58,7 +57,7 @@ function PlayList({ loading }) {
         />
       </div>
 
-      <div className={styles.content__playlist}>{playList}</div>
+      <div className={styles.content__playlist}>{playListItems}</div>
     </div>
   )
 }

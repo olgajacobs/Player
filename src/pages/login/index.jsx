@@ -7,8 +7,12 @@ function Login({ setUser }) {
   const navigate = useNavigate()
 
   const buttonClick = () => {
-    if (!Cookies.get('token')) Cookies.set('token', 'Ivanov')
-    setUser('Ivanov')
+    if (!Cookies.get('token'))
+      Cookies.set(
+        'token',
+        'eyJhbGciOiJIUzI1NiIsInR5cCI6IkpXVCJ9.eyJ0b2tlbl90eXBlIjoiYWNjZXNzIiwiZXhwIjoxNjkwMTMxOTI0LCJpYXQiOjE2OTAxMzE2MjQsImp0aSI6IjQ2YjliNTFmZjE3ODRhY2E4MGU0OTNjYTVjNDg0YjA3IiwidXNlcl9pZCI6NzkxfQ.ktHEfxZrUFecStKU-U7NXecSP4YcWracHw98jopfLrY'
+      )
+    setUser('lox')
     navigate('/', { replace: true })
 
     // const cookies2 = Cookies.get('token')

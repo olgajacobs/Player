@@ -1,18 +1,22 @@
-import Search from "./Search/Search";
-import Filter from "./Filter/Filter";
-import PlayList from "./PlayList/PlayList";
+import Search from './Search/Search'
+import Filter from './Filter/Filter'
+import PlayList from './PlayList/PlayList'
 
-import styles from "./CenterBlock.module.css";
+import styles from './CenterBlock.module.css'
 
-function CenterBlock({ loading }) {
+function CenterBlock({ isLoading, playList, setFooterClosed }) {
   return (
     <div className={styles.main}>
       <Search />
       <h2 className={styles.header}>Треки</h2>
 
       <Filter />
-      <PlayList loading={loading} />
+      <PlayList
+        isLoading={isLoading}
+        playList={playList}
+        setFooterClosed={setFooterClosed}
+      />
     </div>
-  );
+  )
 }
-export default CenterBlock;
+export default CenterBlock
