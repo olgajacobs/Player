@@ -37,7 +37,7 @@ function Main({ setUser }) {
         />
         <RightBlock loading={isLoading} />
       </div>
-      {currentSong && <Footer />}
+      {currentSong && <Footer currentSong={currentSong} />}
 
       {isLoading && !errorMessage && (
         <div className={styles.shadow}>

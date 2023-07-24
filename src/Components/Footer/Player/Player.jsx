@@ -3,11 +3,11 @@ import styles from './Player.module.css'
 import PlayerControls from './PlayerControls/PlayerControls'
 import TrackPlay from './TrackPlay/TrackPlay'
 
-function Player({ isLoading }) {
+function Player({ currentSong }) {
   return (
     <div className={styles.main}>
       <PlayerControls />
-      <TrackPlay loading={isLoading} />
+      <TrackPlay currentSong={currentSong} />
     </div>
   )
 }

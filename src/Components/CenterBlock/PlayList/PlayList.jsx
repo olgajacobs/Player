@@ -4,36 +4,20 @@ import styles from './PlayList.module.css'
 import PlayListItem from './PlayListItem/PlayListItem'
 import Icon from '../../Icon/Icon'
 
-function PlayList({ isLoading, playList }) {
-  function timeFormat(timeInSeconds) {
-    const min = Math.floor(timeInSeconds / 60)
-    let minStr = ''
-    if (min === 0) minStr = '00'
-    else if (min < 10) minStr = `0${min.toString()}`
-    else minStr = min.toString()
-
-    const sec = timeInSeconds - min * 60
-    let secStr = ''
-    if (sec === 0) secStr = '00'
-    else if (sec < 10) secStr = `0${sec.toString()}`
-    else secStr = sec.toString()
-    return `${minStr}:${secStr}`
-  }
-  console.log('+++++++++++++++++++')
-  console.log(isLoading, playList)
-  console.log('+++++++++++++++++++')
-
+function PlayList({ isLoading, playList, setCurrentSong }) {
   const playListItems = isLoading
     ? Array(4)
         .fill('')
-        .map(() => <PlayListItem loading={isLoading} key={uuidv4()} />)
+        .map(() => <PlayListItem isLoading={isLoading} key={uuidv4()} />)
     : playList.map((song) => (
         <PlayListItem
-          titleName={song.name}
-          authorName={song.author}
-          albumName={song.album}
-          time={timeFormat(song.duration_in_seconds)}
+          song={song}
+          //   titleName={song.name}
+          //   authorName={song.author}
+          //   albumName={song.album}
+          //   time={timeFormat(song.duration_in_seconds)}
           key={song.id}
+          setCurrentSong={setCurrentSong}
         />
       ))
 
