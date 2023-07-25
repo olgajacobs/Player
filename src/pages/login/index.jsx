@@ -10,7 +10,7 @@ function Login({ setUser }) {
     if (!Cookies.get('token'))
       Cookies.set(
         'token',
-        'eyJhbGciOiJIUzI1NiIsInR5cCI6IkpXVCJ9.eyJ0b2tlbl90eXBlIjoiYWNjZXNzIiwiZXhwIjoxNjkwMTMxOTI0LCJpYXQiOjE2OTAxMzE2MjQsImp0aSI6IjQ2YjliNTFmZjE3ODRhY2E4MGU0OTNjYTVjNDg0YjA3IiwidXNlcl9pZCI6NzkxfQ.ktHEfxZrUFecStKU-U7NXecSP4YcWracHw98jopfLrY'
+        'eyJhbGciOiJIUzI1NiIsInR5cCI6IkpXVCJ9.eyJ0b2tlbl90eXBlIjoiYWNjZXNzIiwiZXhwIjoxNjkwMTMxOTI0LCJpYXQiOjE2OTAxMzE2MjQsImp0aSI6IjQ2YjliNTFmZjE3ODRhY2E4MGU0OTNjYTVjNDg0YjA3IiwidXNlcl9pZCI6NzkxfQ.ktHEfxZrUFecStKU-U7NXecSP4YcWracHw98jopfLrY',
       )
     setUser('lox')
     navigate('/', { replace: true })
