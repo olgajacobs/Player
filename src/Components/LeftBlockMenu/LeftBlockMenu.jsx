@@ -3,7 +3,7 @@ import { NavLink } from 'react-router-dom'
 import Cookies from 'js-cookie'
 import styles from './LeftBlockMenu.module.css'
 
-function LeftBlockMenu({ isLoading = false, setUser, currentSong }) {
+function LeftBlockMenu({ isLoading = false, setUser }) {
   const [visible, setVisible] = useState(true)
   const toggleVisibility = () => setVisible(!visible)
   const logout = () => {
@@ -77,13 +77,6 @@ function LeftBlockMenu({ isLoading = false, setUser, currentSong }) {
               </div>
             )}
           </div>
-          {currentSong && (
-            <div>
-              <audio controls autoPlay src={currentSong.track_file}>
-                <track kind="captions" />
-              </audio>
-            </div>
-          )}
         </section>
       )}
     </nav>

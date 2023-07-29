@@ -33,4 +33,6 @@
 .content__playlist {
   display: flex;
   flex-direction: column;
+  overflow-y: auto;
+  max-height: calc(100vh - 480px);
 }
