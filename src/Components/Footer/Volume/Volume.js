@@ -5,7 +5,7 @@ import Icon from '../../Icon/Icon'
 function Volume({ changeVolume }) {
   const [currentVolume, setCurrentVolume] = useState(25)
 
-  const handleChange = (e) => {
+  const handleChangeVolume = (e) => {
     changeVolume(Number(e.target.value) / 100)
     setCurrentVolume(e.target.value)
   }
@@ -28,7 +28,7 @@ function Volume({ changeVolume }) {
           min="0"
           max="100"
           value={String(currentVolume)}
-          onChange={(e) => handleChange(e)}
+          onChange={(e) => handleChangeVolume(e)}
         />
       </div>
     </div>

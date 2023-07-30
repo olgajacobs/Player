@@ -45,13 +45,13 @@ button,
   width: 18px;
   height: 12px;
   fill: transparent;
-  stroke: #d9d9d9;
+  stroke: #696969;
 }
 .player__btn-shuffle-svg {
   width: 19px;
   height: 12px;
   fill: transparent;
-  stroke: #d9d9d9;
+  stroke: #696969;
 }
 .track-play__svg {
   width: 18px;
@@ -192,4 +192,7 @@ button,
   width: 75px;
   text-align: end;
   padding-right: 15px;
+}
+.player__btn-active svg{
+  stroke: #fff;
 }

@@ -10,18 +10,27 @@
 
 .player__progress {
   width: 100%;
-  height: 10px;
-  background: #2e2e2e;
+  /* height: 10px; */
+  position: relative;
+  /* background: #2e2e2e;
+  background: #0fb266; */
   cursor: pointer;
 }
 .player__progressLine {
+  -webkit-appearance: none;
   width: 100%;
-  height: 5px;
+  height: 6px;
+  border-radius: 10px;
   background: #2e2e2e;
+  overflow: hidden;
   cursor: pointer;
-  color: #b672ff;
-  cursor: pointer;
-  /* -webkit-appearance: none; */
+ 
+}
+.player__progressLine::-webkit-slider-thumb{
+  -webkit-appearance: none;
+  width: 10px;
+  height:20px;
+  box-shadow: -1920px 0 0 1920px #b672ff;
 }
 
 .player__block {
@@ -29,4 +38,9 @@
   display: flex;
   flex-direction: row;
   justify-content: space-between;
+}
+.time {
+  position: absolute;
+  bottom: 20px;
+  right: 10px;
 }
