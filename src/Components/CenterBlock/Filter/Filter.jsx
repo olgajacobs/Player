@@ -27,7 +27,7 @@ genreFilter = genreFilter.map((genre) => (
   </a>
 ))
 
-function Filter() {
+export default function Filter() {
   const [buttons, setButtons] = useState([false, false, false])
   return (
     <div className={styles.main}>
@@ -56,4 +56,3 @@ function Filter() {
     </div>
   )
 }
-export default Filter

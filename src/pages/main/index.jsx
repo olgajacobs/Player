@@ -6,7 +6,7 @@ import RightBlock from '../../Components/RightBlock/RightBlock'
 import { getPlayList } from '../../api'
 import styles from './main.module.css'
 
-function Main({ setUser }) {
+export default function Main({ setUser }) {
   const [isLoading, setLoading] = useState(true)
   //   const [isFooterClosed, setFooterClosed] = useState(true)
   const [playList, setPlayList] = useState({})
@@ -29,11 +29,7 @@ function Main({ setUser }) {
   return (
     <div className={styles.container}>
       <div className={styles.main}>
-        <LeftBlockMenu
-          loading={isLoading}
-          setUser={setUser}
-          currentSong={currentSong}
-        />
+        <LeftBlockMenu loading={isLoading} setUser={setUser} />
         <CenterBlock
           isLoading={isLoading}
           playList={playList}
@@ -62,5 +58,3 @@ function Main({ setUser }) {
     </div>
   )
 }
-
-export default Main
