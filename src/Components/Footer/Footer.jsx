@@ -4,7 +4,7 @@ import Player from './Player/Player'
 import Volume from './Volume/Volume'
 import timeFormat from '../../util'
 
-export default function Footer({ currentSong }) {
+export const Footer=({ currentSong }) =>{
   const [currentProgress, setCurrentProgress] = useState(0)
   const [duration, setDuration] = useState(0)
   const audioRef = useRef(null)
