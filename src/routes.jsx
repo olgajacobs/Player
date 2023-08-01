@@ -2,6 +2,7 @@ import { Routes, Route } from 'react-router-dom'
 import Main from './pages/main'
 import Registration from './pages/registration'
 import Login from './pages/login'
+
 import NotFound from './pages/notfound'
 import PlayList from './pages/playlist'
 import Favorites from './pages/favorites'

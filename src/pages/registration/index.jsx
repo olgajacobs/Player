@@ -1,18 +1,11 @@
-import { NavLink } from 'react-router-dom'
-import styles from './registration.module.css'
+import AuthPage from '../../Components/AuthPage/AuthPage'
 
-function Registration() {
+export default function Registration() {
+const isLoginMode=false
+  
+
   return (
-    <div className={styles.container}>
-      <div className={styles.main}>
-        <h1>Страница регистрации</h1>
-
-        <NavLink className={styles.link} to="/">
-          Вернуться на главную страницу
-        </NavLink>
-      </div>
-    </div>
+    <AuthPage isLoginMode={isLoginMode}/>
   )
 }
 
-export default Registration
