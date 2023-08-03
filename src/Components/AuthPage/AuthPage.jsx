@@ -1,5 +1,5 @@
 import { useEffect, useState, useContext } from 'react'
-import { Link } from 'react-router-dom'
+import { Link, useNavigate } from 'react-router-dom'
 import * as S from './AuthPage.styles'
 import { registrateUser, autorizeUser } from '../../api'
 import { UserInContext } from '../../contexts/context'
@@ -11,6 +11,7 @@ export default function AuthPage({ isLoginMode = false }) {
   const [repeatPassword, setRepeatPassword] = useState('')
   //   const changeUser = changeUserInContext
   const userInContext = useContext(UserInContext)
+  const navigate = useNavigate()
   const registration = async () => {
     try {
       const username = email
@@ -47,6 +48,7 @@ export default function AuthPage({ isLoginMode = false }) {
       console.log(
         `Auth after setUser:  user- ${user.username} userInContext- ${userInContext.user.username}`
       )
+      navigate('/', { replace: true })
     } catch (apiError) {
       setError(apiError.message)
     }

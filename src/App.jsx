@@ -15,15 +15,19 @@ export default function App() {
   )
   useEffect(() => {
     const userInStorage = localStorage.getItem('userPleer')
-    console.log(userInStorage)
-    console.log(user)
-    console.log(`App setUser b:  user- ${user}`)
+
     if (userInStorage) {
       setUser(JSON.parse(userInStorage))
-      setIsLogined(true)
+      //   setIsLogined(true)
       console.log(`App setUser:  user- ${user}`)
     }
   }, [])
+  useEffect(() => {
+    if (user) {
+      setIsLogined(true)
+      console.log(`App setisLogined:  user- ${user}`)
+    }
+  }, [user])
   return (
     <UserInContext.Provider value={value}>
       <div className={styles.container}>
