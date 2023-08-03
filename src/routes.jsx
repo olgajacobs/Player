@@ -9,16 +9,16 @@ import Favorites from './pages/favorites'
 import ProtectedRoute from './Components/protected-route'
 // import { readUserFromContext } from './contexts/context'
 
-function AppRouts({ user }) {
+function AppRouts({ isLogined }) {
   //   console.log(`AppRouts: isLogined- ${isLogined} user- ${user}`)
   //   const { user } = readUserFromContext()
-  console.log(`AppRouts:  user- ${user}`)
+  console.log(`AppRouts:  isLogined- ${isLogined}`)
   return (
     <Routes>
       <Route path="/login" element={<Login />} />
       <Route path="/registration" element={<Registration />} />
       {/* <Route element={<ProtectedRoute />}> */}
-      <Route element={<ProtectedRoute isLogined={Boolean(user)} />}>
+      <Route element={<ProtectedRoute isLogined={isLogined} />}>
         <Route path="/" element={<Main />} />
         <Route path="/playlist/:id" element={<PlayList />} />
         <Route path="/favorites" element={<Favorites />} />

@@ -41,13 +41,12 @@ export default function AuthPage({ isLoginMode = false }) {
   const authorization = async () => {
     try {
       const user = await autorizeUser({ email, password })
-      console.log('auth++++++++++++++++++++++++++')
-      console.log(user)
-      localStorage.setItem('userPleer', user.username)
+      console.log(`Auth after getUser:  user- ${user}`)
+      localStorage.setItem('userPleer', JSON.stringify(user))
       userInContext.setUser(user)
-      console.log('auth ----------------------')
-
-      console.log(localStorage.getItem('userPleer'))
+      console.log(
+        `Auth after setUser:  user- ${user.username} userInContext- ${userInContext.user.username}`
+      )
     } catch (apiError) {
       setError(apiError.message)
     }

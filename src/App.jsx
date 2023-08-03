@@ -5,6 +5,7 @@ import { UserInContext } from './contexts/context'
 
 export default function App() {
   const [user, setUser] = useState(null)
+  const [isLogined, setIsLogined] = useState(false)
   const value = useMemo(
     () => ({
       user,
@@ -17,13 +18,16 @@ export default function App() {
     console.log(userInStorage)
     console.log(user)
     console.log(`App setUser b:  user- ${user}`)
-    if (userInStorage) setUser(userInStorage)
-    console.log(`App setUser:  user- ${user}`)
+    if (userInStorage) {
+      setUser(JSON.parse(userInStorage))
+      setIsLogined(true)
+      console.log(`App setUser:  user- ${user}`)
+    }
   }, [])
   return (
     <UserInContext.Provider value={value}>
       <div className={styles.container}>
-        <AppRouts user={user} />
+        <AppRouts isLogined={isLogined} />
         {/* <AppRouts user={user} setUser={setUser} /> */}
       </div>
     </UserInContext.Provider>
