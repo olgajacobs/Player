@@ -9,3 +9,8 @@ export const readUserFromContext = () => {
   const user = useContext(UserInContext)
   return user
 }
+export const changeUserInContext = (newUser) => {
+  const user = useContext(UserInContext)
+  console.log(user)
+  user.setUser(newUser)
+}

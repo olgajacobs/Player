@@ -1,62 +1,68 @@
-import { useEffect, useState } from "react";
-import { Link } from "react-router-dom";
-import * as S from "./AuthPage.styles";
-import { registrateUser,autorizeUser } from "../../api";
-
+import { useEffect, useState, useContext } from 'react'
+import { Link } from 'react-router-dom'
+import * as S from './AuthPage.styles'
+import { registrateUser, autorizeUser } from '../../api'
+import { UserInContext } from '../../contexts/context'
 
 export default function AuthPage({ isLoginMode = false }) {
-  const [error, setError] = useState(null);
-  const [email, setEmail] = useState("");
-  const [password, setPassword] = useState("");
-  const [repeatPassword, setRepeatPassword] = useState("");
-
-  const registration = async() =>{
+  const [error, setError] = useState(null)
+  const [email, setEmail] = useState('')
+  const [password, setPassword] = useState('')
+  const [repeatPassword, setRepeatPassword] = useState('')
+  //   const changeUser = changeUserInContext
+  const userInContext = useContext(UserInContext)
+  const registration = async () => {
     try {
-      const username=email
-      const user =await registrateUser({email,password,username})
-      console.log("++++++++++++++++++++++++++")
+      const username = email
+      const user = await registrateUser({ email, password, username })
+      console.log('reg ++++++++++++++++++++++++++')
       console.log(user)
-   
+      //   localStorage.setItem('userPleer', user)
+      //   changeUserInContext(user)
+      //   console.log('----------------------')
+
+      //   console.log(localStorage.getItem('userPleer'))
     } catch (apiError) {
-     
       setError(apiError.message)
     }
   }
 
   const handleRegister = async () => {
-    if (!email) setError("Не заполнена почта");
-    else if(!password) setError("Не заполнен пароль");
-    else if(!repeatPassword) setError("Не заполнен повторный пароль");
-    else if(password !== repeatPassword)   setError(`Пароль: ${password} и повторный пароль ${repeatPassword} не совпадают`);
-  else
-registration()
-  };
+    if (!email) setError('Не заполнена почта')
+    else if (!password) setError('Не заполнен пароль')
+    else if (!repeatPassword) setError('Не заполнен повторный пароль')
+    else if (password !== repeatPassword)
+      setError(
+        `Пароль: ${password} и повторный пароль ${repeatPassword} не совпадают`
+      )
+    else registration()
+  }
 
-  const authorization = async() =>{
+  const authorization = async () => {
     try {
-    
-      const user =await autorizeUser({email,password})
-      console.log("++++++++++++++++++++++++++")
+      const user = await autorizeUser({ email, password })
+      console.log('auth++++++++++++++++++++++++++')
       console.log(user)
-   
+      localStorage.setItem('userPleer', user.username)
+      userInContext.setUser(user)
+      console.log('auth ----------------------')
+
+      console.log(localStorage.getItem('userPleer'))
     } catch (apiError) {
-     
       setError(apiError.message)
     }
   }
- 
-  const handleLogin = async () => {
-    if (!email) setError("Не заполнена почта");
-    else if(!password) setError("Не заполнен пароль");
-  else
-authorization()
-  };
 
+  const handleLogin = async () => {
+    if (!email) setError('Не заполнена почта')
+    else if (!password) setError('Не заполнен пароль')
+    else authorization()
+  }
 
   // Сбрасываем ошибку если пользователь меняет данные на форме или меняется режим формы
   useEffect(() => {
-    setError(null);
-  }, [isLoginMode, email, password, repeatPassword]);
+    setError(null)
+  }, [isLoginMode, email, password, repeatPassword])
 
   return (
     <S.PageContainer>
@@ -75,7 +81,7 @@ authorization()
                 placeholder="Почта"
                 value={email}
                 onChange={(event) => {
-                  setEmail(event.target.value);
+                  setEmail(event.target.value)
                 }}
               />
               <S.ModalInput
@@ -84,7 +90,7 @@ authorization()
                 placeholder="Пароль"
                 value={password}
                 onChange={(event) => {
-                  setPassword(event.target.value);
+                  setPassword(event.target.value)
                 }}
               />
             </S.Inputs>
@@ -107,7 +113,7 @@ authorization()
                 placeholder="Почта"
                 value={email}
                 onChange={(event) => {
-                  setEmail(event.target.value);
+                  setEmail(event.target.value)
                 }}
               />
               <S.ModalInput
@@ -116,7 +122,7 @@ authorization()
                 placeholder="Пароль"
                 value={password}
                 onChange={(event) => {
-                  setPassword(event.target.value);
+                  setPassword(event.target.value)
                 }}
               />
               <S.ModalInput
@@ -125,7 +131,7 @@ authorization()
                 placeholder="Повторите пароль"
                 value={repeatPassword}
                 onChange={(event) => {
-                  setRepeatPassword(event.target.value);
+                  setRepeatPassword(event.target.value)
                 }}
               />
             </S.Inputs>
@@ -139,5 +145,5 @@ authorization()
         )}
       </S.ModalForm>
     </S.PageContainer>
-  );
+  )
 }
