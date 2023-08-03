@@ -9,20 +9,16 @@ export default function AuthPage({ isLoginMode = false }) {
   const [email, setEmail] = useState('')
   const [password, setPassword] = useState('')
   const [repeatPassword, setRepeatPassword] = useState('')
-  //   const changeUser = changeUserInContext
   const userInContext = useContext(UserInContext)
   const navigate = useNavigate()
+
   const registration = async () => {
     try {
       const username = email
       const user = await registrateUser({ email, password, username })
-      console.log('reg ++++++++++++++++++++++++++')
-      console.log(user)
-      //   localStorage.setItem('userPleer', user)
-      //   changeUserInContext(user)
-      //   console.log('----------------------')
-
-      //   console.log(localStorage.getItem('userPleer'))
+      localStorage.setItem('userPleer', JSON.stringify(user))
+      userInContext.setUser(user)
+      navigate('/', { replace: true })
     } catch (apiError) {
       setError(apiError.message)
     }
@@ -42,12 +38,8 @@ export default function AuthPage({ isLoginMode = false }) {
   const authorization = async () => {
     try {
       const user = await autorizeUser({ email, password })
-      console.log(`Auth after getUser:  user- ${user}`)
       localStorage.setItem('userPleer', JSON.stringify(user))
       userInContext.setUser(user)
-      console.log(
-        `Auth after setUser:  user- ${user.username} userInContext- ${userInContext.user.username}`
-      )
       navigate('/', { replace: true })
     } catch (apiError) {
       setError(apiError.message)

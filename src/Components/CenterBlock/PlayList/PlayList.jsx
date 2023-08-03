@@ -1,10 +1,12 @@
-// import React from "react";
+import { useContext } from 'react'
 import { v4 as uuidv4 } from 'uuid'
 import styles from './PlayList.module.css'
 import PlayListItem from './PlayListItem/PlayListItem'
+import { IsLoading } from '../../../contexts/context'
 import Icon from '../../Icon/Icon'
 
-function PlayList({ isLoading, playList, currentSong, setCurrentSong }) {
+function PlayList({ playList, currentSong, setCurrentSong }) {
+  const isLoading = useContext(IsLoading)
   const playListItems = isLoading
     ? Array(4)
         .fill('')

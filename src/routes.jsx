@@ -2,12 +2,10 @@ import { Routes, Route } from 'react-router-dom'
 import Main from './pages/main'
 import Registration from './pages/registration'
 import Login from './pages/login'
-
 import NotFound from './pages/notfound'
 import PlayList from './pages/playlist'
 import Favorites from './pages/favorites'
 import ProtectedRoute from './Components/protected-route'
-// import { readUserFromContext } from './contexts/context'
 
 function AppRouts({ isLogined }) {
   //   console.log(`AppRouts: isLogined- ${isLogined} user- ${user}`)

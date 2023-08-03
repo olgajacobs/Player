@@ -5,10 +5,10 @@ import Footer from '../../Components/Footer/Footer'
 import RightBlock from '../../Components/RightBlock/RightBlock'
 import { getPlayList } from '../../api'
 import styles from './main.module.css'
+import { IsLoading } from '../../contexts/context'
 
 export default function Main() {
   const [isLoading, setLoading] = useState(true)
-  //   const [isFooterClosed, setFooterClosed] = useState(true)
   const [playList, setPlayList] = useState({})
   const [currentSong, setCurrentSong] = useState(null)
   const [errorMessage, setErrorMessage] = useState(null)
@@ -29,14 +29,15 @@ export default function Main() {
   return (
     <div className={styles.container}>
       <div className={styles.main}>
-        <LeftBlockMenu loading={isLoading} />
-        <CenterBlock
-          isLoading={isLoading}
-          playList={playList}
-          currentSong={currentSong}
-          setCurrentSong={setCurrentSong}
-        />
-        <RightBlock isLoading={isLoading} />
+        <IsLoading.Provider value={isLoading}>
+          <LeftBlockMenu />
+          <CenterBlock
+            playList={playList}
+            currentSong={currentSong}
+            setCurrentSong={setCurrentSong}
+          />
+          <RightBlock />
+        </IsLoading.Provider>
       </div>
       {currentSong && <Footer currentSong={currentSong} />}
 

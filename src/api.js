@@ -30,8 +30,17 @@ export async function registrateUser({ email, password, username }) {
   if (response.status === 501) {
     throw new Error('Сервер сломался')
   } else if (response.status === 400) {
-    console.log(await response.json())
-    throw new Error('Ошибка регистрации')
+    const responseMessage = await response.json()
+    let errorMessage = 'Ошибка регистрации:'
+    // if (responseMessage?.username)
+    //   errorMessage += `\n ${responseMessage.username}`
+    if (responseMessage?.email) errorMessage += `\n ${responseMessage.email}`
+    if (responseMessage?.password)
+      errorMessage += `\n ${responseMessage.password}`
+    console.log(responseMessage?.username)
+    console.log(responseMessage?.email)
+    console.log(responseMessage?.password)
+    throw new Error(errorMessage)
   } else throw new Error('Прочие ошибки сервера')
 }
 
@@ -54,8 +63,10 @@ export async function autorizeUser({ email, password }) {
   if (response.status === 500) {
     throw new Error('Сервер сломался')
   } else if (response.status === 401) {
-    console.log(await response.json())
-    throw new Error('Ошибка авторизации')
+    const responseMessage = await response.json()
+    let errorMessage = 'Ошибка авторизации:'
+    if (responseMessage?.detail) errorMessage += `\n ${responseMessage.detail}`
+    throw new Error(errorMessage)
   } else throw new Error('Прочие ошибки сервера')
 }
 
