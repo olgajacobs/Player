@@ -12,7 +12,7 @@ function RightBlock() {
   const personal =
     !isLoading && userInContext?.user ? userInContext?.user?.username : ''
   const logout = () => {
-    localStorage.setItem('userPleer', undefined)
+    localStorage.removeItem('userPleer')
     userInContext.setUser(undefined)
   }
   return (

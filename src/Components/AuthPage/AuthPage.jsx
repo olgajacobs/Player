@@ -9,10 +9,13 @@ export default function AuthPage({ isLoginMode = false }) {
   const [email, setEmail] = useState('')
   const [password, setPassword] = useState('')
   const [repeatPassword, setRepeatPassword] = useState('')
+  const [isButtonBlocked, setIsButtonBlocked] = useState(false)
+
   const userInContext = useContext(UserInContext)
   const navigate = useNavigate()
 
   const registration = async () => {
+    setIsButtonBlocked(true)
     try {
       const username = email
       const user = await registrateUser({ email, password, username })
@@ -21,6 +24,8 @@ export default function AuthPage({ isLoginMode = false }) {
       navigate('/', { replace: true })
     } catch (apiError) {
       setError(apiError.message)
+    } finally {
+      setIsButtonBlocked(false)
     }
   }
 
@@ -36,6 +41,7 @@ export default function AuthPage({ isLoginMode = false }) {
   }
 
   const authorization = async () => {
+    setIsButtonBlocked(true)
     try {
       const user = await autorizeUser({ email, password })
       localStorage.setItem('userPleer', JSON.stringify(user))
@@ -43,6 +49,8 @@ export default function AuthPage({ isLoginMode = false }) {
       navigate('/', { replace: true })
     } catch (apiError) {
       setError(apiError.message)
+    } finally {
+      setIsButtonBlocked(false)
     }
   }
 
@@ -89,11 +97,16 @@ export default function AuthPage({ isLoginMode = false }) {
             </S.Inputs>
             {error && <S.Error>{error}</S.Error>}
             <S.Buttons>
-              <S.PrimaryButton onClick={() => handleLogin({ email, password })}>
-                Войти
+              <S.PrimaryButton
+                disabled={isButtonBlocked}
+                onClick={() => handleLogin({ email, password })}
+              >
+                {isButtonBlocked ? 'Идет авторизация' : 'Войти'}
               </S.PrimaryButton>
               <Link to="/registration">
-                <S.SecondaryButton>Зарегистрироваться</S.SecondaryButton>
+                <S.SecondaryButton disabled={isButtonBlocked}>
+                  {isButtonBlocked ? 'Идет авторизация' : 'Зарегистрироваться'}
+                </S.SecondaryButton>
               </Link>
             </S.Buttons>
           </>
@@ -130,8 +143,11 @@ export default function AuthPage({ isLoginMode = false }) {
             </S.Inputs>
             {error && <S.Error>{error}</S.Error>}
             <S.Buttons>
-              <S.PrimaryButton onClick={handleRegister}>
-                Зарегистрироваться
+              <S.PrimaryButton
+                disabled={isButtonBlocked}
+                onClick={handleRegister}
+              >
+                {isButtonBlocked ? 'Идет регистрация' : 'Зарегистрироваться'}
               </S.PrimaryButton>
             </S.Buttons>
           </>

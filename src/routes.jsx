@@ -8,14 +8,10 @@ import Favorites from './pages/favorites'
 import ProtectedRoute from './Components/protected-route'
 
 function AppRouts({ isLogined }) {
-  //   console.log(`AppRouts: isLogined- ${isLogined} user- ${user}`)
-  //   const { user } = readUserFromContext()
-  console.log(`AppRouts:  isLogined- ${isLogined}`)
   return (
     <Routes>
       <Route path="/login" element={<Login />} />
       <Route path="/registration" element={<Registration />} />
-      {/* <Route element={<ProtectedRoute />}> */}
       <Route element={<ProtectedRoute isLogined={isLogined} />}>
         <Route path="/" element={<Main />} />
         <Route path="/playlist/:id" element={<PlayList />} />

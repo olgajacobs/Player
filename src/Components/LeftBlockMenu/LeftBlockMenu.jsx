@@ -9,7 +9,7 @@ function LeftBlockMenu() {
   const userInContext = useContext(UserInContext)
   const isLoading = useContext(IsLoading)
   const logout = () => {
-    localStorage.setItem('userPleer', undefined)
+    localStorage.removeItem('userPleer')
     userInContext.setUser(undefined)
   }
 

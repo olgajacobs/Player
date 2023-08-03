@@ -37,9 +37,6 @@ export async function registrateUser({ email, password, username }) {
     if (responseMessage?.email) errorMessage += `\n ${responseMessage.email}`
     if (responseMessage?.password)
       errorMessage += `\n ${responseMessage.password}`
-    console.log(responseMessage?.username)
-    console.log(responseMessage?.email)
-    console.log(responseMessage?.password)
     throw new Error(errorMessage)
   } else throw new Error('Прочие ошибки сервера')
 }
