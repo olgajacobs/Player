@@ -1,9 +1,11 @@
-// import React from "react";
+import { useContext } from 'react'
 import styles from './PlayListItem.module.css'
 import Icon from '../../../Icon/Icon'
 import timeFormat from '../../../../util'
+import { IsLoading } from '../../../../contexts/context'
 
-function PlayListItem({ isLoading, song, currentSong, setCurrentSong }) {
+function PlayListItem({ song, currentSong, setCurrentSong }) {
+  const isLoading = useContext(IsLoading)
   const isCurrentSong = () => currentSong && currentSong.id === song.id
   const chooseCurrentSong = () => {
     setCurrentSong(song)

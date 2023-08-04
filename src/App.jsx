@@ -1,16 +1,24 @@
-import { useState } from 'react'
-import Cookies from 'js-cookie'
+import { useState, useMemo } from 'react'
 import AppRouts from './routes'
 import styles from './App.module.css'
+import { UserInContext } from './contexts/context'
 
-function App() {
-  const [user, setUser] = useState(Cookies.get('token'))
+export default function App() {
+  const [user, setUser] = useState(localStorage.getItem('userPleer'))
+
+  const value = useMemo(
+    () => ({
+      user,
+      setUser,
+    }),
+    [user],
+  )
 
   return (
-    <div className={styles.container}>
-      <AppRouts user={user} setUser={setUser} />
-    </div>
+    <UserInContext.Provider value={value}>
+      <div className={styles.container}>
+        <AppRouts isLogined={Boolean(user)} />
+      </div>
+    </UserInContext.Provider>
   )
 }
-
-export default App

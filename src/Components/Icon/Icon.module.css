@@ -193,6 +193,41 @@ button,
   text-align: end;
   padding-right: 15px;
 }
-.player__btn-active svg{
+.player__btn-active svg {
   stroke: #fff;
+}
+
+.exit__image {
+  width: 40px;
+  height: 40px;
+  padding: 6px;
+  /* flex-shrink: 0; */
+  border-radius: 50%;
+  border: 1px solid #696969;
+  display: flex;
+  align-items: center;
+  justify-content: center;
+  cursor: pointer;
+}
+.exit__image:hover {
+  stroke-width: 1px;
+  stroke: #acacac;
+  stroke: #d9d9d9;
+}
+.exit__svg {
+  width: 40px;
+  height: 40px;
+  padding-top: 10px;
+  padding-left: 4px;
+  /* display: flex;
+  align-items: center;
+  justify-content: center; */
+  fill: transparent;
+  stroke: #d9d9d9;
+  stroke: #acacac;
+}
+.exit__svg:hover {
+  stroke-width: 2px;
+  stroke: #acacac;
+  stroke: #d9d9d9;
 }

@@ -1,20 +1,18 @@
-import { useState } from 'react'
+import { useState, useContext } from 'react'
 import { NavLink } from 'react-router-dom'
-import Cookies from 'js-cookie'
 import styles from './LeftBlockMenu.module.css'
+import { IsLoading, UserInContext } from '../../contexts/context'
 
-function LeftBlockMenu({ isLoading = false, setUser }) {
+function LeftBlockMenu() {
   const [visible, setVisible] = useState(true)
   const toggleVisibility = () => setVisible(!visible)
+  const userInContext = useContext(UserInContext)
+  const isLoading = useContext(IsLoading)
   const logout = () => {
-    if (Cookies.get('token')) {
-      Cookies.remove('token')
-      setUser(undefined)
-
-      //   const cookies2 = Cookies.get('token')
-      //   console.log(`LogOut after:  cookies2- ${cookies2} `)
-    }
+    localStorage.removeItem('userPleer')
+    userInContext.setUser(undefined)
   }
+
   return (
     <nav className={styles.main}>
       <div className={styles.logo}>
