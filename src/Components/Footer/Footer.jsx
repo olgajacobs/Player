@@ -1,4 +1,4 @@
-import { useRef, useState } from 'react'
+import { useRef, useState, useEffect } from 'react'
 import { useSelector } from 'react-redux'
 import styles from './Footer.module.css'
 import Player from './Player/Player'
