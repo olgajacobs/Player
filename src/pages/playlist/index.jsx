@@ -3,7 +3,6 @@ import playListNames from './playlistnames'
 import styles from './playlist.module.css'
 
 function PlayList() {
-  //   const [loading, setLoading] = useState(true)
   const params = useParams()
   const navigate = useNavigate()
   const playListName = playListNames.find(

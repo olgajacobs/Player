@@ -1,13 +1,17 @@
 import { useRef, useState } from 'react'
+import { useSelector } from 'react-redux'
 import styles from './Footer.module.css'
 import Player from './Player/Player'
 import Volume from './Volume/Volume'
 import timeFormat from '../../util'
+import { currentTrackSelector } from '../../store/selectors/pleer'
 
-export default function Footer({ currentSong }) {
+export default function Footer() {
   const [currentProgress, setCurrentProgress] = useState(0)
   const [duration, setDuration] = useState(0)
   const audioRef = useRef(null)
+  const currentSong = useSelector(currentTrackSelector)
+  console.log(currentSong)
   // const progressRef = useRef(null)
 
   const changeVolume = (value) => {
@@ -19,13 +23,13 @@ export default function Footer({ currentSong }) {
   const handlerTimeUpdate = () => {
     setCurrentProgress(Math.floor(audioRef?.current?.currentTime))
   }
-  
+
   const handlerLoadedMetadata = () => {
     setDuration(Math.floor(audioRef?.current?.duration))
   }
 
   const handleChangeProgress = (e) => {
-    audioRef.current.currentTime=Number(e.target.value) 
+    audioRef.current.currentTime = Number(e.target.value)
     setCurrentProgress(e.target.value)
   }
 
@@ -34,6 +38,9 @@ export default function Footer({ currentSong }) {
   //   setDuration(Math.floor(audioRef?.current?.duration))
   // }, [audioRef?.current?.loadedmetadata])
   // audioRef?.current?.readyStat
+  //   useEffect(() => {
+  //     console.log(currentSong)
+  //   }, [currentSong])
   return (
     <footer className={styles.main}>
       <div className={styles.player__progress}>
@@ -43,14 +50,19 @@ export default function Footer({ currentSong }) {
           type="range"
           name="progress"
           max={duration}
-       
           value={currentProgress}
           onChange={(e) => handleChangeProgress(e)}
         />
-        <div className={styles.time}>{`${timeFormat(currentProgress)}/${timeFormat(duration)}`}</div>
+        <div className={styles.time}>{`${timeFormat(
+          currentProgress
+        )}/${timeFormat(duration)}`}</div>
       </div>
       <div className={styles.player__block}>
-        <Player currentSong={currentSong} audioRef={audioRef} changeLoop={changeLoop} />
+        <Player
+          currentSong={currentSong}
+          audioRef={audioRef}
+          changeLoop={changeLoop}
+        />
         <Volume changeVolume={changeVolume} />
       </div>
 

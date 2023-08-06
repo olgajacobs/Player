@@ -1,14 +1,18 @@
 import { useContext } from 'react'
+import { useDispatch } from 'react-redux'
 import styles from './PlayListItem.module.css'
 import Icon from '../../../Icon/Icon'
 import timeFormat from '../../../../util'
 import { IsLoading } from '../../../../contexts/context'
+import { setCurrentTrack } from '../../../../store/actions/creators/pleer'
 
-function PlayListItem({ song, currentSong, setCurrentSong }) {
+function PlayListItem({ song, currentSong }) {
   const isLoading = useContext(IsLoading)
   const isCurrentSong = () => currentSong && currentSong.id === song.id
+  const dispatcher = useDispatch()
   const chooseCurrentSong = () => {
-    setCurrentSong(song)
+    dispatcher(setCurrentTrack(song))
+    //    setCurrentSong(song)
   }
   if (isLoading)
     return (
