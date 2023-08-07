@@ -1,10 +1,17 @@
 import { useState, useEffect } from 'react'
+import { useDispatch, useSelector } from 'react-redux'
 import styles from './PlayerControls.module.css'
 import Icon from '../../../Icon/Icon'
+import { currentTrackSelector } from '../../../../store/selectors/pleer'
+import { nextTrack, prevTrack } from '../../../../store/actions/creators/pleer'
 
-function PlayerControls({ audioRef, currentSong,changeLoop }) {
+function PlayerControls({ audioRef, changeLoop }) {
   const [isPlaying, setIsPlaying] = useState(false)
   const [isLoop, setIsLoop] = useState(false)
+  const dispatcher = useDispatch()
+  const currentSong = useSelector(currentTrackSelector)
+  const handleNextTrack = () => dispatcher(nextTrack())
+  const handlePrevTrack = () => dispatcher(prevTrack(3))
 
   const handleStart = () => {
     audioRef.current.play()
@@ -16,17 +23,16 @@ function PlayerControls({ audioRef, currentSong,changeLoop }) {
     setIsPlaying(false)
   }
   const handleLoop = () => {
-    const newLoop=!audioRef.current.loop
-   changeLoop(newLoop)
+    const newLoop = !audioRef.current.loop
+    changeLoop(newLoop)
     setIsLoop(newLoop)
   }
   const underconstruction = () => {
-    alert("Еще не реализовано")
+    alert('Еще не реализовано')
   }
-  
-
 
   const togglePlay = isPlaying ? handleStop : handleStart
+
   useEffect(() => {
     handleStart()
   }, [currentSong])
@@ -37,7 +43,7 @@ function PlayerControls({ audioRef, currentSong,changeLoop }) {
         classSvg="player__btn_prev_svg"
         iconName="prev"
         alt="prev"
-        action={underconstruction}
+        action={handlePrevTrack}
       />
       <Icon
         classDiv="player__btn-play _btn-icon"
@@ -51,10 +57,12 @@ function PlayerControls({ audioRef, currentSong,changeLoop }) {
         classSvg="player__btn-next-svg"
         iconName="next"
         alt="next"
-        action={underconstruction}
+        action={handleNextTrack}
       />
       <Icon
-        classDiv={`player__btn-repeat _btn-icon ${isLoop?"player__btn-active":""}`}
+        classDiv={`player__btn-repeat _btn-icon ${
+          isLoop ? 'player__btn-active' : ''
+        }`}
         classSvg="player__btn-repeat-svg"
         iconName="repeat"
         alt="repeat"

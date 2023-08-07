@@ -1,16 +1,14 @@
-import { useRef, useState, useEffect } from 'react'
-import { useSelector } from 'react-redux'
+import { useRef, useState } from 'react'
 import styles from './Footer.module.css'
 import Player from './Player/Player'
 import Volume from './Volume/Volume'
 import timeFormat from '../../util'
-import { currentTrackSelector } from '../../store/selectors/pleer'
 
-export default function Footer() {
+export default function Footer({ currentSong }) {
   const [currentProgress, setCurrentProgress] = useState(0)
   const [duration, setDuration] = useState(0)
   const audioRef = useRef(null)
-  const currentSong = useSelector(currentTrackSelector)
+
   console.log(currentSong)
   // const progressRef = useRef(null)
 
@@ -33,14 +31,6 @@ export default function Footer() {
     setCurrentProgress(e.target.value)
   }
 
-  // useEffect(() => {
-  //   console.log(audioRef.current.duration)
-  //   setDuration(Math.floor(audioRef?.current?.duration))
-  // }, [audioRef?.current?.loadedmetadata])
-  // audioRef?.current?.readyStat
-  //   useEffect(() => {
-  //     console.log(currentSong)
-  //   }, [currentSong])
   return (
     <footer className={styles.main}>
       <div className={styles.player__progress}>

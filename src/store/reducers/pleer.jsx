@@ -1,8 +1,8 @@
 import {
   LOAD_PLAYLIST,
   SET_CURRENT_TRACK,
-  //   NEXT_TRACK,
-  //   PREV_TRACK,
+  NEXT_TRACK,
+  PREV_TRACK,
   //   SET_PAUSE,
   //   TOGGLE_SHUFFLED,
   //   TOGGLE_AUTOREPEAT,
@@ -35,23 +35,19 @@ export default function pleerReducer(state = initialState, action = '') {
         currentTrack: newCurrentTrack,
       }
     }
-    // case NEXT_TRACK: {
-    //   const { id } = action.payload
-    //   const targetTodo = state.byIds[id]
-    //   return {
-    //     ...state,
-    //     byIds: {
-    //       ...state.byIds,
-    //       [id]: {
-    //         ...targetTodo,
-    //         completed: !targetTodo.completed,
-    //       },
-    //     },
-    //   }
-    // }
-    // case PREV_TRACK: {
-    //   return { ...state }
-    // }
+    case NEXT_TRACK: {
+      const { currentTrack, playlist } = state
+      const currentIndex = playlist.findIndex((e) => e.id === currentTrack.id)
+      if (currentIndex === playlist.length - 1) return { ...state }
+      return { ...state, currentTrack: playlist[currentIndex + 1] }
+    }
+    case PREV_TRACK: {
+      const { time } = action.payload
+      const { currentTrack, playlist } = state
+      const currentIndex = playlist.findIndex((e) => e.id === currentTrack.id)
+      if (currentIndex === 0 || time > 5) return { ...state }
+      return { ...state, currentTrack: playlist[currentIndex - 1] }
+    }
     // case SET_PAUSE: {
     //   return { ...state }
     // }

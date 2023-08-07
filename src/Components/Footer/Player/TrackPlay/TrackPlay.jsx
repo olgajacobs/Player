@@ -1,8 +1,11 @@
 // import React from "react";
+import { useSelector } from 'react-redux'
 import styles from './TrackPlay.module.css'
 import Icon from '../../../Icon/Icon'
+import { currentTrackSelector } from '../../../../store/selectors/pleer'
 
-function TrackPlay({ currentSong }) {
+function TrackPlay() {
+  const currentSong = useSelector(currentTrackSelector)
   return (
     <div className={styles.main}>
       <div className={styles.track__playBlock}>

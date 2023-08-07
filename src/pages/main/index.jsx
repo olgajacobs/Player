@@ -16,14 +16,14 @@ export default function Main() {
   //   const [currentSong, setCurrentSong] = useState(null)
   const [errorMessage, setErrorMessage] = useState(null)
 
-  const dispatch = useDispatch()
+  const dispatcher = useDispatch()
   const currentSong = useSelector(currentTrackSelector)
   const fillPlayList = async () => {
     try {
       const newPlaylist = await getPlayList()
       setPlayList(newPlaylist)
       setLoading(false)
-      dispatch(loadPlayList(newPlaylist))
+      dispatcher(loadPlayList(newPlaylist))
     } catch (error) {
       setErrorMessage(error.message)
     }

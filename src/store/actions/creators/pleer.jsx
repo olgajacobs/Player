@@ -20,13 +20,13 @@ export const setPause = () => ({
   type: SET_PAUSE,
   payload: {},
 })
-export const nextTrack = (id) => ({
+export const nextTrack = () => ({
   type: NEXT_TRACK,
-  payload: { id },
+  payload: {},
 })
-export const prevTrack = (id) => ({
+export const prevTrack = (time) => ({
   type: PREV_TRACK,
-  payload: { id },
+  payload: { time },
 })
 export const setCurrentTrack = (newCurrentTrack) => ({
   type: SET_CURRENT_TRACK,
