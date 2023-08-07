@@ -16,7 +16,7 @@ export default function Footer({ currentSong }) {
     audioRef.current.volume = value
   }
   const changeAutoplay = (value) => {
-    audioRef.current.autoplay = value
+    audioRef.current.loop = value
   }
 
   const handlerTimeUpdate = () => {
