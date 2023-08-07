@@ -4,16 +4,21 @@ import {
   NEXT_TRACK,
   PREV_TRACK,
   SET_PAUSE,
+  TOGGLE_PLAYING,
   TOGGLE_SHUFFLED,
-  TOGGLE_AUTOREPEAT,
+  TOGGLE_AUTOPLAY,
 } from '../types/pleer'
 
 export const toggleShuffled = () => ({
   type: TOGGLE_SHUFFLED,
   payload: {},
 })
-export const toggleAutorepeat = () => ({
-  type: TOGGLE_AUTOREPEAT,
+export const toggleAutoplay = () => ({
+  type: TOGGLE_AUTOPLAY,
+  payload: {},
+})
+export const togglePlaying = () => ({
+  type: TOGGLE_PLAYING,
   payload: {},
 })
 export const setPause = () => ({

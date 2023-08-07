@@ -9,15 +9,16 @@ export default function Footer({ currentSong }) {
   const [duration, setDuration] = useState(0)
   const audioRef = useRef(null)
 
-  console.log(currentSong)
+  //   console.log(currentSong)
   // const progressRef = useRef(null)
 
   const changeVolume = (value) => {
     audioRef.current.volume = value
   }
-  const changeLoop = (value) => {
-    audioRef.current.loop = value
+  const changeAutoplay = (value) => {
+    audioRef.current.autoplay = value
   }
+
   const handlerTimeUpdate = () => {
     setCurrentProgress(Math.floor(audioRef?.current?.currentTime))
   }
@@ -48,11 +49,7 @@ export default function Footer({ currentSong }) {
         )}/${timeFormat(duration)}`}</div>
       </div>
       <div className={styles.player__block}>
-        <Player
-          currentSong={currentSong}
-          audioRef={audioRef}
-          changeLoop={changeLoop}
-        />
+        <Player audioRef={audioRef} changeAutoplay={changeAutoplay} />
         <Volume changeVolume={changeVolume} />
       </div>
 

@@ -1,41 +1,54 @@
-import { useState, useEffect } from 'react'
+import { useEffect } from 'react'
 import { useDispatch, useSelector } from 'react-redux'
 import styles from './PlayerControls.module.css'
 import Icon from '../../../Icon/Icon'
-import { currentTrackSelector } from '../../../../store/selectors/pleer'
-import { nextTrack, prevTrack } from '../../../../store/actions/creators/pleer'
+import {
+  isPlayingSelector,
+  isAutoplaySelector,
+  currentTrackSelector,
+} from '../../../../store/selectors/pleer'
+import {
+  nextTrack,
+  prevTrack,
+  togglePlaying,
+  toggleAutoplay,
+} from '../../../../store/actions/creators/pleer'
 
-function PlayerControls({ audioRef, changeLoop }) {
-  const [isPlaying, setIsPlaying] = useState(false)
-  const [isLoop, setIsLoop] = useState(false)
+function PlayerControls({ audioRef, changeAutoplay }) {
+  //   const [isPlaying, setIsPlaying] = useState(false)
+  //   const [isLoop, setIsLoop] = useState(false)
   const dispatcher = useDispatch()
-  const currentSong = useSelector(currentTrackSelector)
+  const isPlaying = useSelector(isPlayingSelector)
+  const isAutoplay = useSelector(isAutoplaySelector)
+  const currentTrack = useSelector(currentTrackSelector)
   const handleNextTrack = () => dispatcher(nextTrack())
   const handlePrevTrack = () => dispatcher(prevTrack(3))
 
-  const handleStart = () => {
-    audioRef.current.play()
-    setIsPlaying(true)
+  const handleTogglePlaying = () => {
+    if (isPlaying) {
+      audioRef.current.pause()
+    } else audioRef.current.play()
+    dispatcher(togglePlaying())
   }
 
-  const handleStop = () => {
-    audioRef.current.pause()
-    setIsPlaying(false)
-  }
-  const handleLoop = () => {
-    const newLoop = !audioRef.current.loop
-    changeLoop(newLoop)
-    setIsLoop(newLoop)
+  const handleToggleAutoplay = () => {
+    console.log('pppppppppppppppp')
+    console.log(isAutoplay)
+    console.log(audioRef.current.autoplay)
+
+    changeAutoplay(!isAutoplay)
+    dispatcher(toggleAutoplay())
   }
   const underconstruction = () => {
     alert('Еще не реализовано')
   }
 
-  const togglePlay = isPlaying ? handleStop : handleStart
+  //   const togglePlay = isPlaying ? handleStop : handleStart
 
   useEffect(() => {
-    handleStart()
-  }, [currentSong])
+    audioRef.current.play()
+  }, [currentTrack])
+
   return (
     <div className={styles.main}>
       <Icon
@@ -50,7 +63,7 @@ function PlayerControls({ audioRef, changeLoop }) {
         classSvg="player__btn-play-svg"
         iconName={`${isPlaying ? 'pause' : 'play'}`}
         alt="play"
-        action={togglePlay}
+        action={handleTogglePlaying}
       />
       <Icon
         classDiv="player__btn-next _btn-icon"
@@ -61,12 +74,12 @@ function PlayerControls({ audioRef, changeLoop }) {
       />
       <Icon
         classDiv={`player__btn-repeat _btn-icon ${
-          isLoop ? 'player__btn-active' : ''
+          isAutoplay ? 'player__btn-active' : ''
         }`}
         classSvg="player__btn-repeat-svg"
         iconName="repeat"
         alt="repeat"
-        action={handleLoop}
+        action={handleToggleAutoplay}
       />
       <Icon
         classDiv="player__btn-shuffle _btn-icon"

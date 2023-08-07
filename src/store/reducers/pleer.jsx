@@ -3,17 +3,18 @@ import {
   SET_CURRENT_TRACK,
   NEXT_TRACK,
   PREV_TRACK,
-  //   SET_PAUSE,
+  TOGGLE_PLAYING,
+
   //   TOGGLE_SHUFFLED,
-  //   TOGGLE_AUTOREPEAT,
+  TOGGLE_AUTOPLAY,
 } from '../actions/types/pleer'
 
 const initialState = {
-  loading: true,
-  playing: false,
-  shuffled: false,
-  autorepeat: false,
-  currentTrack: [],
+  isLoading: true,
+  isPlaying: false,
+  isShuffled: false,
+  isAutoplay: false,
+  currentTrack: {},
   playlist: [],
   shuffledPlayList: [],
 }
@@ -22,18 +23,11 @@ export default function pleerReducer(state = initialState, action = '') {
   switch (action.type) {
     case LOAD_PLAYLIST: {
       const { newPlaylist } = action.payload
-      return {
-        ...state,
-        playlist: newPlaylist,
-      }
+      return { ...state, playlist: newPlaylist }
     }
-
     case SET_CURRENT_TRACK: {
       const { newCurrentTrack } = action.payload
-      return {
-        ...state,
-        currentTrack: newCurrentTrack,
-      }
+      return { ...state, currentTrack: newCurrentTrack }
     }
     case NEXT_TRACK: {
       const { currentTrack, playlist } = state
@@ -47,6 +41,12 @@ export default function pleerReducer(state = initialState, action = '') {
       const currentIndex = playlist.findIndex((e) => e.id === currentTrack.id)
       if (currentIndex === 0 || time > 5) return { ...state }
       return { ...state, currentTrack: playlist[currentIndex - 1] }
+    }
+    case TOGGLE_PLAYING: {
+      return { ...state, isPlaying: !state.isPlaying }
+    }
+    case TOGGLE_AUTOPLAY: {
+      return { ...state, isAutoplay: !state.isAutoplay }
     }
     // case SET_PAUSE: {
     //   return { ...state }

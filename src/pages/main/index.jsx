@@ -18,6 +18,7 @@ export default function Main() {
 
   const dispatcher = useDispatch()
   const currentSong = useSelector(currentTrackSelector)
+  //   const currentSongEmpty=currentSong.keys()
   const fillPlayList = async () => {
     try {
       const newPlaylist = await getPlayList()
@@ -32,7 +33,7 @@ export default function Main() {
   useEffect(() => {
     fillPlayList()
   }, [])
-
+  if (currentSong) console.log('uuuuuuuuuuuuuuuuuuuuuu')
   return (
     <div className={styles.container}>
       <div className={styles.main}>
@@ -42,7 +43,9 @@ export default function Main() {
           <RightBlock />
         </IsLoading.Provider>
       </div>
-      {currentSong && <Footer currentSong={currentSong} />}
+      {Object.keys(currentSong).length !== 0 && (
+        <Footer currentSong={currentSong} />
+      )}
 
       {isLoading && !errorMessage && (
         <div className={styles.shadow}>
