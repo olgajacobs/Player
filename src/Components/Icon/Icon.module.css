@@ -231,3 +231,27 @@ button,
   stroke: #acacac;
   stroke: #d9d9d9;
 }
+@keyframes glowing {
+  0% {
+    box-shadow: 0 0 1px #d32553;
+  }
+  50% {
+    box-shadow: 0 0 10px 6px #d42a4e;
+  }
+  100% {
+    box-shadow: 0 0 1px #d32553;
+  }
+}
+.sign {
+  width: 10px;
+  height: 10px;
+  border-radius: 50%;
+  background-color: #d32553;
+  animation: glowing 1300ms infinite;
+}
+.pause {
+  animation-play-state: paused;
+}
+.run {
+  animation-play-state: running;
+}

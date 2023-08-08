@@ -44,9 +44,10 @@ function PlayListItem({ song }) {
   return (
     <div className={styles.main}>
       <div
-        className={`${styles.playlist__track} ${
-          isCurrentTrack ? styles.currentSong : ''
-        }`}
+        className={styles.playlist__track}
+        // className={`${styles.playlist__track} ${
+        //   isCurrentTrack ? styles.currentSong : ''
+        // }`}
         onClick={chooseCurrentSong}
         role="button"
         tabIndex="0"
