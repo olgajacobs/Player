@@ -15,8 +15,6 @@ import {
 } from '../../../../store/actions/creators/pleer'
 
 function PlayerControls({ audioRef, changeAutoplay }) {
-  //   const [isPlaying, setIsPlaying] = useState(false)
-  //   const [isLoop, setIsLoop] = useState(false)
   const dispatcher = useDispatch()
   const isPlaying = useSelector(isPlayingSelector)
   const isAutoplay = useSelector(isAutoplaySelector)
@@ -32,10 +30,6 @@ function PlayerControls({ audioRef, changeAutoplay }) {
   }
 
   const handleToggleAutoplay = () => {
-    console.log('pppppppppppppppp')
-    console.log(isAutoplay)
-    console.log(audioRef.current.autoplay)
-
     changeAutoplay(!isAutoplay)
     dispatcher(toggleAutoplay())
   }

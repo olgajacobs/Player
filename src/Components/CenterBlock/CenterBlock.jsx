@@ -4,18 +4,13 @@ import PlayList from './PlayList/PlayList'
 
 import styles from './CenterBlock.module.css'
 
-function CenterBlock({ playList, currentSong, setCurrentSong }) {
+function CenterBlock() {
   return (
     <div className={styles.main}>
       <Search />
       <h2 className={styles.header}>Треки</h2>
-
       <Filter />
-      <PlayList
-        playList={playList}
-        currentSong={currentSong}
-        setCurrentSong={setCurrentSong}
-      />
+      <PlayList />
     </div>
   )
 }

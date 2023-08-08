@@ -1,6 +1,8 @@
+import { shuffle } from '../../util'
 import {
   LOAD_PLAYLIST,
   SET_CURRENT_TRACK,
+  SET_SHUFFLED_PLAYLIST,
   NEXT_TRACK,
   PREV_TRACK,
   TOGGLE_PLAYING,
@@ -16,7 +18,7 @@ const initialState = {
   isAutoplay: false,
   currentTrack: {},
   playlist: [],
-  shuffledPlayList: [],
+  shuffledPlaylist: [],
 }
 
 export default function pleerReducer(state = initialState, action = '') {
@@ -28,6 +30,10 @@ export default function pleerReducer(state = initialState, action = '') {
     case SET_CURRENT_TRACK: {
       const { newCurrentTrack } = action.payload
       return { ...state, currentTrack: newCurrentTrack }
+    }
+    case SET_SHUFFLED_PLAYLIST: {
+      const newShuffledPlaylist = shuffle(state.playlist)
+      return { ...state, shuffledPlaylist: newShuffledPlaylist }
     }
     case NEXT_TRACK: {
       const { currentTrack, playlist } = state

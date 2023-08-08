@@ -1,6 +1,7 @@
 import {
   LOAD_PLAYLIST,
   SET_CURRENT_TRACK,
+  SET_SHUFFLED_PLAYLIST,
   NEXT_TRACK,
   PREV_TRACK,
   SET_PAUSE,
@@ -36,6 +37,10 @@ export const prevTrack = (time) => ({
 export const setCurrentTrack = (newCurrentTrack) => ({
   type: SET_CURRENT_TRACK,
   payload: { newCurrentTrack },
+})
+export const setShuffledPlaylist = () => ({
+  type: SET_SHUFFLED_PLAYLIST,
+  payload: {},
 })
 export const loadPlayList = (newPlaylist) => ({
   type: LOAD_PLAYLIST,

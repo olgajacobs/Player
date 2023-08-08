@@ -2,7 +2,7 @@ import { useContext } from 'react'
 import { useDispatch } from 'react-redux'
 import styles from './PlayListItem.module.css'
 import Icon from '../../../Icon/Icon'
-import timeFormat from '../../../../util'
+import { timeFormat } from '../../../../util'
 import { IsLoading } from '../../../../contexts/context'
 import { setCurrentTrack } from '../../../../store/actions/creators/pleer'
 

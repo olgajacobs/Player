@@ -2,7 +2,7 @@ import { useRef, useState } from 'react'
 import styles from './Footer.module.css'
 import Player from './Player/Player'
 import Volume from './Volume/Volume'
-import timeFormat from '../../util'
+import { timeFormat } from '../../util'
 
 export default function Footer({ currentSong }) {
   const [currentProgress, setCurrentProgress] = useState(0)

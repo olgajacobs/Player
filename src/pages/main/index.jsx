@@ -7,12 +7,15 @@ import RightBlock from '../../Components/RightBlock/RightBlock'
 import { getPlayList } from '../../api'
 import styles from './main.module.css'
 import { IsLoading } from '../../contexts/context'
-import { loadPlayList } from '../../store/actions/creators/pleer'
+import {
+  loadPlayList,
+  setShuffledPlaylist,
+} from '../../store/actions/creators/pleer'
 import { currentTrackSelector } from '../../store/selectors/pleer'
 
 export default function Main() {
   const [isLoading, setLoading] = useState(true)
-  const [playList, setPlayList] = useState({})
+
   //   const [currentSong, setCurrentSong] = useState(null)
   const [errorMessage, setErrorMessage] = useState(null)
 
@@ -22,9 +25,10 @@ export default function Main() {
   const fillPlayList = async () => {
     try {
       const newPlaylist = await getPlayList()
-      setPlayList(newPlaylist)
-      setLoading(false)
+
       dispatcher(loadPlayList(newPlaylist))
+      dispatcher(setShuffledPlaylist())
+      setLoading(false)
     } catch (error) {
       setErrorMessage(error.message)
     }
@@ -33,13 +37,13 @@ export default function Main() {
   useEffect(() => {
     fillPlayList()
   }, [])
-  if (currentSong) console.log('uuuuuuuuuuuuuuuuuuuuuu')
+
   return (
     <div className={styles.container}>
       <div className={styles.main}>
         <IsLoading.Provider value={isLoading}>
           <LeftBlockMenu />
-          <CenterBlock playList={playList} />
+          <CenterBlock />
           <RightBlock />
         </IsLoading.Provider>
       </div>
