@@ -11,12 +11,14 @@ export const isPlayingSelector = (store) =>
 export const isShuffledSelector = (store) =>
   pleerSelector(store)?.isShuffled || false
 
-export const isAutoplaySelector = (store) =>
-  pleerSelector(store)?.isAutoplay || false
+export const showFooterSelector = (store) =>
+  pleerSelector(store)?.showFooter || false
 
-export const todosSelector = () => {
-  const c = {}
-  //   const c = todoIdsSelector(store).map((id) => todoByIdSelector(store, id));
-  //   console.log(c);
-  return c
-}
+export const isLoopSelector = (store) => pleerSelector(store)?.isLoop || false
+
+// export const todosSelector = () => {
+//   const c = {}
+//   //   const c = todoIdsSelector(store).map((id) => todoByIdSelector(store, id));
+//   //   console.log(c);
+//   return c
+// }

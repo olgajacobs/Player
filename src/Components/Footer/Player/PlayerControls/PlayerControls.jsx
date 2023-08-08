@@ -4,43 +4,47 @@ import styles from './PlayerControls.module.css'
 import Icon from '../../../Icon/Icon'
 import {
   isPlayingSelector,
-  isAutoplaySelector,
+  isLoopSelector,
   currentTrackSelector,
 } from '../../../../store/selectors/pleer'
 import {
   nextTrack,
   prevTrack,
-  togglePlaying,
-  toggleAutoplay,
+  setIsPlaying,
+  toggleLoop,
 } from '../../../../store/actions/creators/pleer'
 
-function PlayerControls({ audioRef, changeAutoplay }) {
+function PlayerControls({ audioRef, changeLoop }) {
   const dispatcher = useDispatch()
   const isPlaying = useSelector(isPlayingSelector)
-  const isAutoplay = useSelector(isAutoplaySelector)
+  const isLoop = useSelector(isLoopSelector)
   const currentTrack = useSelector(currentTrackSelector)
   const handleNextTrack = () => dispatcher(nextTrack())
   const handlePrevTrack = () => dispatcher(prevTrack(3))
 
   const handleTogglePlaying = () => {
+    console.log('Toggle')
     if (isPlaying) {
       audioRef.current.pause()
-    } else audioRef.current.play()
-    dispatcher(togglePlaying())
+      dispatcher(setIsPlaying(false))
+    } else {
+      audioRef.current.play()
+      dispatcher(setIsPlaying(true))
+    }
   }
 
-  const handleToggleAutoplay = () => {
-    changeAutoplay(!isAutoplay)
-    dispatcher(toggleAutoplay())
+  const handleToggleLoop = () => {
+    changeLoop(!isLoop)
+    dispatcher(toggleLoop())
   }
   const underconstruction = () => {
     alert('Еще не реализовано')
   }
 
-  //   const togglePlay = isPlaying ? handleStop : handleStart
-
   useEffect(() => {
+    console.log('PlayerControls')
     audioRef.current.play()
+    dispatcher(setIsPlaying(true))
   }, [currentTrack])
 
   return (
@@ -68,12 +72,12 @@ function PlayerControls({ audioRef, changeAutoplay }) {
       />
       <Icon
         classDiv={`player__btn-repeat _btn-icon ${
-          isAutoplay ? 'player__btn-active' : ''
+          isLoop ? 'player__btn-active' : ''
         }`}
         classSvg="player__btn-repeat-svg"
         iconName="repeat"
         alt="repeat"
-        action={handleToggleAutoplay}
+        action={handleToggleLoop}
       />
       <Icon
         classDiv="player__btn-shuffle _btn-icon"

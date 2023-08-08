@@ -2,30 +2,26 @@ import {
   LOAD_PLAYLIST,
   SET_CURRENT_TRACK,
   SET_SHUFFLED_PLAYLIST,
+  SET_ISPLAYING,
   NEXT_TRACK,
   PREV_TRACK,
-  SET_PAUSE,
-  TOGGLE_PLAYING,
   TOGGLE_SHUFFLED,
-  TOGGLE_AUTOPLAY,
+  TOGGLE_LOOP,
 } from '../types/pleer'
 
 export const toggleShuffled = () => ({
   type: TOGGLE_SHUFFLED,
   payload: {},
 })
-export const toggleAutoplay = () => ({
-  type: TOGGLE_AUTOPLAY,
+export const toggleLoop = () => ({
+  type: TOGGLE_LOOP,
   payload: {},
 })
-export const togglePlaying = () => ({
-  type: TOGGLE_PLAYING,
-  payload: {},
+export const setIsPlaying = (newIsPlaying) => ({
+  type: SET_ISPLAYING,
+  payload: { newIsPlaying },
 })
-export const setPause = () => ({
-  type: SET_PAUSE,
-  payload: {},
-})
+
 export const nextTrack = () => ({
   type: NEXT_TRACK,
   payload: {},

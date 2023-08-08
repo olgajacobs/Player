@@ -12,7 +12,6 @@ function PlayListItem({ song, currentSong }) {
   const dispatcher = useDispatch()
   const chooseCurrentSong = () => {
     dispatcher(setCurrentTrack(song))
-    //    setCurrentSong(song)
   }
   if (isLoading)
     return (

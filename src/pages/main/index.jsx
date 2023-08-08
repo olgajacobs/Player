@@ -11,7 +11,7 @@ import {
   loadPlayList,
   setShuffledPlaylist,
 } from '../../store/actions/creators/pleer'
-import { currentTrackSelector } from '../../store/selectors/pleer'
+import { showFooterSelector } from '../../store/selectors/pleer'
 
 export default function Main() {
   const [isLoading, setLoading] = useState(true)
@@ -20,8 +20,7 @@ export default function Main() {
   const [errorMessage, setErrorMessage] = useState(null)
 
   const dispatcher = useDispatch()
-  const currentSong = useSelector(currentTrackSelector)
-  //   const currentSongEmpty=currentSong.keys()
+  const showFooter = useSelector(showFooterSelector)
   const fillPlayList = async () => {
     try {
       const newPlaylist = await getPlayList()
@@ -37,7 +36,7 @@ export default function Main() {
   useEffect(() => {
     fillPlayList()
   }, [])
-
+  console.log('Main')
   return (
     <div className={styles.container}>
       <div className={styles.main}>
@@ -47,9 +46,7 @@ export default function Main() {
           <RightBlock />
         </IsLoading.Provider>
       </div>
-      {Object.keys(currentSong).length !== 0 && (
-        <Footer currentSong={currentSong} />
-      )}
+      {showFooter && <Footer />}
 
       {isLoading && !errorMessage && (
         <div className={styles.shadow}>

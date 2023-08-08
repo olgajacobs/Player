@@ -5,17 +5,18 @@ import {
   SET_SHUFFLED_PLAYLIST,
   NEXT_TRACK,
   PREV_TRACK,
-  TOGGLE_PLAYING,
+  SET_ISPLAYING,
 
   //   TOGGLE_SHUFFLED,
-  TOGGLE_AUTOPLAY,
+  TOGGLE_LOOP,
 } from '../actions/types/pleer'
 
 const initialState = {
   isLoading: true,
   isPlaying: false,
   isShuffled: false,
-  isAutoplay: false,
+  isLoop: false,
+  showFooter: false,
   currentTrack: {},
   playlist: [],
   shuffledPlaylist: [],
@@ -29,7 +30,8 @@ export default function pleerReducer(state = initialState, action = '') {
     }
     case SET_CURRENT_TRACK: {
       const { newCurrentTrack } = action.payload
-      return { ...state, currentTrack: newCurrentTrack }
+      if (state.showFooter) return { ...state, currentTrack: newCurrentTrack }
+      return { ...state, currentTrack: newCurrentTrack, showFooter: true }
     }
     case SET_SHUFFLED_PLAYLIST: {
       const newShuffledPlaylist = shuffle(state.playlist)
@@ -48,19 +50,18 @@ export default function pleerReducer(state = initialState, action = '') {
       if (currentIndex === 0 || time > 5) return { ...state }
       return { ...state, currentTrack: playlist[currentIndex - 1] }
     }
-    case TOGGLE_PLAYING: {
-      return { ...state, isPlaying: !state.isPlaying }
+    case SET_ISPLAYING: {
+      const { newIsPlaying } = action.payload
+      console.log('IsPlaying')
+      console.log(newIsPlaying)
+      console.log(state.isPlaying)
+      return { ...state, isPlaying: newIsPlaying }
     }
-    case TOGGLE_AUTOPLAY: {
-      return { ...state, isAutoplay: !state.isAutoplay }
+    case TOGGLE_LOOP: {
+      return { ...state, isLoop: !state.isLoop }
     }
-    // case SET_PAUSE: {
-    //   return { ...state }
-    // }
+
     // case TOGGLE_SHUFFLED: {
-    //   return { ...state }
-    // }
-    // case TOGGLE_AUTOREPEAT: {
     //   return { ...state }
     // }
 
