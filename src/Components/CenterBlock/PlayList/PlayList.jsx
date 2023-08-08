@@ -7,7 +7,7 @@ import { IsLoading } from '../../../contexts/context'
 import Icon from '../../Icon/Icon'
 import { playListSelector } from '../../../store/selectors/pleer'
 
-function PlayList({ currentSong, setCurrentSong }) {
+function PlayList() {
   const isLoading = useContext(IsLoading)
   const playList = useSelector(playListSelector)
 
@@ -15,14 +15,7 @@ function PlayList({ currentSong, setCurrentSong }) {
     ? Array(5)
         .fill('')
         .map(() => <PlayListItem isLoading={isLoading} key={uuidv4()} />)
-    : playList.map((song) => (
-        <PlayListItem
-          song={song}
-          key={song.id}
-          currentSong={currentSong}
-          setCurrentSong={setCurrentSong}
-        />
-      ))
+    : playList.map((song) => <PlayListItem song={song} key={song.id} />)
 
   return (
     <div className={styles.main}>

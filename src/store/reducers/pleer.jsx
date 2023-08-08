@@ -6,8 +6,7 @@ import {
   NEXT_TRACK,
   PREV_TRACK,
   SET_ISPLAYING,
-
-  //   TOGGLE_SHUFFLED,
+  TOGGLE_SHUFFLED,
   TOGGLE_LOOP,
 } from '../actions/types/pleer'
 
@@ -38,32 +37,32 @@ export default function pleerReducer(state = initialState, action = '') {
       return { ...state, shuffledPlaylist: newShuffledPlaylist }
     }
     case NEXT_TRACK: {
-      const { currentTrack, playlist } = state
-      const currentIndex = playlist.findIndex((e) => e.id === currentTrack.id)
-      if (currentIndex === playlist.length - 1) return { ...state }
-      return { ...state, currentTrack: playlist[currentIndex + 1] }
+      const { currentTrack, playlist, shuffledPlaylist } = state
+      const pl = state.isShuffled ? shuffledPlaylist : playlist
+
+      const currentIndex = pl.findIndex((e) => e.id === currentTrack.id)
+      if (currentIndex === pl.length - 1) return { ...state }
+      return { ...state, currentTrack: pl[currentIndex + 1] }
     }
     case PREV_TRACK: {
-      const { time } = action.payload
-      const { currentTrack, playlist } = state
-      const currentIndex = playlist.findIndex((e) => e.id === currentTrack.id)
-      if (currentIndex === 0 || time > 5) return { ...state }
-      return { ...state, currentTrack: playlist[currentIndex - 1] }
+      const { currentTrack, playlist, shuffledPlaylist } = state
+      const pl = state.isShuffled ? shuffledPlaylist : playlist
+      const currentIndex = pl.findIndex((e) => e.id === currentTrack.id)
+      if (currentIndex === 0) return { ...state }
+      return { ...state, currentTrack: pl[currentIndex - 1] }
     }
     case SET_ISPLAYING: {
       const { newIsPlaying } = action.payload
-      console.log('IsPlaying')
-      console.log(newIsPlaying)
-      console.log(state.isPlaying)
+
       return { ...state, isPlaying: newIsPlaying }
     }
     case TOGGLE_LOOP: {
       return { ...state, isLoop: !state.isLoop }
     }
 
-    // case TOGGLE_SHUFFLED: {
-    //   return { ...state }
-    // }
+    case TOGGLE_SHUFFLED: {
+      return { ...state, isShuffled: !state.isShuffled }
+    }
 
     default:
       return state

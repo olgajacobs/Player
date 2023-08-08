@@ -1,18 +1,19 @@
 import { useContext } from 'react'
-import { useDispatch } from 'react-redux'
+import { useDispatch, useSelector } from 'react-redux'
 import styles from './PlayListItem.module.css'
 import Icon from '../../../Icon/Icon'
 import { timeFormat } from '../../../../util'
 import { IsLoading } from '../../../../contexts/context'
 import { setCurrentTrack } from '../../../../store/actions/creators/pleer'
+import { currentTrackSelector } from '../../../../store/selectors/pleer'
 
-function PlayListItem({ song, currentSong }) {
+function PlayListItem({ song }) {
   const isLoading = useContext(IsLoading)
-  const isCurrentSong = () => currentSong && currentSong.id === song.id
   const dispatcher = useDispatch()
-  const chooseCurrentSong = () => {
-    dispatcher(setCurrentTrack(song))
-  }
+  const chooseCurrentSong = () => dispatcher(setCurrentTrack(song))
+  const currentTrack = useSelector(currentTrackSelector)
+  const isCurrentTrack = currentTrack?.id && currentTrack.id === song.id
+
   if (isLoading)
     return (
       <div className={styles.main}>
@@ -44,7 +45,7 @@ function PlayListItem({ song, currentSong }) {
     <div className={styles.main}>
       <div
         className={`${styles.playlist__track} ${
-          isCurrentSong() ? styles.currentSong : ''
+          isCurrentTrack ? styles.currentSong : ''
         }`}
         onClick={chooseCurrentSong}
         role="button"
@@ -57,6 +58,7 @@ function PlayListItem({ song, currentSong }) {
             classSvg="track__title-svg"
             iconName="note"
             alt="music"
+            isCurrentTrack={isCurrentTrack}
           />
           <div className={`${styles.track__title} ${styles.track__link}`}>
             {song.name}

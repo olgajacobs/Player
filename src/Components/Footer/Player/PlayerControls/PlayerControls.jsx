@@ -6,24 +6,35 @@ import {
   isPlayingSelector,
   isLoopSelector,
   currentTrackSelector,
+  isShuffledSelector,
 } from '../../../../store/selectors/pleer'
 import {
   nextTrack,
   prevTrack,
   setIsPlaying,
   toggleLoop,
+  toggleShuffled,
 } from '../../../../store/actions/creators/pleer'
 
-function PlayerControls({ audioRef, changeLoop }) {
-  const dispatcher = useDispatch()
+function PlayerControls({
+  audioRef,
+  changeLoop,
+  currentProgress,
+  handleChangeProgress,
+}) {
   const isPlaying = useSelector(isPlayingSelector)
   const isLoop = useSelector(isLoopSelector)
+  const isShuffled = useSelector(isShuffledSelector)
   const currentTrack = useSelector(currentTrackSelector)
+
+  const dispatcher = useDispatch()
   const handleNextTrack = () => dispatcher(nextTrack())
-  const handlePrevTrack = () => dispatcher(prevTrack(3))
+  const handlePrevTrack = () => {
+    if (currentProgress <= 5) handleChangeProgress(0)
+    else dispatcher(prevTrack())
+  }
 
   const handleTogglePlaying = () => {
-    console.log('Toggle')
     if (isPlaying) {
       audioRef.current.pause()
       dispatcher(setIsPlaying(false))
@@ -37,8 +48,9 @@ function PlayerControls({ audioRef, changeLoop }) {
     changeLoop(!isLoop)
     dispatcher(toggleLoop())
   }
-  const underconstruction = () => {
-    alert('Еще не реализовано')
+  const handleToggleShuffled = () => {
+    changeLoop(!isLoop)
+    dispatcher(toggleShuffled())
   }
 
   useEffect(() => {
@@ -80,11 +92,13 @@ function PlayerControls({ audioRef, changeLoop }) {
         action={handleToggleLoop}
       />
       <Icon
-        classDiv="player__btn-shuffle _btn-icon"
+        classDiv={`player__btn-shuffle _btn-icon ${
+          isShuffled ? 'player__btn-active' : ''
+        }`}
         classSvg="player__btn-shuffle-svg"
         iconName="shuffle"
         alt="shuffle"
-        action={underconstruction}
+        action={handleToggleShuffled}
       />
     </div>
   )

@@ -38,29 +38,33 @@ export default function Footer() {
     }
   }
 
-  const handleChangeProgress = (e) => {
-    audioRef.current.currentTime = Number(e.target.value)
-    setCurrentProgress(e.target.value)
+  const handleChangeProgress = (value) => {
+    audioRef.current.currentTime = value
+    setCurrentProgress(value)
   }
   //   console.log('Footer')
   return (
     <footer className={styles.main}>
       <div className={styles.player__progress}>
         <input
-          // ref={progressRef}
           className={styles.player__progressLine}
           type="range"
           name="progress"
           max={duration}
           value={currentProgress}
-          onChange={(e) => handleChangeProgress(e)}
+          onChange={(e) => handleChangeProgress(Number(e.target.value))}
         />
         <div className={styles.time}>{`${timeFormat(
           currentProgress
         )}/${timeFormat(duration)}`}</div>
       </div>
       <div className={styles.player__block}>
-        <Player audioRef={audioRef} changeLoop={changeLoop} />
+        <Player
+          audioRef={audioRef}
+          changeLoop={changeLoop}
+          currentProgress={currentProgress}
+          handleChangeProgress={handleChangeProgress}
+        />
         <Volume changeVolume={changeVolume} />
       </div>
 

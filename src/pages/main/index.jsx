@@ -36,7 +36,7 @@ export default function Main() {
   useEffect(() => {
     fillPlayList()
   }, [])
-  console.log('Main')
+
   return (
     <div className={styles.container}>
       <div className={styles.main}>
