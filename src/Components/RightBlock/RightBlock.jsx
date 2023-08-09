@@ -8,9 +8,9 @@ import Icon from '../Icon/Icon'
 function RightBlock() {
   const userInContext = useContext(UserInContext)
   const isLoading = useContext(IsLoading)
-
   const personal =
-    !isLoading && userInContext?.user ? userInContext?.user?.username : ''
+    !isLoading && userInContext.user.id ? userInContext.user?.username : ''
+
   const logout = () => {
     localStorage.removeItem('userPleer')
     userInContext.setUser(undefined)

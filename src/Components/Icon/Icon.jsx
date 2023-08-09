@@ -1,5 +1,6 @@
-// import React from "react";
+import { useSelector } from 'react-redux'
 import styles from './Icon.module.css'
+import { isPlayingSelector } from '../../store/selectors/pleer'
 
 function Icon({
   classDiv = '',
@@ -7,7 +8,9 @@ function Icon({
   alt = '',
   iconName = '',
   action = null,
+  isCurrentTrack = false,
 }) {
+  const isPlaying = useSelector(isPlayingSelector)
   let classDivList = classDiv ? classDiv.split(' ') : ''
 
   classDivList = classDivList
@@ -24,9 +27,15 @@ function Icon({
       tabIndex="0"
       onKeyUp={() => {}}
     >
-      <svg className={`${styles[classSvg]}`} alt={alt}>
-        <use xlinkHref={`../img/icon/sprite.svg#icon-${iconName}`} />
-      </svg>
+      {isCurrentTrack ? (
+        <div
+          className={`${styles.sign} ${!isPlaying ? styles.pause : styles.run}`}
+        />
+      ) : (
+        <svg className={`${styles[classSvg]}`} alt={alt}>
+          <use xlinkHref={`../img/icon/sprite.svg#icon-${iconName}`} />
+        </svg>
+      )}
     </div>
   )
 }

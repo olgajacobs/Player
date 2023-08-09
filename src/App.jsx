@@ -4,7 +4,9 @@ import styles from './App.module.css'
 import { UserInContext } from './contexts/context'
 
 export default function App() {
-  const [user, setUser] = useState(localStorage.getItem('userPleer'))
+  const [user, setUser] = useState(
+    JSON.parse(localStorage.getItem('userPleer')),
+  )
 
   const value = useMemo(
     () => ({

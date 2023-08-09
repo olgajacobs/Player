@@ -3,15 +3,21 @@ import styles from './Player.module.css'
 import PlayerControls from './PlayerControls/PlayerControls'
 import TrackPlay from './TrackPlay/TrackPlay'
 
-function Player({ currentSong, audioRef, changeLoop }) {
+function Player({
+  audioRef,
+  changeLoop,
+  currentProgress,
+  handleChangeProgress,
+}) {
   return (
     <div className={styles.main}>
       <PlayerControls
         audioRef={audioRef}
-        currentSong={currentSong}
         changeLoop={changeLoop}
+        currentProgress={currentProgress}
+        handleChangeProgress={handleChangeProgress}
       />
-      <TrackPlay currentSong={currentSong} />
+      <TrackPlay />
     </div>
   )
 }

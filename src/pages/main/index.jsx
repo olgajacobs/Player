@@ -1,4 +1,5 @@
 import { useState, useEffect } from 'react'
+import { useDispatch, useSelector } from 'react-redux'
 import LeftBlockMenu from '../../Components/LeftBlockMenu/LeftBlockMenu'
 import CenterBlock from '../../Components/CenterBlock/CenterBlock'
 import Footer from '../../Components/Footer/Footer'
@@ -6,16 +7,26 @@ import RightBlock from '../../Components/RightBlock/RightBlock'
 import { getPlayList } from '../../api'
 import styles from './main.module.css'
 import { IsLoading } from '../../contexts/context'
+import {
+  loadPlayList,
+  setShuffledPlaylist,
+} from '../../store/actions/creators/pleer'
+import { showFooterSelector } from '../../store/selectors/pleer'
 
 export default function Main() {
   const [isLoading, setLoading] = useState(true)
-  const [playList, setPlayList] = useState({})
-  const [currentSong, setCurrentSong] = useState(null)
+
+  //   const [currentSong, setCurrentSong] = useState(null)
   const [errorMessage, setErrorMessage] = useState(null)
 
+  const dispatcher = useDispatch()
+  const showFooter = useSelector(showFooterSelector)
   const fillPlayList = async () => {
     try {
-      setPlayList(await getPlayList())
+      const newPlaylist = await getPlayList()
+
+      dispatcher(loadPlayList(newPlaylist))
+      dispatcher(setShuffledPlaylist())
       setLoading(false)
     } catch (error) {
       setErrorMessage(error.message)
@@ -31,15 +42,11 @@ export default function Main() {
       <div className={styles.main}>
         <IsLoading.Provider value={isLoading}>
           <LeftBlockMenu />
-          <CenterBlock
-            playList={playList}
-            currentSong={currentSong}
-            setCurrentSong={setCurrentSong}
-          />
+          <CenterBlock />
           <RightBlock />
         </IsLoading.Provider>
       </div>
-      {currentSong && <Footer currentSong={currentSong} />}
+      {showFooter && <Footer />}
 
       {isLoading && !errorMessage && (
         <div className={styles.shadow}>

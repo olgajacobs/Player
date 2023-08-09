@@ -1,14 +1,22 @@
 import { useRef, useState } from 'react'
+import { useDispatch, useSelector } from 'react-redux'
 import styles from './Footer.module.css'
 import Player from './Player/Player'
 import Volume from './Volume/Volume'
-import timeFormat from '../../util'
+import { timeFormat } from '../../util'
+import {
+  isLoopSelector,
+  currentTrackSelector,
+} from '../../store/selectors/pleer'
+import { nextTrack } from '../../store/actions/creators/pleer'
 
-export default function Footer({ currentSong }) {
+export default function Footer() {
   const [currentProgress, setCurrentProgress] = useState(0)
   const [duration, setDuration] = useState(0)
+  const dispatcher = useDispatch()
+  const isLoop = useSelector(isLoopSelector)
+  const currentTrack = useSelector(currentTrackSelector)
   const audioRef = useRef(null)
-  // const progressRef = useRef(null)
 
   const changeVolume = (value) => {
     audioRef.current.volume = value
@@ -16,6 +24,7 @@ export default function Footer({ currentSong }) {
   const changeLoop = (value) => {
     audioRef.current.loop = value
   }
+
   const handlerTimeUpdate = () => {
     setCurrentProgress(Math.floor(audioRef?.current?.currentTime))
   }
@@ -23,28 +32,27 @@ export default function Footer({ currentSong }) {
   const handlerLoadedMetadata = () => {
     setDuration(Math.floor(audioRef?.current?.duration))
   }
-
-  const handleChangeProgress = (e) => {
-    audioRef.current.currentTime = Number(e.target.value)
-    setCurrentProgress(e.target.value)
+  const handlerEnded = () => {
+    if (!isLoop) {
+      dispatcher(nextTrack())
+    }
   }
 
-  // useEffect(() => {
-  //   console.log(audioRef.current.duration)
-  //   setDuration(Math.floor(audioRef?.current?.duration))
-  // }, [audioRef?.current?.loadedmetadata])
-  // audioRef?.current?.readyStat
+  const handleChangeProgress = (value) => {
+    audioRef.current.currentTime = value
+    setCurrentProgress(value)
+  }
+  //   console.log('Footer')
   return (
     <footer className={styles.main}>
       <div className={styles.player__progress}>
         <input
-          // ref={progressRef}
           className={styles.player__progressLine}
           type="range"
           name="progress"
           max={duration}
           value={currentProgress}
-          onChange={(e) => handleChangeProgress(e)}
+          onChange={(e) => handleChangeProgress(Number(e.target.value))}
         />
         <div className={styles.time}>{`${timeFormat(
           currentProgress,
@@ -52,9 +60,10 @@ export default function Footer({ currentSong }) {
       </div>
       <div className={styles.player__block}>
         <Player
-          currentSong={currentSong}
           audioRef={audioRef}
           changeLoop={changeLoop}
+          currentProgress={currentProgress}
+          handleChangeProgress={handleChangeProgress}
         />
         <Volume changeVolume={changeVolume} />
       </div>
@@ -62,9 +71,10 @@ export default function Footer({ currentSong }) {
       <div>
         <audio
           ref={audioRef}
-          src={currentSong.track_file}
+          src={currentTrack.track_file}
           onTimeUpdate={handlerTimeUpdate}
           onLoadedMetadata={handlerLoadedMetadata}
+          onEnded={handlerEnded}
         >
           <track kind="captions" />
         </audio>

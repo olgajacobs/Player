@@ -21,8 +21,7 @@ export async function registrateUser({ email, password, username }) {
       'content-type': 'application/json',
     },
   })
-  console.log(email, password, username)
-  console.log('------------------------')
+
   if (response.status === 201) {
     const data = await response.json()
     return data
