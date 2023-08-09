@@ -26,9 +26,9 @@ export const nextTrack = () => ({
   type: NEXT_TRACK,
   payload: {},
 })
-export const prevTrack = (time) => ({
+export const prevTrack = () => ({
   type: PREV_TRACK,
-  payload: { time },
+  payload: {},
 })
 export const setCurrentTrack = (newCurrentTrack) => ({
   type: SET_CURRENT_TRACK,

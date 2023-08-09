@@ -39,16 +39,21 @@ export default function pleerReducer(state = initialState, action = '') {
     case NEXT_TRACK: {
       const { currentTrack, playlist, shuffledPlaylist } = state
       const pl = state.isShuffled ? shuffledPlaylist : playlist
-
       const currentIndex = pl.findIndex((e) => e.id === currentTrack.id)
-      if (currentIndex === pl.length - 1) return { ...state }
+      if (currentIndex === pl.length - 1)
+        return state.isShuffled
+          ? { ...state, currentTrack: pl[0] }
+          : { ...state, isPlaying: false }
       return { ...state, currentTrack: pl[currentIndex + 1] }
     }
     case PREV_TRACK: {
       const { currentTrack, playlist, shuffledPlaylist } = state
       const pl = state.isShuffled ? shuffledPlaylist : playlist
       const currentIndex = pl.findIndex((e) => e.id === currentTrack.id)
-      if (currentIndex === 0) return { ...state }
+      if (currentIndex === 0)
+        return state.isShuffled
+          ? { ...state, currentTrack: pl[pl.length - 1] }
+          : { ...state }
       return { ...state, currentTrack: pl[currentIndex - 1] }
     }
     case SET_ISPLAYING: {
