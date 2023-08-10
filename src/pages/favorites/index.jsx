@@ -1,18 +1,5 @@
-import { NavLink } from 'react-router-dom'
-import styles from './favorites.module.css'
+import MainPage from '../../Components/MainPage/MainPage'
 
-function Favorites() {
-  return (
-    <div className={styles.container}>
-      <div className={styles.main}>
-        <h1>Мой плейлист</h1>
-
-        <NavLink className={styles.link} to="/">
-          Вернуться на главную страницу
-        </NavLink>
-      </div>
-    </div>
-  )
+export default function Favorites() {
+  return <MainPage />
 }
-
-export default Favorites
