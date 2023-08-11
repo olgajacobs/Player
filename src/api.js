@@ -65,9 +65,55 @@ export async function autorizeUser({ email, password }) {
     throw new Error(errorMessage)
   } else throw new Error('Прочие ошибки сервера')
 }
+export async function getToken({ email, password }) {
+  const response = await fetch('https://painassasin.online/user/token/', {
+    method: 'POST',
+    body: JSON.stringify({
+      email,
+      password,
+    }),
+    headers: {
+      'content-type': 'application/json',
+    },
+  })
 
-//   {
-//     headers: {
-//       Authorization: `Bearer ${token}`,
-//          },
-//   }
+  if (response.status === 200) {
+    const data = await response.json()
+    return data
+  }
+  if (response.status === 500) {
+    throw new Error('Сервер сломался')
+  } else if (response.status === 401) {
+    const responseMessage = await response.json()
+    let errorMessage = 'Ошибка авторизации:'
+    if (responseMessage?.detail) errorMessage += `\n ${responseMessage.detail}`
+    throw new Error(errorMessage)
+  } else throw new Error('Прочие ошибки сервера')
+}
+export async function refreshToken({refreshToken }) {
+
+  const response = await fetch('https://painassasin.online/user/tokenrefresh/', {
+    method: 'POST',
+    body: JSON.stringify({
+     refresh:refreshToken
+   
+    }),
+    headers: {
+      'content-type': 'application/json',
+    },
+  })
+
+  if (response.status === 200) {
+    const data = await response.json()
+    return data
+  }
+  if (response.status === 500) {
+    throw new Error('Сервер сломался')
+  } else if (response.status === 401) {
+    const responseMessage = await response.json()
+    let errorMessage = 'Refresh token не валиден'
+    if (responseMessage?.detail) errorMessage = responseMessage?.detail
+    throw new Error(errorMessage)
+  } else throw new Error('Прочие ошибки сервера')
+}
+

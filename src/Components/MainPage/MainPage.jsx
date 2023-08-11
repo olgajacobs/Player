@@ -12,8 +12,10 @@ import {
   setShuffledPlaylist,
 } from '../../store/actions/creators/pleer'
 import { showFooterSelector } from '../../store/selectors/pleer'
+import { useGetTracksQuery } from '../../RTKapi'
+import { PLAYLIST,FAVORITES } from '../../const'
 
-export default function MainPage() {
+export default function MainPage({page}) {
   const [isLoading, setLoading] = useState(true)
 
   //   const [currentSong, setCurrentSong] = useState(null)
@@ -21,10 +23,24 @@ export default function MainPage() {
 
   const dispatcher = useDispatch()
   const showFooter = useSelector(showFooterSelector)
-  const fillPlayList = async () => {
-    try {
-      const newPlaylist = await getPlayList()
 
+  const {data}=useGetTracksQuery()
+  console.log("---------------------")
+  const fillPlayList = async () => {
+    let newPlaylist=null
+    try {
+      switch (page) {
+        case PLAYLIST:{
+          newPlaylist = await getPlayList()
+          break}
+          case FAVORITES:{
+         
+           newPlaylist=[...data]
+          break}
+      
+        default:
+          break;
+      }
       dispatcher(loadPlayList(newPlaylist))
       dispatcher(setShuffledPlaylist())
       setLoading(false)
