@@ -90,9 +90,8 @@ export async function getToken({ email, password }) {
     throw new Error(errorMessage)
   } else throw new Error('Прочие ошибки сервера')
 }
-export async function refreshToken({refreshToken }) {
-
-  const response = await fetch('https://painassasin.online/user/tokenrefresh/', {
+export async function refreshAccessToken(refreshToken ) {
+  const response = await fetch('https://painassasin.online/user/token/refresh/', {
     method: 'POST',
     body: JSON.stringify({
      refresh:refreshToken
@@ -104,6 +103,7 @@ export async function refreshToken({refreshToken }) {
   })
 
   if (response.status === 200) {
+    console.log("Success")
     const data = await response.json()
     return data
   }

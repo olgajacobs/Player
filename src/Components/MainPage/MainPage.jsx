@@ -1,10 +1,11 @@
-import { useState, useEffect } from 'react'
+import { useState } from 'react'
+// import { useState, useEffect } from 'react'
 import { useDispatch, useSelector } from 'react-redux'
 import LeftBlockMenu from '../LeftBlockMenu/LeftBlockMenu'
 import CenterBlock from '../CenterBlock/CenterBlock'
 import Footer from '../Footer/Footer'
 import RightBlock from '../RightBlock/RightBlock'
-import { getPlayList } from '../../api'
+import { refreshAccessToken } from '../../api'
 import styles from './MainPage.module.css'
 import { IsLoading } from '../../contexts/context'
 import {
@@ -12,59 +13,88 @@ import {
   setShuffledPlaylist,
 } from '../../store/actions/creators/pleer'
 import { showFooterSelector } from '../../store/selectors/pleer'
-import { useGetTracksQuery } from '../../RTKapi'
+import { useGetFavoritesQuery, useGetPlayListQuery } from '../../RTKapi'
 import { PLAYLIST,FAVORITES } from '../../const'
 
 export default function MainPage({page}) {
-  const [isLoading, setLoading] = useState(true)
-
+  // const [isLoading, setLoading] = useState(true)
+let il=true
   //   const [currentSong, setCurrentSong] = useState(null)
   const [errorMessage, setErrorMessage] = useState(null)
 
   const dispatcher = useDispatch()
   const showFooter = useSelector(showFooterSelector)
 
-  const {data}=useGetTracksQuery()
-  console.log("---------------------")
-  const fillPlayList = async () => {
-    let newPlaylist=null
+  const renewAccessToken = async () => {
+    console.log("Refresh token")
+    
     try {
-      switch (page) {
-        case PLAYLIST:{
-          newPlaylist = await getPlayList()
-          break}
-          case FAVORITES:{
-         
-           newPlaylist=[...data]
-          break}
-      
-        default:
-          break;
+      const a=JSON.parse(localStorage.getItem('refreshToken'))
+
+      const newToken=await refreshAccessToken(a)
+      console.log(`Новый токен ${newToken}`)
+      localStorage.setItem('accessToken',JSON.stringify(newToken?.access))   
+    } catch (error2) {
+      console.log(error2)
+      console.log(`Rfresh token ${error2.message.detail}`)
+    
+      setErrorMessage(error2.message)
+    }
+  }
+if(!errorMessage) {
+  console.log("Begin")
+let useQuery
+  switch (page) {
+    case PLAYLIST:
+      useQuery=useGetPlayListQuery
+      break
+      case FAVORITES:
+        useQuery=useGetFavoritesQuery
+      break
+    
+    default:
+      break;
+  }
+
+  const {data,isLoading,error}=useQuery()
+  il=isLoading
+  if(error)
+  {
+    console.log(error)
+    console.log(`Ошибка загрузки списка ${error.data.detail}`)
+    if(error.status===401) {
+      renewAccessToken()
       }
-      dispatcher(loadPlayList(newPlaylist))
+      else
+
+    setErrorMessage(error.message)
+  }
+else
+{
+    console.log(isLoading)
+    if(!isLoading){
+      dispatcher(loadPlayList(data))
       dispatcher(setShuffledPlaylist())
-      setLoading(false)
-    } catch (error) {
-      setErrorMessage(error.message)
+      }
     }
   }
 
-  useEffect(() => {
-    fillPlayList()
-  }, [])
+  // useEffect(() => {
+  //   fillPlayList()
+  // }, [])
 
   return (
     <div className={styles.container}>
       <div className={styles.main}>
-        <IsLoading.Provider value={isLoading}>
+        <IsLoading.Provider value={il}>
           <LeftBlockMenu />
-          <CenterBlock />
+          <CenterBlock isLoading={il}/>
           <RightBlock />
         </IsLoading.Provider>
       </div>
       {showFooter && <Footer />}
 
-      {isLoading && !errorMessage && (
+      {il && !errorMessage && (
         <div className={styles.shadow}>
           <p className={styles.loading}>Loading...</p>
         </div>

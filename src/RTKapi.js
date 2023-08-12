@@ -6,16 +6,23 @@ const getTokenFromLocalStorage = () =>  JSON.parse(localStorage.getItem('accessT
 export const RTKApi = createApi({
     reducerPath: 'RTKApi',
     tagTypes: ['Favorits'],
-    baseQuery: fetchBaseQuery({baseUrl: 'https://painassasin.online/catalog/track/'}),
+    baseQuery: fetchBaseQuery({baseUrl: 'https://painassasin.online/catalog/'}),
     endpoints: (build) => ({
-        getTracks: build.query({
+        getFavorites: build.query({
             query: () =>({ 
-              url:`favorite/all/`,
+              url:`track/favorite/all/`,
               method:'GET',
               headers:{
                 Authorization:`Bearer ${getTokenFromLocalStorage()}`
               }
         })
+        }),
+        getPlayList: build.query({
+            query: () =>({ 
+          url:`track/all/`,
+              method:'GET',
+                          }
+        )
         }),
         // addTrackProduct: build.mutation({
         //     query: (body) => ({
@@ -35,4 +42,4 @@ export const RTKApi = createApi({
     })
 })
 
-export const {useGetTracksQuery} = RTKApi;
+export const {useGetFavoritesQuery,useGetPlayListQuery} = RTKApi;

@@ -9,8 +9,10 @@ import { playListSelector } from '../../../store/selectors/pleer'
 
 function PlayList() {
   const isLoading = useContext(IsLoading)
-  const playList = useSelector(playListSelector)
-
+  let playList=[]
+  if(!isLoading) {
+playList = useSelector(playListSelector)
+  }
   const playListItems = isLoading
     ? Array(5)
         .fill('')

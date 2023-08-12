@@ -22,7 +22,7 @@ export default function AuthPage({ isLoginMode = false }) {
       localStorage.setItem('userPleer', JSON.stringify(user))
       userInContext.setUser(user)
      
-      try {
+          try {
             const token = await getToken({ email, password})
         localStorage.setItem('refreshToken', JSON.stringify(token?.refresh))
         localStorage.setItem('accessToken',JSON.stringify(token?.access))
