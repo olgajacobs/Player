@@ -6,6 +6,7 @@ import {
   NEXT_TRACK,
   PREV_TRACK,
   SET_ISPLAYING,
+  SET_ISLOADING,
   TOGGLE_SHUFFLED,
   TOGGLE_LOOP,
 } from '../actions/types/pleer'
@@ -60,6 +61,11 @@ export default function pleerReducer(state = initialState, action = '') {
       const { newIsPlaying } = action.payload
 
       return { ...state, isPlaying: newIsPlaying }
+    }
+    case SET_ISLOADING: {
+      const { newIsLoading } = action.payload
+
+      return { ...state, isLoading: newIsLoading }
     }
     case TOGGLE_LOOP: {
       return { ...state, isLoop: !state.isLoop }

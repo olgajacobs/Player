@@ -1,10 +1,10 @@
-import { useContext } from 'react'
 import { NavLink } from 'react-router-dom'
-import { IsLoading } from '../../../contexts/context'
+import { useSelector } from 'react-redux'
 import styles from './RightBlockItem.module.css'
+import { isLoadingSelector } from '../../../store/selectors/pleer'
 
 function RightBlockItem({ id = '0', altName = '' }) {
-  const isLoading = useContext(IsLoading)
+  const isLoading = useSelector(isLoadingSelector)
   if (isLoading) return <div className={styles.playlist} />
   return (
     <div className={styles.playlist}>

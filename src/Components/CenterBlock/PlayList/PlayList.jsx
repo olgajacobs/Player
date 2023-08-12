@@ -1,22 +1,23 @@
-import { useContext } from 'react'
-import { v4 as uuidv4 } from 'uuid'
+// import { v4 as uuidv4 } from 'uuid'
 import { useSelector } from 'react-redux'
 import styles from './PlayList.module.css'
 import PlayListItem from './PlayListItem/PlayListItem'
-import { IsLoading } from '../../../contexts/context'
 import Icon from '../../Icon/Icon'
-import { playListSelector } from '../../../store/selectors/pleer'
+import {
+  isLoadingSelector,
+  playListSelector,
+} from '../../../store/selectors/pleer'
 
 function PlayList() {
-  const isLoading = useContext(IsLoading)
-  let playList=[]
-  if(!isLoading) {
-playList = useSelector(playListSelector)
+  const isLoading = useSelector(isLoadingSelector)
+  let playList = []
+  if (!isLoading) {
+    playList = useSelector(playListSelector)
   }
   const playListItems = isLoading
     ? Array(5)
         .fill('')
-        .map(() => <PlayListItem isLoading={isLoading} key={uuidv4()} />)
+        .map(() => <PlayListItem key={new Date()} />)
     : playList.map((song) => <PlayListItem song={song} key={song.id} />)
 
   return (

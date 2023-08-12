@@ -8,6 +8,9 @@ export const currentTrackSelector = (store) =>
 export const isPlayingSelector = (store) =>
   pleerSelector(store)?.isPlaying || false
 
+export const isLoadingSelector = (store) =>
+  pleerSelector(store)?.isLoading || false
+
 export const isShuffledSelector = (store) =>
   pleerSelector(store)?.isShuffled || false
 

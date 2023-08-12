@@ -1,14 +1,15 @@
-import { useContext } from 'react'
 import { useDispatch, useSelector } from 'react-redux'
 import styles from './PlayListItem.module.css'
 import Icon from '../../../Icon/Icon'
 import { timeFormat } from '../../../../util'
-import { IsLoading } from '../../../../contexts/context'
 import { setCurrentTrack } from '../../../../store/actions/creators/pleer'
-import { currentTrackSelector } from '../../../../store/selectors/pleer'
+import {
+  currentTrackSelector,
+  isLoadingSelector,
+} from '../../../../store/selectors/pleer'
 
 function PlayListItem({ song }) {
-  const isLoading = useContext(IsLoading)
+  const isLoading = useSelector(isLoadingSelector)
   const dispatcher = useDispatch()
   const chooseCurrentSong = () => dispatcher(setCurrentTrack(song))
   const currentTrack = useSelector(currentTrackSelector)

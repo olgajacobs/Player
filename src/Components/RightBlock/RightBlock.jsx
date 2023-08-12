@@ -1,13 +1,14 @@
 import { useContext } from 'react'
+import { useSelector } from 'react-redux'
 import RightBlockItem from './RightBlockItem/RigthBlockItem'
-
 import styles from './RightBlock.module.css'
-import { IsLoading, UserInContext } from '../../contexts/context'
+import UserInContext from '../../contexts/context'
 import Icon from '../Icon/Icon'
+import { isLoadingSelector } from '../../store/selectors/pleer'
 
 function RightBlock() {
   const userInContext = useContext(UserInContext)
-  const isLoading = useContext(IsLoading)
+  const isLoading = useSelector(isLoadingSelector)
   const personal =
     !isLoading && userInContext.user.id ? userInContext.user?.username : ''
 

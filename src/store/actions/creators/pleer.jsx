@@ -3,6 +3,7 @@ import {
   SET_CURRENT_TRACK,
   SET_SHUFFLED_PLAYLIST,
   SET_ISPLAYING,
+  SET_ISLOADING,
   NEXT_TRACK,
   PREV_TRACK,
   TOGGLE_SHUFFLED,
@@ -20,6 +21,10 @@ export const toggleLoop = () => ({
 export const setIsPlaying = (newIsPlaying) => ({
   type: SET_ISPLAYING,
   payload: { newIsPlaying },
+})
+export const setIsLoading = (newIsLoading) => ({
+  type: SET_ISLOADING,
+  payload: { newIsLoading },
 })
 
 export const nextTrack = () => ({

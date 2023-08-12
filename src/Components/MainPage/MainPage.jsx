@@ -1,5 +1,5 @@
-import { useState } from 'react'
-// import { useState, useEffect } from 'react'
+// import { useState } from 'react'
+import { useState, useEffect } from 'react'
 import { useDispatch, useSelector } from 'react-redux'
 import LeftBlockMenu from '../LeftBlockMenu/LeftBlockMenu'
 import CenterBlock from '../CenterBlock/CenterBlock'
@@ -7,9 +7,9 @@ import Footer from '../Footer/Footer'
 import RightBlock from '../RightBlock/RightBlock'
 import { refreshAccessToken } from '../../api'
 import styles from './MainPage.module.css'
-import { IsLoading } from '../../contexts/context'
 import {
   loadPlayList,
+  setIsLoading,
   setShuffledPlaylist,
 } from '../../store/actions/creators/pleer'
 import { showFooterSelector } from '../../store/selectors/pleer'
@@ -26,23 +26,16 @@ export default function MainPage({ page }) {
   const showFooter = useSelector(showFooterSelector)
 
   const renewAccessToken = async () => {
-    console.log('Refresh token')
-
     try {
-      const a = JSON.parse(localStorage.getItem('refreshToken'))
-
-      const newToken = await refreshAccessToken(a)
-      console.log(`Новый токен ${newToken}`)
+      const newToken = await refreshAccessToken(
+        JSON.parse(localStorage.getItem('refreshToken'))
+      )
       localStorage.setItem('accessToken', JSON.stringify(newToken?.access))
     } catch (error2) {
-      console.log(error2)
-      console.log(`Rfresh token ${error2.message.detail}`)
-
       setErrorMessage(error2.message)
     }
   }
   if (!errorMessage) {
-    console.log('Begin')
     let useQuery
     switch (page) {
       case PLAYLIST:
@@ -51,7 +44,6 @@ export default function MainPage({ page }) {
       case FAVORITES:
         useQuery = useGetFavoritesQuery
         break
-
       default:
         break
     }
@@ -59,8 +51,6 @@ export default function MainPage({ page }) {
     const { data, isLoading, error } = useQuery()
     il = isLoading
     if (error) {
-      console.log(error)
-      console.log(`Ошибка загрузки списка ${error.data.detail}`)
       if (error.status === 401) {
         renewAccessToken()
       } else setErrorMessage(error.message)
@@ -73,18 +63,16 @@ export default function MainPage({ page }) {
     }
   }
 
-  // useEffect(() => {
-  //   fillPlayList()
-  // }, [])
+  useEffect(() => {
+    dispatcher(setIsLoading(false))
+  }, [il])
 
   return (
     <div className={styles.container}>
       <div className={styles.main}>
-        <IsLoading.Provider value={il}>
-          <LeftBlockMenu />
-          <CenterBlock isLoading={il} page={page} />
-          <RightBlock />
-        </IsLoading.Provider>
+        <LeftBlockMenu />
+        <CenterBlock page={page} />
+        <RightBlock />
       </div>
       {showFooter && <Footer />}
 
