@@ -14,11 +14,11 @@ import {
 } from '../../store/actions/creators/pleer'
 import { showFooterSelector } from '../../store/selectors/pleer'
 import { useGetFavoritesQuery, useGetPlayListQuery } from '../../RTKapi'
-import { PLAYLIST,FAVORITES } from '../../const'
+import { PLAYLIST, FAVORITES } from '../../const'
 
-export default function MainPage({page}) {
+export default function MainPage({ page }) {
   // const [isLoading, setLoading] = useState(true)
-let il=true
+  let il = true
   //   const [currentSong, setCurrentSong] = useState(null)
   const [errorMessage, setErrorMessage] = useState(null)
 
@@ -26,55 +26,49 @@ let il=true
   const showFooter = useSelector(showFooterSelector)
 
   const renewAccessToken = async () => {
-    console.log("Refresh token")
-    
-    try {
-      const a=JSON.parse(localStorage.getItem('refreshToken'))
+    console.log('Refresh token')
 
-      const newToken=await refreshAccessToken(a)
+    try {
+      const a = JSON.parse(localStorage.getItem('refreshToken'))
+
+      const newToken = await refreshAccessToken(a)
       console.log(`Новый токен ${newToken}`)
-      localStorage.setItem('accessToken',JSON.stringify(newToken?.access))   
+      localStorage.setItem('accessToken', JSON.stringify(newToken?.access))
     } catch (error2) {
       console.log(error2)
       console.log(`Rfresh token ${error2.message.detail}`)
-    
+
       setErrorMessage(error2.message)
     }
   }
-if(!errorMessage) {
-  console.log("Begin")
-let useQuery
-  switch (page) {
-    case PLAYLIST:
-      useQuery=useGetPlayListQuery
-      break
+  if (!errorMessage) {
+    console.log('Begin')
+    let useQuery
+    switch (page) {
+      case PLAYLIST:
+        useQuery = useGetPlayListQuery
+        break
       case FAVORITES:
-        useQuery=useGetFavoritesQuery
-      break
-    
-    default:
-      break;
-  }
+        useQuery = useGetFavoritesQuery
+        break
 
-  const {data,isLoading,error}=useQuery()
-  il=isLoading
-  if(error)
-  {
-    console.log(error)
-    console.log(`Ошибка загрузки списка ${error.data.detail}`)
-    if(error.status===401) {
-      renewAccessToken()
-      }
-      else
+      default:
+        break
+    }
 
-    setErrorMessage(error.message)
-  }
-else
-{
-    console.log(isLoading)
-    if(!isLoading){
-      dispatcher(loadPlayList(data))
-      dispatcher(setShuffledPlaylist())
+    const { data, isLoading, error } = useQuery()
+    il = isLoading
+    if (error) {
+      console.log(error)
+      console.log(`Ошибка загрузки списка ${error.data.detail}`)
+      if (error.status === 401) {
+        renewAccessToken()
+      } else setErrorMessage(error.message)
+    } else {
+      console.log(isLoading)
+      if (!isLoading) {
+        dispatcher(loadPlayList(data))
+        dispatcher(setShuffledPlaylist())
       }
     }
   }
@@ -88,7 +82,7 @@ else
       <div className={styles.main}>
         <IsLoading.Provider value={il}>
           <LeftBlockMenu />
-          <CenterBlock isLoading={il}/>
+          <CenterBlock isLoading={il} page={page} />
           <RightBlock />
         </IsLoading.Provider>
       </div>
