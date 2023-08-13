@@ -16,6 +16,11 @@ function Icon({
   classDivList = classDivList
     ? classDivList.map((classDivName) => `${styles[classDivName]}`).join(' ')
     : ''
+  let classSvgList = classSvg ? classSvg.split(' ') : ''
+
+  classSvgList = classSvgList
+    ? classSvgList.map((classSvgName) => `${styles[classSvgName]}`).join(' ')
+    : ''
   const handleClick = () => {
     if (action) action()
   }
@@ -32,7 +37,7 @@ function Icon({
           className={`${styles.sign} ${!isPlaying ? styles.pause : styles.run}`}
         />
       ) : (
-        <svg className={`${styles[classSvg]}`} alt={alt}>
+        <svg className={classSvgList} alt={alt}>
           <use xlinkHref={`../img/icon/sprite.svg#icon-${iconName}`} />
         </svg>
       )}

@@ -17,6 +17,9 @@ export const isLoadingSelector = (store) =>
 export const isShuffledSelector = (store) =>
   pleerSelector(store)?.isShuffled || false
 
+export const errorMessageSelector = (store) =>
+  pleerSelector(store)?.errorMeaasge || ''
+
 export const showFooterSelector = (store) =>
   pleerSelector(store)?.showFooter || false
 

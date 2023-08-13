@@ -3,19 +3,16 @@ import styles from './PlayListItem.module.css'
 import Icon from '../../../Icon/Icon'
 import { timeFormat } from '../../../../util'
 import { setCurrentTrack } from '../../../../store/actions/creators/pleer'
-import {
-  currentTrackSelector,
-  isLoadingSelector,
-} from '../../../../store/selectors/pleer'
+import { currentTrackSelector } from '../../../../store/selectors/pleer'
 
-function PlayListItem({ song }) {
-  const isLoading = useSelector(isLoadingSelector)
-  const dispatcher = useDispatch()
-  const chooseCurrentSong = () => dispatcher(setCurrentTrack(song))
+function PlayListItem({ flag, song }) {
+  //   const isLoading = useSelector(isLoadingSelector)
+  const dispatch = useDispatch()
+  const chooseCurrentSong = () => dispatch(setCurrentTrack(song))
   const currentTrack = useSelector(currentTrackSelector)
-  const isCurrentTrack = currentTrack?.id && currentTrack.id === song.id
-
-  if (isLoading)
+  //   console.log(`PLI  ${flag} ${currentTrack} ${song}`)
+  const isCurrentTrack = currentTrack?.id && currentTrack.id === song?.id
+  if (!flag)
     return (
       <div className={styles.main}>
         <div className={styles.playlist__track}>
@@ -75,7 +72,7 @@ function PlayListItem({ song }) {
         <div className={styles.track__timeBlock}>
           <Icon
             classDiv="_btn-icon"
-            classSvg="track__time-svg"
+            classSvg={`track__time-svg ${song.isLiked ? 'liked' : ''}`}
             iconName="like"
             alt="time"
           />

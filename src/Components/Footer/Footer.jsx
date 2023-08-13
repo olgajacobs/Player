@@ -1,4 +1,4 @@
-import { useRef, useState } from 'react'
+import { useRef, useState, useEffect } from 'react'
 import { useDispatch, useSelector } from 'react-redux'
 import styles from './Footer.module.css'
 import Player from './Player/Player'
@@ -11,12 +11,19 @@ import {
 import { nextTrack } from '../../store/actions/creators/pleer'
 
 export default function Footer() {
-  const [currentProgress, setCurrentProgress] = useState(0)
+  const audioRef = useRef(null)
+  const [currentProgress, setCurrentProgress] = useState(
+    JSON.parse(localStorage.getItem('progress'))
+  )
+  const handleChangeProgress = (value) => {
+    audioRef.current.currentTime = value
+    localStorage.setItem('progress', JSON.stringify(value))
+    setCurrentProgress(value)
+  }
   const [duration, setDuration] = useState(0)
   const dispatcher = useDispatch()
   const isLoop = useSelector(isLoopSelector)
   const currentTrack = useSelector(currentTrackSelector)
-  const audioRef = useRef(null)
 
   const changeVolume = (value) => {
     audioRef.current.volume = value
@@ -26,11 +33,13 @@ export default function Footer() {
   }
 
   const handlerTimeUpdate = () => {
-    setCurrentProgress(Math.floor(audioRef?.current?.currentTime))
+    const cp = audioRef?.current?.currentTime
+    localStorage.setItem('progress', JSON.stringify(cp))
+    setCurrentProgress(cp)
   }
 
   const handlerLoadedMetadata = () => {
-    setDuration(Math.floor(audioRef?.current?.duration))
+    setDuration(audioRef?.current?.duration)
   }
   const handlerEnded = () => {
     if (!isLoop) {
@@ -38,11 +47,10 @@ export default function Footer() {
     }
   }
 
-  const handleChangeProgress = (value) => {
-    audioRef.current.currentTime = value
-    setCurrentProgress(value)
-  }
-  //   console.log('Footer')
+  useEffect(() => {
+    handleChangeProgress(JSON.parse(localStorage.getItem('progress')))
+  }, [])
+
   return (
     <footer className={styles.main}>
       <div className={styles.player__progress}>
@@ -55,8 +63,8 @@ export default function Footer() {
           onChange={(e) => handleChangeProgress(Number(e.target.value))}
         />
         <div className={styles.time}>{`${timeFormat(
-          currentProgress
-        )}/${timeFormat(duration)}`}</div>
+          Math.floor(currentProgress)
+        )}/${timeFormat(Math.floor(duration))}`}</div>
       </div>
       <div className={styles.player__block}>
         <Player

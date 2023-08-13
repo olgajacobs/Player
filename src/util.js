@@ -1,3 +1,5 @@
+import { FAVORITES } from './const'
+
 export function timeFormat(timeInSeconds) {
   const min = Math.floor(timeInSeconds / 60)
   let minStr = ''
@@ -19,5 +21,23 @@ export const shuffle = (array) => {
     const j = Math.floor(Math.random() * (i + 1))
     ;[newArray[i], newArray[j]] = [newArray[j], newArray[i]]
   }
+  return newArray
+}
+
+export const addLike = (array, currentPage) => {
+  if (currentPage === FAVORITES) {
+    const newArray = array.map((track) => ({
+      ...track,
+      isLiked: true,
+    }))
+
+    return newArray
+  }
+
+  const userId = JSON.parse(localStorage.getItem('userPleer')).id
+  const newArray = array.map((track) => ({
+    ...track,
+    isLiked: track.stared_user?.find((u) => u.id === userId),
+  }))
   return newArray
 }

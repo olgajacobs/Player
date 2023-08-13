@@ -255,3 +255,9 @@ button,
 .run {
   animation-play-state: running;
 }
+
+.liked {
+  fill: #b672ff;
+  stroke-width: 1px;
+  stroke: #b672ff;
+}

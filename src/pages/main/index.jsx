@@ -4,7 +4,7 @@ import { PLAYLIST } from '../../const'
 import { setCurrentPage } from '../../store/actions/creators/pleer'
 
 export default function Main() {
-  const dispatcher = useDispatch()
-  dispatcher(setCurrentPage(PLAYLIST))
+  const dispatch = useDispatch()
+  dispatch(setCurrentPage(PLAYLIST))
   return <MainPage />
 }

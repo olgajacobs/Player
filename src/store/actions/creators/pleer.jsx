@@ -8,6 +8,7 @@ import {
   PREV_TRACK,
   TOGGLE_SHUFFLED,
   TOGGLE_LOOP,
+  SET_ERROR_MESSAGE,
   SET_CURRENT_PAGE,
 } from '../types/pleer'
 
@@ -30,6 +31,10 @@ export const setIsLoading = (newIsLoading) => ({
 export const setCurrentPage = (newCurrentPage) => ({
   type: SET_CURRENT_PAGE,
   payload: { newCurrentPage },
+})
+export const setErrorMessage = (newErrorMessage) => ({
+  type: SET_ERROR_MESSAGE,
+  payload: { newErrorMessage },
 })
 
 export const nextTrack = () => ({
