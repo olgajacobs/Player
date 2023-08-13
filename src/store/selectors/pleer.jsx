@@ -5,6 +5,9 @@ export const playListSelector = (store) => pleerSelector(store)?.playlist || []
 export const currentTrackSelector = (store) =>
   pleerSelector(store)?.currentTrack || {}
 
+export const currentPageSelector = (store) =>
+  pleerSelector(store)?.currentPage || {}
+
 export const isPlayingSelector = (store) =>
   pleerSelector(store)?.isPlaying || false
 

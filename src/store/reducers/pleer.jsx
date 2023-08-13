@@ -1,6 +1,7 @@
 import { shuffle } from '../../util'
 import {
   LOAD_PLAYLIST,
+  SET_CURRENT_PAGE,
   SET_CURRENT_TRACK,
   SET_SHUFFLED_PLAYLIST,
   NEXT_TRACK,
@@ -17,6 +18,7 @@ const initialState = {
   isShuffled: false,
   isLoop: false,
   showFooter: false,
+  currentPage: '',
   currentTrack: {},
   playlist: [],
   shuffledPlaylist: [],
@@ -59,13 +61,15 @@ export default function pleerReducer(state = initialState, action = '') {
     }
     case SET_ISPLAYING: {
       const { newIsPlaying } = action.payload
-
       return { ...state, isPlaying: newIsPlaying }
     }
     case SET_ISLOADING: {
       const { newIsLoading } = action.payload
-
       return { ...state, isLoading: newIsLoading }
+    }
+    case SET_CURRENT_PAGE: {
+      const { newCurrentPage } = action.payload
+      return { ...state, currentPage: newCurrentPage }
     }
     case TOGGLE_LOOP: {
       return { ...state, isLoop: !state.isLoop }

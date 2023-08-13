@@ -8,6 +8,7 @@ import {
   PREV_TRACK,
   TOGGLE_SHUFFLED,
   TOGGLE_LOOP,
+  SET_CURRENT_PAGE,
 } from '../types/pleer'
 
 export const toggleShuffled = () => ({
@@ -25,6 +26,10 @@ export const setIsPlaying = (newIsPlaying) => ({
 export const setIsLoading = (newIsLoading) => ({
   type: SET_ISLOADING,
   payload: { newIsLoading },
+})
+export const setCurrentPage = (newCurrentPage) => ({
+  type: SET_CURRENT_PAGE,
+  payload: { newCurrentPage },
 })
 
 export const nextTrack = () => ({

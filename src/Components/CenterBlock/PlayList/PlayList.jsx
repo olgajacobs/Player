@@ -1,4 +1,4 @@
-// import { v4 as uuidv4 } from 'uuid'
+import { v4 as uuidv4 } from 'uuid'
 import { useSelector } from 'react-redux'
 import styles from './PlayList.module.css'
 import PlayListItem from './PlayListItem/PlayListItem'
@@ -17,7 +17,7 @@ function PlayList() {
   const playListItems = isLoading
     ? Array(5)
         .fill('')
-        .map(() => <PlayListItem key={new Date()} />)
+        .map(() => <PlayListItem key={uuidv4()} />)
     : playList.map((song) => <PlayListItem song={song} key={song.id} />)
 
   return (

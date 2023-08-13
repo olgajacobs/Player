@@ -12,11 +12,14 @@ import {
   setIsLoading,
   setShuffledPlaylist,
 } from '../../store/actions/creators/pleer'
-import { showFooterSelector } from '../../store/selectors/pleer'
+import {
+  currentPageSelector,
+  showFooterSelector,
+} from '../../store/selectors/pleer'
 import { useGetFavoritesQuery, useGetPlayListQuery } from '../../RTKapi'
 import { PLAYLIST, FAVORITES } from '../../const'
 
-export default function MainPage({ page }) {
+export default function MainPage() {
   // const [isLoading, setLoading] = useState(true)
   let il = true
   //   const [currentSong, setCurrentSong] = useState(null)
@@ -24,6 +27,7 @@ export default function MainPage({ page }) {
 
   const dispatcher = useDispatch()
   const showFooter = useSelector(showFooterSelector)
+  const currentPage = useSelector(currentPageSelector)
 
   const renewAccessToken = async () => {
     try {
@@ -37,7 +41,7 @@ export default function MainPage({ page }) {
   }
   if (!errorMessage) {
     let useQuery
-    switch (page) {
+    switch (currentPage) {
       case PLAYLIST:
         useQuery = useGetPlayListQuery
         break
@@ -71,7 +75,7 @@ export default function MainPage({ page }) {
     <div className={styles.container}>
       <div className={styles.main}>
         <LeftBlockMenu />
-        <CenterBlock page={page} />
+        <CenterBlock />
         <RightBlock />
       </div>
       {showFooter && <Footer />}
