@@ -1,3 +1,6 @@
+import { useDispatch } from 'react-redux'
+import { setErrorMessage } from './store/actions/creators/pleer'
+
 export async function getPlayList() {
   const response = await fetch('https://painassasin.online/catalog/track/all/')
   if (response.ok) {
@@ -90,20 +93,22 @@ export async function getToken({ email, password }) {
     throw new Error(errorMessage)
   } else throw new Error('Прочие ошибки сервера')
 }
-export async function refreshAccessToken(refreshToken ) {
-  const response = await fetch('https://painassasin.online/user/token/refresh/', {
-    method: 'POST',
-    body: JSON.stringify({
-     refresh:refreshToken
-   
-    }),
-    headers: {
-      'content-type': 'application/json',
-    },
-  })
+export async function refreshAccessToken(refreshToken) {
+  const response = await fetch(
+    'https://painassasin.online/user/token/refresh/',
+    {
+      method: 'POST',
+      body: JSON.stringify({
+        refresh: refreshToken,
+      }),
+      headers: {
+        'content-type': 'application/json',
+      },
+    }
+  )
 
   if (response.status === 200) {
-    console.log("Success")
+    console.log('Success')
     const data = await response.json()
     return data
   }
@@ -117,3 +122,14 @@ export async function refreshAccessToken(refreshToken ) {
   } else throw new Error('Прочие ошибки сервера')
 }
 
+export const renewAccessToken = async () => {
+  const dispatch = useDispatch()
+  try {
+    const newToken = await refreshAccessToken(
+      JSON.parse(localStorage.getItem('refreshToken'))
+    )
+    localStorage.setItem('accessToken', JSON.stringify(newToken?.access))
+  } catch (error2) {
+    dispatch(setErrorMessage(error2.message))
+  }
+}

@@ -12,6 +12,9 @@ function PlayListItem({ flag, song }) {
   const currentTrack = useSelector(currentTrackSelector)
   //   console.log(`PLI  ${flag} ${currentTrack} ${song}`)
   const isCurrentTrack = currentTrack?.id && currentTrack.id === song?.id
+  const handleToggleLike = () => {
+    dispatcher(toggleLoop())
+  }
   if (!flag)
     return (
       <div className={styles.main}>
@@ -75,6 +78,7 @@ function PlayListItem({ flag, song }) {
             classSvg={`track__time-svg ${song.isLiked ? 'liked' : ''}`}
             iconName="like"
             alt="time"
+            action={handleToggleLike}
           />
 
           <span className={styles.track__time}>

@@ -1,3 +1,4 @@
+import { FAVORITES, PLAYLIST } from '../../const'
 import { shuffle } from '../../util'
 import {
   LOAD_PLAYLIST,
@@ -23,6 +24,7 @@ const initialState = {
   currentPage: '',
   currentTrack: {},
   playlist: [],
+  favorites: [],
   shuffledPlaylist: [],
 }
 
@@ -30,7 +32,9 @@ export default function pleerReducer(state = initialState, action = '') {
   switch (action.type) {
     case LOAD_PLAYLIST: {
       const { newPlaylist } = action.payload
-      return { ...state, playlist: newPlaylist }
+      if (state.currentPage === PLAYLIST)
+        return { ...state, playlist: newPlaylist }
+      return { ...state, favorites: newPlaylist }
     }
     case SET_CURRENT_TRACK: {
       const { newCurrentTrack } = action.payload
@@ -42,8 +46,13 @@ export default function pleerReducer(state = initialState, action = '') {
       return { ...state, shuffledPlaylist: newShuffledPlaylist }
     }
     case NEXT_TRACK: {
-      const { currentTrack, playlist, shuffledPlaylist } = state
-      const pl = state.isShuffled ? shuffledPlaylist : playlist
+      const { currentTrack, playlist, favorites, shuffledPlaylist } = state
+      let pl = playlist
+      if (state.isShuffled) {
+        pl = shuffledPlaylist
+      } else if (state.currentPage === FAVORITES) {
+        pl = favorites
+      }
       const currentIndex = pl.findIndex((e) => e.id === currentTrack.id)
       if (currentIndex === pl.length - 1)
         return state.isShuffled
@@ -52,8 +61,13 @@ export default function pleerReducer(state = initialState, action = '') {
       return { ...state, currentTrack: pl[currentIndex + 1] }
     }
     case PREV_TRACK: {
-      const { currentTrack, playlist, shuffledPlaylist } = state
-      const pl = state.isShuffled ? shuffledPlaylist : playlist
+      const { currentTrack, playlist, favorites, shuffledPlaylist } = state
+      let pl = playlist
+      if (state.isShuffled) {
+        pl = shuffledPlaylist
+      } else if (state.currentPage === FAVORITES) {
+        pl = favorites
+      }
       const currentIndex = pl.findIndex((e) => e.id === currentTrack.id)
       if (currentIndex === 0)
         return state.isShuffled

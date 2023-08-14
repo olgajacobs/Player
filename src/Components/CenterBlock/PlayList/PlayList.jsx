@@ -5,12 +5,14 @@ import styles from './PlayList.module.css'
 import PlayListItem from './PlayListItem/PlayListItem'
 import Icon from '../../Icon/Icon'
 import { currentPageSelector } from '../../../store/selectors/pleer'
-import { refreshAccessToken } from '../../../api'
+import { renewAccessToken } from '../../../api'
 import { useGetFavoritesQuery, useGetPlayListQuery } from '../../../RTKapi'
 import { FAVORITES } from '../../../const'
 import {
+  loadPlayList,
   setErrorMessage,
   setIsLoading,
+  setShuffledPlaylist,
 } from '../../../store/actions/creators/pleer'
 import { addLike } from '../../../util'
 
@@ -20,16 +22,6 @@ function PlayList() {
   let playListItems = Array(5)
     .fill('')
     .map(() => <PlayListItem flag={false} key={uuidv4()} />)
-  const renewAccessToken = async () => {
-    try {
-      const newToken = await refreshAccessToken(
-        JSON.parse(localStorage.getItem('refreshToken'))
-      )
-      localStorage.setItem('accessToken', JSON.stringify(newToken?.access))
-    } catch (error2) {
-      dispatch(setErrorMessage(error2.message))
-    }
-  }
 
   let useQuery = useGetPlayListQuery
   switch (currentPage) {
@@ -50,12 +42,14 @@ function PlayList() {
   }
 
   if (!isLoading && !error?.message && data?.length) {
-    const playListWithLike = data ? addLike(data, currentPage) : undefined
-    console.log(`+++++ playListLike ${playListWithLike}  `)
+    const newPlaylist = data ? addLike(data, currentPage) : undefined
+    console.log(`+++++ playListLike ${newPlaylist}  `)
     console.log(`***** isLoading ${isLoading} ${data?.length} `)
-    playListItems = playListWithLike.map((song) => (
+    playListItems = newPlaylist.map((song) => (
       <PlayListItem flag={!isLoading} song={song} key={song.id} />
     ))
+    dispatch(loadPlayList(newPlaylist))
+    dispatch(setShuffledPlaylist())
     dispatch(setIsLoading(false))
   }
 
