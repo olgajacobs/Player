@@ -17,10 +17,20 @@ export const RTKApi = createApi({
         },
       }),
     }),
-    deleteFavorites: build.query({
-      query: (id) => ({
-        url: `track/${id}favorite//`,
+    deleteFavorite: build.mutation({
+      query: ({ id }) => ({
+        url: `track/${id}/favorite/`,
         method: 'DELETE',
+        headers: {
+          Authorization: `Bearer ${getTokenFromLocalStorage()}`,
+        },
+      }),
+    }),
+    addFavorite: build.mutation({
+      query: ({ id, body }) => ({
+        url: `track/${id}/favorite/`,
+        method: 'DELETE',
+        body,
         headers: {
           Authorization: `Bearer ${getTokenFromLocalStorage()}`,
         },
@@ -50,4 +60,9 @@ export const RTKApi = createApi({
   }),
 })
 
-export const { useGetFavoritesQuery, useGetPlayListQuery } = RTKApi
+export const {
+  useGetFavoritesQuery,
+  useGetPlayListQuery,
+  useAddFavoriteMutation,
+  useDeleteFavoriteMutation,
+} = RTKApi

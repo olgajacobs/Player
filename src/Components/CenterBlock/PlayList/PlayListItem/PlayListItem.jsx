@@ -1,4 +1,5 @@
 import { useDispatch, useSelector } from 'react-redux'
+import { useChangeLike } from '../../../../customHooks/customHooks'
 import styles from './PlayListItem.module.css'
 import Icon from '../../../Icon/Icon'
 import { timeFormat } from '../../../../util'
@@ -12,8 +13,12 @@ function PlayListItem({ flag, song }) {
   const currentTrack = useSelector(currentTrackSelector)
   //   console.log(`PLI  ${flag} ${currentTrack} ${song}`)
   const isCurrentTrack = currentTrack?.id && currentTrack.id === song?.id
+
+  const a = song ? useChangeLike(song) : () => {}
+
   const handleToggleLike = () => {
-    dispatcher(toggleLoop())
+    // console.log('LIKE++++++')
+    a()
   }
   if (!flag)
     return (
@@ -89,4 +94,8 @@ function PlayListItem({ flag, song }) {
     </div>
   )
 }
+// const callHook=()=>{
+
+// }
+
 export default PlayListItem

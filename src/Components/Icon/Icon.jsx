@@ -21,13 +21,14 @@ function Icon({
   classSvgList = classSvgList
     ? classSvgList.map((classSvgName) => `${styles[classSvgName]}`).join(' ')
     : ''
-  const handleClick = () => {
+  const handleClick = (e) => {
+    e.stopPropagation()
     if (action) action()
   }
   return (
     <div
       className={classDivList}
-      onClick={handleClick}
+      onClick={(e) => handleClick(e)}
       role="button"
       tabIndex="0"
       onKeyUp={() => {}}
