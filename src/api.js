@@ -1,5 +1,5 @@
-import { useDispatch } from 'react-redux'
-import { setErrorMessage } from './store/actions/creators/pleer'
+// import { useDispatch } from 'react-redux'
+// import { setErrorMessage } from './store/actions/creators/pleer'
 
 export async function getPlayList() {
   const response = await fetch('https://painassasin.online/catalog/track/all/')
@@ -123,13 +123,14 @@ export async function refreshAccessToken(refreshToken) {
 }
 
 export const renewAccessToken = async () => {
-  const dispatch = useDispatch()
+  //   const dispatch = useDispatch()
   try {
     const newToken = await refreshAccessToken(
       JSON.parse(localStorage.getItem('refreshToken'))
     )
     localStorage.setItem('accessToken', JSON.stringify(newToken?.access))
   } catch (error2) {
-    dispatch(setErrorMessage(error2.message))
+    console.error(`Ошибка при обновлении токена ${error2.message}`)
+    // dispatch(setErrorMessage(error2.message))
   }
 }

@@ -29,7 +29,7 @@ export const RTKApi = createApi({
     addFavorite: build.mutation({
       query: ({ id, body }) => ({
         url: `track/${id}/favorite/`,
-        method: 'DELETE',
+        method: 'POST',
         body,
         headers: {
           Authorization: `Bearer ${getTokenFromLocalStorage()}`,

@@ -2,6 +2,7 @@
 
 import { useDispatch, useSelector } from 'react-redux'
 
+import { useEffect, useState } from 'react'
 import { currentPageSelector } from '../store/selectors/pleer'
 import { renewAccessToken } from '../api'
 import {
@@ -32,9 +33,12 @@ export const useReadTracks = () => {
       break
   }
 
+  console.log(`Read 1`)
   const { data, isLoading, error } = useQuery()
   if (error) {
     if (error.status === 401) {
+      console.log(`Read 2`)
+
       renewAccessToken()
     } else dispatch(setErrorMessage(error.message))
   }
@@ -52,29 +56,30 @@ export const useReadTracks = () => {
 }
 export const useChangeLike = (clickedTrack) => {
   //   const dispatch = useDispatch()
-
-  console.log('Mutation')
-  console.log(clickedTrack)
+  const setTokenRefreshed = useState(false)[1]
   const useMutation = clickedTrack.isLiked
-    ? useAddFavoriteMutation
-    : useDeleteFavoriteMutation
+    ? useDeleteFavoriteMutation
+    : useAddFavoriteMutation
   const user = JSON.parse(localStorage.getItem('userPleer'))
   const queryParam = clickedTrack.isLiked
     ? { id: clickedTrack.id, body: JSON.stringify(user) }
     : { id: clickedTrack.id }
 
-  console.log(useMutation)
   const [changeFavorits, { isLoading, error }] = useMutation()
-  console.log(`Mut ${changeFavorits} ${isLoading} ${error}`)
+  console.log(`Mut ${isLoading} ${error}`)
   const lox = async () => {
     await changeFavorits(queryParam).unwrap()
   }
-  if (error) {
-    if (error.status === 401) renewAccessToken()
-    // } else dispatch(setErrorMessage(error.message))
-  } else {
-    console.log(isLoading)
-  }
+
+  useEffect(() => {
+    if (error) {
+      console.log(`Mut 1`)
+      if (error.status === 401) renewAccessToken()
+      console.log(`Mut 2`)
+      setTokenRefreshed(true)
+      console.log(`Mut 3`)
+    }
+  }, [error])
   return lox
   //   if (!isLoading && !error?.message) {
   //     asyncChangeFavorits()

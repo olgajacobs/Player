@@ -9,17 +9,13 @@ import { currentTrackSelector } from '../../../../store/selectors/pleer'
 function PlayListItem({ flag, song }) {
   //   const isLoading = useSelector(isLoadingSelector)
   const dispatch = useDispatch()
-  const chooseCurrentSong = () => dispatch(setCurrentTrack(song))
+  const handleSetCurrentTrack = () => dispatch(setCurrentTrack(song))
   const currentTrack = useSelector(currentTrackSelector)
   //   console.log(`PLI  ${flag} ${currentTrack} ${song}`)
   const isCurrentTrack = currentTrack?.id && currentTrack.id === song?.id
 
-  const a = song ? useChangeLike(song) : () => {}
+  const handleToggleLike = song ? useChangeLike(song) : () => {}
 
-  const handleToggleLike = () => {
-    // console.log('LIKE++++++')
-    a()
-  }
   if (!flag)
     return (
       <div className={styles.main}>
@@ -54,7 +50,7 @@ function PlayListItem({ flag, song }) {
         // className={`${styles.playlist__track} ${
         //   isCurrentTrack ? styles.currentSong : ''
         // }`}
-        onClick={chooseCurrentSong}
+        onClick={handleSetCurrentTrack}
         role="button"
         tabIndex="0"
         onKeyUp={() => {}}
