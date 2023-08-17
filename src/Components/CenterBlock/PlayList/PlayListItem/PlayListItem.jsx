@@ -1,12 +1,11 @@
 import { useDispatch, useSelector } from 'react-redux'
-import { useChangeLike } from '../../../../customHooks/customHooks'
 import styles from './PlayListItem.module.css'
 import Icon from '../../../Icon/Icon'
 import { timeFormat } from '../../../../util'
 import { setCurrentTrack } from '../../../../store/actions/creators/pleer'
 import { currentTrackSelector } from '../../../../store/selectors/pleer'
 
-function PlayListItem({ flag, song }) {
+function PlayListItem({ flag, song, toggler }) {
   //   const isLoading = useSelector(isLoadingSelector)
   const dispatch = useDispatch()
   const handleSetCurrentTrack = () => dispatch(setCurrentTrack(song))
@@ -14,7 +13,7 @@ function PlayListItem({ flag, song }) {
   //   console.log(`PLI  ${flag} ${currentTrack} ${song}`)
   const isCurrentTrack = currentTrack?.id && currentTrack.id === song?.id
 
-  const handleToggleLike = song ? useChangeLike(song) : () => {}
+  //   const handleToggleLike = song ? useChangeLike(song) : () => {}
 
   if (!flag)
     return (
@@ -79,7 +78,9 @@ function PlayListItem({ flag, song }) {
             classSvg={`track__time-svg ${song.isLiked ? 'liked' : ''}`}
             iconName="like"
             alt="time"
-            action={handleToggleLike}
+            action={() => {
+              toggler(song)
+            }}
           />
 
           <span className={styles.track__time}>

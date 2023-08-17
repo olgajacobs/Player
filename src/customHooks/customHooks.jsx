@@ -54,20 +54,22 @@ export const useReadTracks = () => {
   }
   return { isLoading, error, newPlaylist }
 }
-export const useChangeLike = (clickedTrack) => {
+export const useChangeLike = (isLiked) => {
   //   const dispatch = useDispatch()
+  console.log(`isLiked ${isLiked}`)
   const setTokenRefreshed = useState(false)[1]
-  const useMutation = clickedTrack.isLiked
+  const useMutation = isLiked
     ? useDeleteFavoriteMutation
     : useAddFavoriteMutation
-  const user = JSON.parse(localStorage.getItem('userPleer'))
-  const queryParam = clickedTrack.isLiked
-    ? { id: clickedTrack.id, body: JSON.stringify(user) }
-    : { id: clickedTrack.id }
 
-  const [changeFavorits, { isLoading, error }] = useMutation()
-  console.log(`Mut ${isLoading} ${error}`)
-  const lox = async () => {
+  const [changeFavorits, { error }] = useMutation()
+  //   console.log(`Mut ${isLoading} ${error}`)
+  const lox = async (clickedTrack) => {
+    const user = JSON.parse(localStorage.getItem('userPleer'))
+    const queryParam = clickedTrack.isLiked
+      ? { id: clickedTrack.id, body: JSON.stringify(user) }
+      : { id: clickedTrack.id }
+    console.log(queryParam)
     await changeFavorits(queryParam).unwrap()
   }
 
@@ -81,14 +83,4 @@ export const useChangeLike = (clickedTrack) => {
     }
   }, [error])
   return lox
-  //   if (!isLoading && !error?.message) {
-  //     asyncChangeFavorits()
-  //   }
-
-  //   useEffect(() => {
-  //     playListItems = data?.map((song) => (
-  //       <PlayListItem song={song} key={song.id} />
-  //     ))
-  //     dispatch(setIsLoading(false))
-  //   }, [isLoading])
 }

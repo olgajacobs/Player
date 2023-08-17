@@ -1,7 +1,8 @@
+import { useEffect, useState } from 'react'
 import { v4 as uuidv4 } from 'uuid'
 import { useSelector } from 'react-redux'
 import Icon from '../../Icon/Icon'
-import { useReadTracks } from '../../../customHooks/customHooks'
+import { useChangeLike, useReadTracks } from '../../../customHooks/customHooks'
 import styles from './PlayList.module.css'
 import PlayListItem from './PlayListItem/PlayListItem'
 import { addLike } from '../../../util'
@@ -9,6 +10,10 @@ import { currentPageSelector } from '../../../store/selectors/pleer'
 
 export default function PlayList() {
   const currentPage = useSelector(currentPageSelector)
+  const [clickedTrack, setClickedTrack] = useState({})
+  const disLike = useChangeLike(true)
+  const like = useChangeLike(false)
+
   let playListItems = Array(5)
     .fill('')
     .map(() => <PlayListItem flag={false} key={uuidv4()} />)
@@ -19,9 +24,18 @@ export default function PlayList() {
     const pl = newPlaylist ? addLike(newPlaylist, currentPage) : undefined
 
     playListItems = pl.map((song) => (
-      <PlayListItem flag={!isLoading} song={song} key={song.id} />
+      <PlayListItem
+        flag={!isLoading}
+        song={song}
+        key={song.id}
+        toggler={setClickedTrack}
+      />
     ))
   }
+  useEffect(() => {
+    const f = clickedTrack?.isLiked ? disLike : like
+    f(clickedTrack)
+  }, [clickedTrack])
   //   console.log(`PL isLoading ${isLoading} ${data?.length} ${error?.message}`)
   return (
     <div className={styles.main}>
