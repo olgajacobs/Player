@@ -9,6 +9,7 @@ function Icon({
   iconName = '',
   action = null,
   isCurrentTrack = false,
+  song = {},
 }) {
   const isPlaying = useSelector(isPlayingSelector)
   let classDivList = classDiv ? classDiv.split(' ') : ''
@@ -23,7 +24,7 @@ function Icon({
     : ''
   const handleClick = (e) => {
     e.stopPropagation()
-    if (action) action()
+    if (action) action(song)
   }
   return (
     <div

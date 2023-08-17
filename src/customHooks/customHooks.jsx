@@ -2,7 +2,8 @@
 
 import { useDispatch, useSelector } from 'react-redux'
 
-import { useEffect, useState } from 'react'
+import { useState } from 'react'
+// import { useEffect, useState } from 'react'
 import { currentPageSelector } from '../store/selectors/pleer'
 import { renewAccessToken } from '../api'
 import {
@@ -23,6 +24,13 @@ import { addLike } from '../util'
 export const useReadTracks = () => {
   const dispatch = useDispatch()
   const currentPage = useSelector(currentPageSelector)
+  const [r, setRereadTracks] = useState(false)
+
+  const a = async () => {
+    await renewAccessToken()
+    setRereadTracks(true)
+    console.log(r)
+  }
 
   let useQuery = useGetPlayListQuery
   switch (currentPage) {
@@ -33,13 +41,10 @@ export const useReadTracks = () => {
       break
   }
 
-  console.log(`Read 1`)
   const { data, isLoading, error } = useQuery()
   if (error) {
     if (error.status === 401) {
-      console.log(`Read 2`)
-
-      renewAccessToken()
+      a()
     } else dispatch(setErrorMessage(error.message))
   }
 
@@ -54,33 +59,29 @@ export const useReadTracks = () => {
   }
   return { isLoading, error, newPlaylist }
 }
+
 export const useChangeLike = (isLiked) => {
   //   const dispatch = useDispatch()
-  console.log(`isLiked ${isLiked}`)
-  const setTokenRefreshed = useState(false)[1]
+  //   const setTokenRefreshed = useState(false)[1]
   const useMutation = isLiked
     ? useDeleteFavoriteMutation
     : useAddFavoriteMutation
 
-  const [changeFavorits, { error }] = useMutation()
-  //   console.log(`Mut ${isLoading} ${error}`)
+  const [changeLikes, { error, isLoading }] = useMutation()
+
   const lox = async (clickedTrack) => {
     const user = JSON.parse(localStorage.getItem('userPleer'))
     const queryParam = clickedTrack.isLiked
       ? { id: clickedTrack.id, body: JSON.stringify(user) }
       : { id: clickedTrack.id }
-    console.log(queryParam)
-    await changeFavorits(queryParam).unwrap()
+
+    await changeLikes(queryParam).unwrap()
+    if (error) {
+      if (error.status === 401 && !isLoading) await renewAccessToken()
+
+      await changeLikes(queryParam).unwrap()
+    }
   }
 
-  useEffect(() => {
-    if (error) {
-      console.log(`Mut 1`)
-      if (error.status === 401) renewAccessToken()
-      console.log(`Mut 2`)
-      setTokenRefreshed(true)
-      console.log(`Mut 3`)
-    }
-  }, [error])
   return lox
 }

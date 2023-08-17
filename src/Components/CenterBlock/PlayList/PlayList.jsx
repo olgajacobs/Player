@@ -33,10 +33,12 @@ export default function PlayList() {
     ))
   }
   useEffect(() => {
+    if (!clickedTrack?.id) return
+    console.log(`clickedTrack ${clickedTrack?.id}`)
     const f = clickedTrack?.isLiked ? disLike : like
+
     f(clickedTrack)
   }, [clickedTrack])
-  //   console.log(`PL isLoading ${isLoading} ${data?.length} ${error?.message}`)
   return (
     <div className={styles.main}>
       <div className={styles.content__title}>

@@ -78,9 +78,8 @@ function PlayListItem({ flag, song, toggler }) {
             classSvg={`track__time-svg ${song.isLiked ? 'liked' : ''}`}
             iconName="like"
             alt="time"
-            action={() => {
-              toggler(song)
-            }}
+            action={toggler}
+            song={song}
           />
 
           <span className={styles.track__time}>
