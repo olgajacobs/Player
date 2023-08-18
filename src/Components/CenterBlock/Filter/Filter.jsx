@@ -1,34 +1,38 @@
 import { useState } from 'react'
-import styles from './Filter.module.css'
+import { useSelector } from 'react-redux'
 import FilterItem from './FilterItem/FilterItem'
-
-// Подготовка тестового плейлиста
-import tempPlayList from '../../../tempPlayList'
-
-const songFilter = tempPlayList.map((song) => (
-  <a className={styles.filterItems} href="http://" key={song.id}>
-    {song.name}
-  </a>
-))
-let yearFilter = Array.from(
-  new Set(tempPlayList.map((song) => song.release_date.substring(0, 4)))
-).sort()
-yearFilter = yearFilter.map((releaseData) => (
-  <a className={styles.filterItems} href="http://" key={releaseData}>
-    {releaseData}
-  </a>
-))
-let genreFilter = Array.from(
-  new Set(tempPlayList.map((song) => song.genre))
-).sort()
-genreFilter = genreFilter.map((genre) => (
-  <a className={styles.filterItems} href="http://" key={genre}>
-    {genre}
-  </a>
-))
+import { playListSelector } from '../../../store/selectors/pleer'
+import styles from './Filter.module.css'
 
 export default function Filter() {
   const [buttons, setButtons] = useState([false, false, false])
+  const playList = useSelector(playListSelector)
+  let [songFilter,yearFilter,genreFilter]=[[],[],[]]
+  if(playList.length){
+
+  console.log(playList[0].release_date)
+songFilter = playList.map((song) => (
+    <a className={styles.filterItems} href="http://" key={song.id}>
+      {song.name}
+    </a>
+  ))
+yearFilter = Array.from(
+    new Set(playList.map((song) => song?.release_date?.substring(0, 4)))
+  ).sort()
+  yearFilter = yearFilter.map((releaseData) => (
+    <a className={styles.filterItems} href="http://" key={releaseData}>
+      {releaseData}
+    </a>
+  ))
+ genreFilter = Array.from(
+    new Set(playList.map((song) => song.genre))
+  ).sort()
+  genreFilter = genreFilter.map((genre) => (
+    <a className={styles.filterItems} href="http://" key={genre}>
+      {genre}
+    </a>
+  ))}
+  else
   return (
     <div className={styles.main}>
       <div className={styles.filter__title}>Искать по:</div>

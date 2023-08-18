@@ -2,30 +2,28 @@ import { useEffect, useState } from 'react'
 import { v4 as uuidv4 } from 'uuid'
 import { useSelector } from 'react-redux'
 import Icon from '../../Icon/Icon'
-import { useChangeLike, useReadTracks } from '../../../customHooks/customHooks'
+import  useChangeLike from '../../../customHooks/customHooks'
 import styles from './PlayList.module.css'
 import PlayListItem from './PlayListItem/PlayListItem'
-import { addLike } from '../../../util'
-import { currentPageSelector } from '../../../store/selectors/pleer'
+import {  isLoadingSelector, playListSelector } from '../../../store/selectors/pleer'
 
 export default function PlayList() {
-  const currentPage = useSelector(currentPageSelector)
+  // const currentPage = useSelector(currentPageSelector)
+  const playList = useSelector(playListSelector)
+  const isLoading=useSelector(isLoadingSelector)
   const [clickedTrack, setClickedTrack] = useState({})
   const disLike = useChangeLike(true)
   const like = useChangeLike(false)
 
   let playListItems = Array(5)
     .fill('')
-    .map(() => <PlayListItem flag={false} key={uuidv4()} />)
-
-  const { newPlaylist, isLoading, error } = useReadTracks()
-
-  if (!isLoading && !error?.message && newPlaylist?.length) {
-    const pl = newPlaylist ? addLike(newPlaylist, currentPage) : undefined
-
-    playListItems = pl.map((song) => (
+    .map(() => <PlayListItem isLoading={isLoading} key={uuidv4()} />)
+  
+  if (playList?.length) {
+console.log(playList)
+    playListItems = playList.map((song) => (
       <PlayListItem
-        flag={!isLoading}
+      isLoading={isLoading}
         song={song}
         key={song.id}
         toggler={setClickedTrack}

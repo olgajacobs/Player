@@ -5,17 +5,17 @@ import { timeFormat } from '../../../../util'
 import { setCurrentTrack } from '../../../../store/actions/creators/pleer'
 import { currentTrackSelector } from '../../../../store/selectors/pleer'
 
-function PlayListItem({ flag, song, toggler }) {
+function PlayListItem({ isLoading, song, toggler }) {
   //   const isLoading = useSelector(isLoadingSelector)
   const dispatch = useDispatch()
   const handleSetCurrentTrack = () => dispatch(setCurrentTrack(song))
   const currentTrack = useSelector(currentTrackSelector)
-  //   console.log(`PLI  ${flag} ${currentTrack} ${song}`)
+    console.log(`PLI${currentTrack} ${song}`)
   const isCurrentTrack = currentTrack?.id && currentTrack.id === song?.id
 
   //   const handleToggleLike = song ? useChangeLike(song) : () => {}
 
-  if (!flag)
+  if (isLoading)
     return (
       <div className={styles.main}>
         <div className={styles.playlist__track}>

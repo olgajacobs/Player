@@ -1,5 +1,6 @@
 import { createApi, fetchBaseQuery } from '@reduxjs/toolkit/query/react'
 
+const TRACKS_TAG='Tracks'
 const getTokenFromLocalStorage = () =>
   JSON.parse(localStorage.getItem('accessToken'))
 
@@ -16,6 +17,7 @@ export const RTKApi = createApi({
           Authorization: `Bearer ${getTokenFromLocalStorage()}`,
         },
       }),
+      providesTags:()=>[TRACKS_TAG]
     }),
     deleteFavorite: build.mutation({
       query: ({ id }) => ({
@@ -25,6 +27,7 @@ export const RTKApi = createApi({
           Authorization: `Bearer ${getTokenFromLocalStorage()}`,
         },
       }),
+      invalidatesTags:[TRACKS_TAG]
     }),
     addFavorite: build.mutation({
       query: ({ id, body }) => ({
@@ -35,12 +38,14 @@ export const RTKApi = createApi({
           Authorization: `Bearer ${getTokenFromLocalStorage()}`,
         },
       }),
+      invalidatesTags:[TRACKS_TAG]
     }),
     getPlayList: build.query({
       query: () => ({
         url: `track/all/`,
         method: 'GET',
       }),
+      providesTags:()=>[TRACKS_TAG]
     }),
     // addTrackProduct: build.mutation({
     //     query: (body) => ({
