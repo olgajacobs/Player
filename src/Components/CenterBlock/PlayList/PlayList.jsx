@@ -2,7 +2,7 @@
 import { v4 as uuidv4 } from 'uuid'
 import { useSelector } from 'react-redux'
 import Icon from '../../Icon/Icon'
-import useChangeLike from '../../../customHooks/customHooks'
+import changeLike from '../../../customHooks/customHooks'
 import styles from './PlayList.module.css'
 import PlayListItem from './PlayListItem/PlayListItem'
 import {
@@ -20,8 +20,8 @@ export default function PlayList() {
   const currentPage = useSelector(currentPageSelector)
   const playList = currentPage === PLAYLIST ? main : favorites
   //   const [clickedTrack, setClickedTrack] = useState({})
-  const disLike = useChangeLike(true)
-  const like = useChangeLike(false)
+  const disLike = changeLike(true)
+  const like = changeLike(false)
 
   let playListItems = Array(5)
     .fill('')

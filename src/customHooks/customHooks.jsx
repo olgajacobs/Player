@@ -3,7 +3,7 @@ import { useAddFavoriteMutation, useDeleteFavoriteMutation } from '../RTKapi'
 import { setErrorMessage } from '../store/actions/creators/pleer'
 import UserInContext from '../contexts/context'
 
-const useChangeLike = (isLiked) => {
+const changeLike = (isLiked) => {
   const dispatch = useDispatch()
   const logout = () => {
     localStorage.removeItem('userPleer')
@@ -31,4 +31,4 @@ const useChangeLike = (isLiked) => {
 
   return lox
 }
-export default useChangeLike
+export default changeLike

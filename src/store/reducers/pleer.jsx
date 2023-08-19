@@ -13,6 +13,7 @@ import {
   SET_ACTIVPLAYLIST,
   TOGGLE_SHUFFLED,
   TOGGLE_LOOP,
+  TOGGLE_ISLIKED,
 } from '../actions/types/pleer'
 
 const initialState = {
@@ -99,6 +100,11 @@ export default function pleerReducer(state = initialState, action = '') {
     }
     case TOGGLE_LOOP: {
       return { ...state, isLoop: !state.isLoop }
+    }
+    case TOGGLE_ISLIKED: {
+      const ct = { ...state.currentTrack }
+      const newCt = { ...ct, isLiked: !ct.isLiked }
+      return { ...state, currentTrack: newCt }
     }
 
     case TOGGLE_SHUFFLED: {

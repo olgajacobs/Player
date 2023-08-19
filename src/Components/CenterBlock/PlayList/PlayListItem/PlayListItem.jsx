@@ -13,7 +13,7 @@ function PlayListItem({ isLoading, song, toggler }) {
   // console.log(`PLI${currentTrack} ${song}`)
   const isCurrentTrack = currentTrack?.id && currentTrack.id === song?.id
 
-  //   const handleToggleLike = song ? useChangeLike(song) : () => {}
+  //   const handleToggleLike = song ? changeLike(song) : () => {}
 
   if (isLoading)
     return (

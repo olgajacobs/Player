@@ -8,6 +8,7 @@ import {
   PREV_TRACK,
   TOGGLE_SHUFFLED,
   TOGGLE_LOOP,
+  TOGGLE_ISLIKED,
   SET_ERROR_MESSAGE,
   SET_CURRENT_PAGE,
   SET_ACTIVPLAYLIST,
@@ -15,6 +16,10 @@ import {
 
 export const toggleShuffled = () => ({
   type: TOGGLE_SHUFFLED,
+  payload: {},
+})
+export const toggleIsLiked = () => ({
+  type: TOGGLE_ISLIKED,
   payload: {},
 })
 export const toggleLoop = () => ({
