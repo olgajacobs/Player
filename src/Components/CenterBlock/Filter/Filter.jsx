@@ -1,4 +1,5 @@
 import { useState } from 'react'
+import { v4 as uuidv4 } from 'uuid'
 import { useSelector } from 'react-redux'
 import FilterItem from './FilterItem/FilterItem'
 import { playListSelector } from '../../../store/selectors/pleer'
@@ -11,9 +12,8 @@ export default function Filter() {
 
   if (!playList.length) return <div />
 
-  console.log(playList[0].release_date)
   const songFilter = playList.map((song) => (
-    <a className={styles.filterItems} href="http://" key={song.id}>
+    <a className={styles.filterItems} href="http://" key={uuidv4()}>
       {song.name}
     </a>
   ))
@@ -21,7 +21,7 @@ export default function Filter() {
     new Set(playList.map((song) => song?.release_date?.substring(0, 4)))
   ).sort()
   yearFilter = yearFilter.map((releaseData) => (
-    <a className={styles.filterItems} href="http://" key={releaseData}>
+    <a className={styles.filterItems} href="http://" key={uuidv4()}>
       {releaseData}
     </a>
   ))
@@ -29,7 +29,7 @@ export default function Filter() {
     new Set(playList.map((song) => song.genre))
   ).sort()
   genreFilter = genreFilter.map((genre) => (
-    <a className={styles.filterItems} href="http://" key={genre}>
+    <a className={styles.filterItems} href="http://" key={uuidv4()}>
       {genre}
     </a>
   ))

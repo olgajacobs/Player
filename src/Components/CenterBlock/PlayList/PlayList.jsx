@@ -1,4 +1,4 @@
-import { useEffect, useState } from 'react'
+// import { useEffect } from 'react'
 import { v4 as uuidv4 } from 'uuid'
 import { useSelector } from 'react-redux'
 import Icon from '../../Icon/Icon'
@@ -19,7 +19,7 @@ export default function PlayList() {
   const favorites = useSelector(favoritesSelector)
   const currentPage = useSelector(currentPageSelector)
   const playList = currentPage === PLAYLIST ? main : favorites
-  const [clickedTrack, setClickedTrack] = useState({})
+  //   const [clickedTrack, setClickedTrack] = useState({})
   const disLike = useChangeLike(true)
   const like = useChangeLike(false)
 
@@ -33,17 +33,17 @@ export default function PlayList() {
         isLoading={isLoading}
         song={song}
         key={song.id}
-        toggler={setClickedTrack}
+        toggler={song.isLiked ? disLike : like}
       />
     ))
   }
-  useEffect(() => {
-    if (!clickedTrack?.id) return
-    console.log(`clickedTrack ${clickedTrack?.id}`)
-    const f = clickedTrack?.isLiked ? disLike : like
+  //   useEffect(() => {
+  //     if (!clickedTrack?.id) return
+  //     console.log(`clickedTrack ${clickedTrack?.id}`)
+  //     const f = clickedTrack?.isLiked ? disLike : like
 
-    f(clickedTrack)
-  }, [clickedTrack])
+  //     f(clickedTrack)
+  //   }, [clickedTrack])
   return (
     <div className={styles.main}>
       <div className={styles.content__title}>

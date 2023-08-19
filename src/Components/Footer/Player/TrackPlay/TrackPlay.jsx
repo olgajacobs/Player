@@ -29,7 +29,7 @@ function TrackPlay() {
       <div className={styles.like__dislike}>
         <Icon
           classDiv="track-play__like _btn-icon"
-          classSvg="track-play__like-svg"
+          classSvg={`track__time-svg ${currentSong.isLiked ? 'liked' : ''}`}
           iconName="like"
           alt="like"
         />

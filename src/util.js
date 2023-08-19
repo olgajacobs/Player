@@ -37,7 +37,7 @@ export const addLike = (array, currentPage) => {
   const userId = JSON.parse(localStorage.getItem('userPleer')).id
   const newArray = array.map((track) => ({
     ...track,
-    isLiked: track.stared_user?.find((u) => u.id === userId),
+    isLiked: (track.stared_user?.find((u) => u.id === userId) && true) || false,
   }))
   return newArray
 }

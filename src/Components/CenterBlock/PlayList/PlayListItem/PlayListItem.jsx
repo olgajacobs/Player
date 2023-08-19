@@ -10,7 +10,7 @@ function PlayListItem({ isLoading, song, toggler }) {
   const dispatch = useDispatch()
   const handleSetCurrentTrack = () => dispatch(setCurrentTrack(song))
   const currentTrack = useSelector(currentTrackSelector)
-    console.log(`PLI${currentTrack} ${song}`)
+  // console.log(`PLI${currentTrack} ${song}`)
   const isCurrentTrack = currentTrack?.id && currentTrack.id === song?.id
 
   //   const handleToggleLike = song ? useChangeLike(song) : () => {}

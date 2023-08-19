@@ -25,7 +25,7 @@ export default function Main() {
   }
   const { data, isLoading, error } = useGetFavoritesQuery()
   if (error) {
-    if (error.status === 401) {
+    if (error.status === 401 && !isLoading) {
       logout()
     } else dispatch(setErrorMessage(error.message))
   }
