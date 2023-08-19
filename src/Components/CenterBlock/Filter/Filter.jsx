@@ -7,16 +7,17 @@ import styles from './Filter.module.css'
 export default function Filter() {
   const [buttons, setButtons] = useState([false, false, false])
   const playList = useSelector(playListSelector)
-  let [songFilter,yearFilter,genreFilter]=[[],[],[]]
-  if(playList.length){
+  //   let [songFilter, yearFilter, genreFilter] = [['empty'], ['1958'], ['empty']]
+
+  if (!playList.length) return <div />
 
   console.log(playList[0].release_date)
-songFilter = playList.map((song) => (
+  const songFilter = playList.map((song) => (
     <a className={styles.filterItems} href="http://" key={song.id}>
       {song.name}
     </a>
   ))
-yearFilter = Array.from(
+  let yearFilter = Array.from(
     new Set(playList.map((song) => song?.release_date?.substring(0, 4)))
   ).sort()
   yearFilter = yearFilter.map((releaseData) => (
@@ -24,15 +25,15 @@ yearFilter = Array.from(
       {releaseData}
     </a>
   ))
- genreFilter = Array.from(
+  let genreFilter = Array.from(
     new Set(playList.map((song) => song.genre))
   ).sort()
   genreFilter = genreFilter.map((genre) => (
     <a className={styles.filterItems} href="http://" key={genre}>
       {genre}
     </a>
-  ))}
-  else
+  ))
+
   return (
     <div className={styles.main}>
       <div className={styles.filter__title}>Искать по:</div>

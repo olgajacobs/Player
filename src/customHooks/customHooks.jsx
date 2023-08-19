@@ -1,11 +1,7 @@
 import { useDispatch } from 'react-redux'
-import {
-  useAddFavoriteMutation,
-  useDeleteFavoriteMutation,
-  } from '../RTKapi'
+import { useAddFavoriteMutation, useDeleteFavoriteMutation } from '../RTKapi'
 import { setErrorMessage } from '../store/actions/creators/pleer'
 import UserInContext from '../contexts/context'
-
 
 const useChangeLike = (isLiked) => {
   const dispatch = useDispatch()
@@ -17,7 +13,7 @@ const useChangeLike = (isLiked) => {
     ? useDeleteFavoriteMutation
     : useAddFavoriteMutation
 
-  const [changeLikes, { error}] = useMutation()
+  const [changeLikes, { error, isLoading }] = useMutation()
 
   const lox = async (clickedTrack) => {
     const user = JSON.parse(localStorage.getItem('userPleer'))
@@ -27,8 +23,8 @@ const useChangeLike = (isLiked) => {
 
     await changeLikes(queryParam).unwrap()
     if (error) {
-      if (error.status === 401) {
-       logout()
+      if (error.status === 401 && !isLoading) {
+        logout()
       } else dispatch(setErrorMessage(error.message))
     }
   }

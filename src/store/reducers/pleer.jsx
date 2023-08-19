@@ -10,6 +10,7 @@ import {
   PREV_TRACK,
   SET_ISPLAYING,
   SET_ISLOADING,
+  SET_ACTIVPLAYLIST,
   TOGGLE_SHUFFLED,
   TOGGLE_LOOP,
 } from '../actions/types/pleer'
@@ -20,6 +21,7 @@ const initialState = {
   isShuffled: false,
   isLoop: false,
   showFooter: false,
+  activPlayList: PLAYLIST,
   errorMessage: '',
   currentPage: '',
   currentTrack: {},
@@ -82,6 +84,10 @@ export default function pleerReducer(state = initialState, action = '') {
     case SET_ISLOADING: {
       const { newIsLoading } = action.payload
       return { ...state, isLoading: newIsLoading }
+    }
+    case SET_ACTIVPLAYLIST: {
+      const { newActivePlayList } = action.payload
+      return { ...state, activePlayList: newActivePlayList }
     }
     case SET_CURRENT_PAGE: {
       const { newCurrentPage } = action.payload

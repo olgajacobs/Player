@@ -2,15 +2,23 @@ import { useEffect, useState } from 'react'
 import { v4 as uuidv4 } from 'uuid'
 import { useSelector } from 'react-redux'
 import Icon from '../../Icon/Icon'
-import  useChangeLike from '../../../customHooks/customHooks'
+import useChangeLike from '../../../customHooks/customHooks'
 import styles from './PlayList.module.css'
 import PlayListItem from './PlayListItem/PlayListItem'
-import {  isLoadingSelector, playListSelector } from '../../../store/selectors/pleer'
+import {
+  currentPageSelector,
+  favoritesSelector,
+  isLoadingSelector,
+  playListSelector,
+} from '../../../store/selectors/pleer'
+import { PLAYLIST } from '../../../const'
 
 export default function PlayList() {
-  // const currentPage = useSelector(currentPageSelector)
-  const playList = useSelector(playListSelector)
-  const isLoading=useSelector(isLoadingSelector)
+  const isLoading = useSelector(isLoadingSelector)
+  const main = useSelector(playListSelector)
+  const favorites = useSelector(favoritesSelector)
+  const currentPage = useSelector(currentPageSelector)
+  const playList = currentPage === PLAYLIST ? main : favorites
   const [clickedTrack, setClickedTrack] = useState({})
   const disLike = useChangeLike(true)
   const like = useChangeLike(false)
@@ -18,12 +26,11 @@ export default function PlayList() {
   let playListItems = Array(5)
     .fill('')
     .map(() => <PlayListItem isLoading={isLoading} key={uuidv4()} />)
-  
-  if (playList?.length) {
-console.log(playList)
+
+  if (!isLoading && playList?.length) {
     playListItems = playList.map((song) => (
       <PlayListItem
-      isLoading={isLoading}
+        isLoading={isLoading}
         song={song}
         key={song.id}
         toggler={setClickedTrack}

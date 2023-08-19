@@ -1,10 +1,15 @@
 import { useDispatch } from 'react-redux'
 import MainPage from '../../Components/MainPage/MainPage'
 import { addLike } from '../../util'
-import { loadPlayList, setIsLoading, setShuffledPlaylist, setCurrentPage, setErrorMessage  } from '../../store/actions/creators/pleer'
+import {
+  loadPlayList,
+  setIsLoading,
+  setShuffledPlaylist,
+  setCurrentPage,
+  setErrorMessage,
+} from '../../store/actions/creators/pleer'
 import { useGetPlayListQuery } from '../../RTKapi'
 import { PLAYLIST } from '../../const'
-
 
 export default function Main() {
   const dispatch = useDispatch()
@@ -12,12 +17,10 @@ export default function Main() {
   dispatch(setIsLoading(true))
   const { data, isLoading, error } = useGetPlayListQuery()
   if (error) dispatch(setErrorMessage(error.message))
-  const newPlaylist =
-    !isLoading && !error?.message && data?.length
-      ? addLike(data)
-      : undefined
+  const playList =
+    !isLoading && !error?.message && data?.length ? addLike(data) : undefined
   if (!isLoading && !error?.message && data?.length) {
-    dispatch(loadPlayList(newPlaylist))
+    dispatch(loadPlayList(playList))
     dispatch(setShuffledPlaylist())
     dispatch(setIsLoading(false))
   }

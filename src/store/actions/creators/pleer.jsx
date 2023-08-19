@@ -10,6 +10,7 @@ import {
   TOGGLE_LOOP,
   SET_ERROR_MESSAGE,
   SET_CURRENT_PAGE,
+  SET_ACTIVPLAYLIST,
 } from '../types/pleer'
 
 export const toggleShuffled = () => ({
@@ -35,6 +36,11 @@ export const setCurrentPage = (newCurrentPage) => ({
 export const setErrorMessage = (newErrorMessage) => ({
   type: SET_ERROR_MESSAGE,
   payload: { newErrorMessage },
+})
+
+export const setActivePlayList = (newActivePlayList) => ({
+  type: SET_ACTIVPLAYLIST,
+  payload: { newActivePlayList },
 })
 
 export const nextTrack = () => ({
