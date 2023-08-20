@@ -1,8 +1,8 @@
 import { useEffect, useState, useContext } from 'react'
 import { Link, useNavigate } from 'react-router-dom'
 import * as S from './AuthPage.styles'
-import { registrateUser, autorizeUser } from '../../api'
-import { UserInContext } from '../../contexts/context'
+import { registrateUser, autorizeUser, getToken } from '../../api'
+import UserInContext from '../../contexts/context'
 
 export default function AuthPage({ isLoginMode = false }) {
   const [error, setError] = useState(null)
@@ -21,9 +21,17 @@ export default function AuthPage({ isLoginMode = false }) {
       const user = await registrateUser({ email, password, username })
       localStorage.setItem('userPleer', JSON.stringify(user))
       userInContext.setUser(user)
-      navigate('/', { replace: true })
+
+      try {
+        const token = await getToken({ email, password })
+        localStorage.setItem('refreshToken', JSON.stringify(token?.refresh))
+        localStorage.setItem('accessToken', JSON.stringify(token?.access))
+        navigate('/', { replace: true })
+      } catch (apiError) {
+        setError(error + apiError.message)
+      }
     } catch (apiError) {
-      setError(apiError.message)
+      setError(error + apiError.message)
     } finally {
       setIsButtonBlocked(false)
     }
@@ -46,9 +54,17 @@ export default function AuthPage({ isLoginMode = false }) {
       const user = await autorizeUser({ email, password })
       localStorage.setItem('userPleer', JSON.stringify(user))
       userInContext.setUser(user)
-      navigate('/', { replace: true })
+
+      try {
+        const token = await getToken({ email, password })
+        localStorage.setItem('refreshToken', JSON.stringify(token?.refresh))
+        localStorage.setItem('accessToken', JSON.stringify(token?.access))
+        navigate('/', { replace: true })
+      } catch (apiError) {
+        setError(error + apiError.message)
+      }
     } catch (apiError) {
-      setError(apiError.message)
+      setError(error + apiError.message)
     } finally {
       setIsButtonBlocked(false)
     }

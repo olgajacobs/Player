@@ -1,68 +1,36 @@
-import { useState, useEffect } from 'react'
-import { useDispatch, useSelector } from 'react-redux'
-import LeftBlockMenu from '../../Components/LeftBlockMenu/LeftBlockMenu'
-import CenterBlock from '../../Components/CenterBlock/CenterBlock'
-import Footer from '../../Components/Footer/Footer'
-import RightBlock from '../../Components/RightBlock/RightBlock'
-import { getPlayList } from '../../api'
-import styles from './main.module.css'
-import { IsLoading } from '../../contexts/context'
+import { useDispatch } from 'react-redux'
+import { useEffect, useState } from 'react'
+import MainPage from '../../Components/MainPage/MainPage'
+import { addLike } from '../../util'
 import {
   loadPlayList,
+  setIsLoading,
   setShuffledPlaylist,
+  setCurrentPage,
+  setErrorMessage,
 } from '../../store/actions/creators/pleer'
-import { showFooterSelector } from '../../store/selectors/pleer'
+import { useGetPlayListQuery } from '../../RTKapi'
+import { PLAYLIST } from '../../const'
 
 export default function Main() {
-  const [isLoading, setLoading] = useState(true)
+  const [renderWasEnded, setRenderWasEnded] = useState(false)
+  const dispatch = useDispatch()
+  dispatch(setCurrentPage(PLAYLIST))
 
-  //   const [currentSong, setCurrentSong] = useState(null)
-  const [errorMessage, setErrorMessage] = useState(null)
-
-  const dispatcher = useDispatch()
-  const showFooter = useSelector(showFooterSelector)
-  const fillPlayList = async () => {
-    try {
-      const newPlaylist = await getPlayList()
-
-      dispatcher(loadPlayList(newPlaylist))
-      dispatcher(setShuffledPlaylist())
-      setLoading(false)
-    } catch (error) {
-      setErrorMessage(error.message)
+  dispatch(setIsLoading(true))
+  const { data, isLoading, error } = useGetPlayListQuery()
+  if (renderWasEnded) {
+    if (error) dispatch(setErrorMessage(error.message))
+    const playList =
+      !isLoading && !error?.message && data?.length ? addLike(data) : undefined
+    if (!isLoading && !error?.message && data?.length) {
+      dispatch(loadPlayList(playList))
+      dispatch(setShuffledPlaylist())
+      dispatch(setIsLoading(false))
     }
   }
-
   useEffect(() => {
-    fillPlayList()
+    setRenderWasEnded(true)
   }, [])
-
-  return (
-    <div className={styles.container}>
-      <div className={styles.main}>
-        <IsLoading.Provider value={isLoading}>
-          <LeftBlockMenu />
-          <CenterBlock />
-          <RightBlock />
-        </IsLoading.Provider>
-      </div>
-      {showFooter && <Footer />}
-
-      {isLoading && !errorMessage && (
-        <div className={styles.shadow}>
-          <p className={styles.loading}>Loading...</p>
-        </div>
-      )}
-      {errorMessage && (
-        <div className={styles.shadow}>
-          <div>
-            <p className={styles.error}>
-              Не удалось загрузить плейлист, попробуйте позже!
-            </p>
-            <p className={styles.error}>{`Ошибка: ${errorMessage}`}</p>
-          </div>
-        </div>
-      )}
-    </div>
-  )
+  return <MainPage />
 }

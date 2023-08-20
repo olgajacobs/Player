@@ -1,22 +1,49 @@
-import { useContext } from 'react'
+// import { useEffect } from 'react'
 import { v4 as uuidv4 } from 'uuid'
 import { useSelector } from 'react-redux'
+import Icon from '../../Icon/Icon'
+import changeLike from '../../../customHooks/customHooks'
 import styles from './PlayList.module.css'
 import PlayListItem from './PlayListItem/PlayListItem'
-import { IsLoading } from '../../../contexts/context'
-import Icon from '../../Icon/Icon'
-import { playListSelector } from '../../../store/selectors/pleer'
+import {
+  currentPageSelector,
+  favoritesSelector,
+  isLoadingSelector,
+  playListSelector,
+} from '../../../store/selectors/pleer'
+import { PLAYLIST } from '../../../const'
 
-function PlayList() {
-  const isLoading = useContext(IsLoading)
-  const playList = useSelector(playListSelector)
+export default function PlayList() {
+  const isLoading = useSelector(isLoadingSelector)
+  const main = useSelector(playListSelector)
+  const favorites = useSelector(favoritesSelector)
+  const currentPage = useSelector(currentPageSelector)
+  const playList = currentPage === PLAYLIST ? main : favorites
+  //   const [clickedTrack, setClickedTrack] = useState({})
+  const disLike = changeLike(true)
+  const like = changeLike(false)
 
-  const playListItems = isLoading
-    ? Array(5)
-        .fill('')
-        .map(() => <PlayListItem isLoading={isLoading} key={uuidv4()} />)
-    : playList.map((song) => <PlayListItem song={song} key={song.id} />)
+  let playListItems = Array(5)
+    .fill('')
+    .map(() => <PlayListItem isLoading={isLoading} key={uuidv4()} />)
 
+  if (!isLoading && playList?.length) {
+    playListItems = playList.map((song) => (
+      <PlayListItem
+        isLoading={isLoading}
+        song={song}
+        key={song.id}
+        toggler={song.isLiked ? disLike : like}
+      />
+    ))
+  }
+  //   useEffect(() => {
+  //     if (!clickedTrack?.id) return
+  //     console.log(`clickedTrack ${clickedTrack?.id}`)
+  //     const f = clickedTrack?.isLiked ? disLike : like
+
+  //     f(clickedTrack)
+  //   }, [clickedTrack])
   return (
     <div className={styles.main}>
       <div className={styles.content__title}>
@@ -41,4 +68,3 @@ function PlayList() {
     </div>
   )
 }
-export default PlayList

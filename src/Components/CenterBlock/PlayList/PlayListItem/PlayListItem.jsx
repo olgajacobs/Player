@@ -1,18 +1,19 @@
-import { useContext } from 'react'
 import { useDispatch, useSelector } from 'react-redux'
 import styles from './PlayListItem.module.css'
 import Icon from '../../../Icon/Icon'
 import { timeFormat } from '../../../../util'
-import { IsLoading } from '../../../../contexts/context'
 import { setCurrentTrack } from '../../../../store/actions/creators/pleer'
 import { currentTrackSelector } from '../../../../store/selectors/pleer'
 
-function PlayListItem({ song }) {
-  const isLoading = useContext(IsLoading)
-  const dispatcher = useDispatch()
-  const chooseCurrentSong = () => dispatcher(setCurrentTrack(song))
+function PlayListItem({ isLoading, song, toggler }) {
+  //   const isLoading = useSelector(isLoadingSelector)
+  const dispatch = useDispatch()
+  const handleSetCurrentTrack = () => dispatch(setCurrentTrack(song))
   const currentTrack = useSelector(currentTrackSelector)
-  const isCurrentTrack = currentTrack?.id && currentTrack.id === song.id
+  // console.log(`PLI${currentTrack} ${song}`)
+  const isCurrentTrack = currentTrack?.id && currentTrack.id === song?.id
+
+  //   const handleToggleLike = song ? changeLike(song) : () => {}
 
   if (isLoading)
     return (
@@ -48,7 +49,7 @@ function PlayListItem({ song }) {
         // className={`${styles.playlist__track} ${
         //   isCurrentTrack ? styles.currentSong : ''
         // }`}
-        onClick={chooseCurrentSong}
+        onClick={handleSetCurrentTrack}
         role="button"
         tabIndex="0"
         onKeyUp={() => {}}
@@ -74,9 +75,11 @@ function PlayListItem({ song }) {
         <div className={styles.track__timeBlock}>
           <Icon
             classDiv="_btn-icon"
-            classSvg="track__time-svg"
+            classSvg={`track__time-svg ${song.isLiked ? 'liked' : ''}`}
             iconName="like"
             alt="time"
+            action={toggler}
+            song={song}
           />
 
           <span className={styles.track__time}>
@@ -87,4 +90,8 @@ function PlayListItem({ song }) {
     </div>
   )
 }
+// const callHook=()=>{
+
+// }
+
 export default PlayListItem

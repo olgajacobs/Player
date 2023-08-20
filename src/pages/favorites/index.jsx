@@ -1,18 +1,44 @@
-import { NavLink } from 'react-router-dom'
-import styles from './favorites.module.css'
+import { useContext } from 'react'
+import { useDispatch } from 'react-redux'
+import MainPage from '../../Components/MainPage/MainPage'
+import { addLike } from '../../util'
+import {
+  loadPlayList,
+  setIsLoading,
+  setShuffledPlaylist,
+  setCurrentPage,
+  setErrorMessage,
+} from '../../store/actions/creators/pleer'
+import { useGetFavoritesQuery } from '../../RTKapi'
+import UserInContext from '../../contexts/context'
+import { FAVORITES } from '../../const'
 
-function Favorites() {
-  return (
-    <div className={styles.container}>
-      <div className={styles.main}>
-        <h1>Мой плейлист</h1>
+export default function Main() {
+  const dispatch = useDispatch()
+  dispatch(setCurrentPage(FAVORITES))
+  dispatch(setIsLoading(true))
+  const userInContext = useContext(UserInContext)
 
-        <NavLink className={styles.link} to="/">
-          Вернуться на главную страницу
-        </NavLink>
-      </div>
-    </div>
-  )
+  const logout = () => {
+    localStorage.removeItem('userPleer')
+    userInContext.setUser(undefined)
+  }
+  const { data, isLoading, error } = useGetFavoritesQuery()
+  if (error) {
+    if (error.status === 401 && !isLoading) {
+      logout()
+    } else dispatch(setErrorMessage(error.message))
+  }
+
+  const playList =
+    !isLoading && !error?.message && data?.length
+      ? addLike(data, FAVORITES)
+      : undefined
+  console.log(playList)
+  if (!isLoading && !error?.message && data?.length) {
+    dispatch(loadPlayList(playList))
+    dispatch(setShuffledPlaylist())
+    dispatch(setIsLoading(false))
+  }
+  return <MainPage />
 }
-
-export default Favorites
