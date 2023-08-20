@@ -41,19 +41,36 @@ export default function pleerReducer(state = initialState, action = '') {
     }
     case SET_CURRENT_TRACK: {
       const { newCurrentTrack } = action.payload
-      if (state.showFooter) return { ...state, currentTrack: newCurrentTrack }
-      return { ...state, currentTrack: newCurrentTrack, showFooter: true }
+      if (state.showFooter)
+        return {
+          ...state,
+          currentTrack: newCurrentTrack,
+          activPlayList: state.currentPage,
+        }
+      return {
+        ...state,
+        currentTrack: newCurrentTrack,
+        showFooter: true,
+        activPlayList: state.currentPage,
+      }
     }
     case SET_SHUFFLED_PLAYLIST: {
       const newShuffledPlaylist = shuffle(state.playlist)
       return { ...state, shuffledPlaylist: newShuffledPlaylist }
     }
     case NEXT_TRACK: {
-      const { currentTrack, playlist, favorites, shuffledPlaylist } = state
+      const {
+        currentTrack,
+        playlist,
+        favorites,
+        shuffledPlaylist,
+        activPlayList,
+      } = state
+
       let pl = playlist
       if (state.isShuffled) {
         pl = shuffledPlaylist
-      } else if (state.currentPage === FAVORITES) {
+      } else if (activPlayList === FAVORITES) {
         pl = favorites
       }
       const currentIndex = pl.findIndex((e) => e.id === currentTrack.id)
@@ -64,11 +81,17 @@ export default function pleerReducer(state = initialState, action = '') {
       return { ...state, currentTrack: pl[currentIndex + 1] }
     }
     case PREV_TRACK: {
-      const { currentTrack, playlist, favorites, shuffledPlaylist } = state
+      const {
+        currentTrack,
+        playlist,
+        favorites,
+        shuffledPlaylist,
+        activPlayList,
+      } = state
       let pl = playlist
       if (state.isShuffled) {
         pl = shuffledPlaylist
-      } else if (state.currentPage === FAVORITES) {
+      } else if (activPlayList === FAVORITES) {
         pl = favorites
       }
       const currentIndex = pl.findIndex((e) => e.id === currentTrack.id)

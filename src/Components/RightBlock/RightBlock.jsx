@@ -15,6 +15,7 @@ function RightBlock() {
   const logout = () => {
     localStorage.removeItem('userPleer')
     userInContext.setUser(undefined)
+    console.log('logout')
   }
   return (
     <div className={styles.main}>
@@ -23,7 +24,6 @@ function RightBlock() {
         <div
           className={styles.user__avatar}
           title="Выход"
-          onClick={logout}
           role="button"
           tabIndex="0"
           onKeyUp={() => {}}
@@ -33,6 +33,7 @@ function RightBlock() {
             classSvg="exit__svg"
             iconName="exit"
             alt="exit"
+            action={logout}
           />
         </div>
       </div>
