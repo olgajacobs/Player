@@ -18,10 +18,13 @@ export const toggleShuffled = () => ({
   type: TOGGLE_SHUFFLED,
   payload: {},
 })
-export const toggleIsLiked = () => ({
-  type: TOGGLE_ISLIKED,
-  payload: {},
-})
+export const toggleIsLiked = () => {
+  console.log(`Креейтор сработал`)
+  return {
+    type: TOGGLE_ISLIKED,
+    payload: {},
+  }
+}
 export const toggleLoop = () => ({
   type: TOGGLE_LOOP,
   payload: {},

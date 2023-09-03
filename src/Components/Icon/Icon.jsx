@@ -28,8 +28,11 @@ function Icon({
   const handleClick = (e) => {
     e.stopPropagation()
     if (action) {
-      action(song)
-      if (song) dispatcher(toggleIsLiked)
+      if (song) {
+        console.log('Like is changed')
+        dispatcher(toggleIsLiked)
+      }
+      //   action(song)
     }
   }
   return (

@@ -32,6 +32,7 @@ const initialState = {
 }
 
 export default function pleerReducer(state = initialState, action = '') {
+  console.log(action.type)
   switch (action.type) {
     case LOAD_PLAYLIST: {
       const { newPlaylist } = action.payload
@@ -125,8 +126,10 @@ export default function pleerReducer(state = initialState, action = '') {
       return { ...state, isLoop: !state.isLoop }
     }
     case TOGGLE_ISLIKED: {
+      console.log(`New сurrent flagdddd`)
       const ct = { ...state.currentTrack }
       const newCt = { ...ct, isLiked: !ct.isLiked }
+      console.log(`New сurrent flag ${newCt.isLiked}`)
       return { ...state, currentTrack: newCt }
     }
 

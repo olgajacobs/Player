@@ -1,21 +1,22 @@
 // import React from "react";
 import { useSelector } from 'react-redux'
-// import { useEffect } from 'react'
+import { useEffect, useState } from 'react'
 import styles from './TrackPlay.module.css'
 import Icon from '../../../Icon/Icon'
 import { currentTrackSelector } from '../../../../store/selectors/pleer'
 import changeLike from '../../../../customHooks/customHooks'
 
 function TrackPlay() {
-  //   const [updateLike, setUpdateLike] = useState(false)
+  const [updateLike, setUpdateLike] = useState(false)
   const currentTrack = useSelector(currentTrackSelector)
   const disLike = changeLike(true)
   const like = changeLike(false)
-  //   console.log('-----------------------------')
-  //   console.log(currentTrack.isLiked)
-  //   useEffect(() => {
-  //     setUpdateLike(!updateLike)
-  //   }, [currentTrack.isLiked])
+  console.log('-----------------------------')
+  console.log(currentTrack)
+  useEffect(() => {
+    console.log(`uf в trackPlay: ${currentTrack.isLiked}`)
+    setUpdateLike(!updateLike)
+  }, [currentTrack.isLiked])
   return (
     <div className={styles.main}>
       <div className={styles.track__playBlock}>
