@@ -1,7 +1,7 @@
 import { useContext } from 'react'
 import { useDispatch } from 'react-redux'
 import { useAddFavoriteMutation, useDeleteFavoriteMutation } from '../RTKapi'
-import { setErrorMessage } from '../store/actions/creators/pleer'
+import { setErrorMessage } from '../store/slices/pleer'
 import UserInContext from '../contexts/context'
 
 const changeLike = (isLiked) => {
@@ -37,7 +37,7 @@ const changeLike = (isLiked) => {
 
       if (e.status === 401 && !isLoading) {
         logout()
-      } else dispatch(setErrorMessage(e.message))
+      } else dispatch(setErrorMessage({ errorMessage: e.message }))
       // }
     }
   }

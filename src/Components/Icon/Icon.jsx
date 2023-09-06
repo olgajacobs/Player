@@ -1,7 +1,7 @@
 import { useDispatch, useSelector } from 'react-redux'
 import styles from './Icon.module.css'
 import { isPlayingSelector } from '../../store/selectors/pleer'
-import { toggleIsLiked } from '../../store/actions/creators/pleer'
+import { toggleIsLiked } from '../../store/slices/pleer'
 
 function Icon({
   classDiv = '',
@@ -12,7 +12,7 @@ function Icon({
   isCurrentTrack = false,
   song = {},
 }) {
-  const dispatcher = useDispatch()
+  const dispatch = useDispatch()
 
   const isPlaying = useSelector(isPlayingSelector)
   let classDivList = classDiv ? classDiv.split(' ') : ''
@@ -30,7 +30,7 @@ function Icon({
     if (action) {
       if (song) {
         console.log('Like is changed')
-        dispatcher(toggleIsLiked)
+        dispatch(toggleIsLiked())
       }
       //   action(song)
     }

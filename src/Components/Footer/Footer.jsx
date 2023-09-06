@@ -8,7 +8,7 @@ import {
   isLoopSelector,
   currentTrackSelector,
 } from '../../store/selectors/pleer'
-import { nextTrack } from '../../store/actions/creators/pleer'
+import { nextTrack } from '../../store/slices/pleer'
 
 export default function Footer() {
   const audioRef = useRef(null)
@@ -21,7 +21,7 @@ export default function Footer() {
     setCurrentProgress(value)
   }
   const [duration, setDuration] = useState(0)
-  const dispatcher = useDispatch()
+  const dispatch = useDispatch()
   const isLoop = useSelector(isLoopSelector)
   const currentTrack = useSelector(currentTrackSelector)
 
@@ -43,7 +43,7 @@ export default function Footer() {
   }
   const handlerEnded = () => {
     if (!isLoop) {
-      dispatcher(nextTrack())
+      dispatch(nextTrack())
     }
   }
 
