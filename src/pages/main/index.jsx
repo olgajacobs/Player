@@ -17,19 +17,28 @@ export default function Main() {
   dispatch(setCurrentPage({ currentPage: PLAYLIST }))
 
   dispatch(setIsLoading({ isLoading: true }))
-  const { data, isLoading, error } = useGetPlayListQuery()
+  const { data, isLoading, isError, error } = useGetPlayListQuery()
+  console.log(`Начало загрузки D=${data} L=${isLoading} E=${isError}`)
   if (renderWasEnded) {
-    if (error) dispatch(setErrorMessage({ errorMessage: error.message }))
-    const playList =
-      !isLoading && !error?.message && data?.length ? addLike(data) : undefined
-    if (!isLoading && !error?.message && data?.length) {
-      dispatch(loadPlayList({ playList }))
-
+    console.log(`Обработка после рендера D=${data} L=${isLoading} E=${isError}`)
+    if (isError) {
       dispatch(setIsLoading({ isLoading: false }))
+      dispatch(setErrorMessage({ errorMessage: error.error }))
+      console.dir(error.error)
+    } else {
+      const playList =
+        !isLoading && !error?.message && data?.length
+          ? addLike(data)
+          : undefined
+      if (!isLoading && !isError && data?.length) {
+        dispatch(loadPlayList({ playList }))
+        dispatch(setIsLoading({ isLoading: false }))
+      }
     }
+    useEffect(() => {
+      console.log('MAIN was loaded')
+      setRenderWasEnded(true)
+    }, [])
   }
-  useEffect(() => {
-    setRenderWasEnded(true)
-  }, [])
   return <MainPage />
 }

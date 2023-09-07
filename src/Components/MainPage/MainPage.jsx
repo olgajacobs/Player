@@ -14,6 +14,8 @@ export default function MainPage() {
   const showFooter = useSelector(showFooterSelector)
   const isLoading = useSelector(isLoadingSelector)
   const errorMessage = useSelector(errorMessageSelector)
+  console.log(`MAINPAGE errorMessage ${errorMessage}`)
+  console.log(`MAINPAGE isLoading ${isLoading}`)
 
   return (
     <div className={styles.container}>
