@@ -5,16 +5,15 @@ import { addLike } from '../../util'
 import {
   loadPlayList,
   setIsLoading,
-  setCurrentPage,
   setErrorMessage,
 } from '../../store/slices/pleer'
 import { useGetPlayListQuery } from '../../RTKapi'
-import { PLAYLIST } from '../../const'
+// import { PLAYLIST } from '../../const'
 
 export default function Main() {
   const [renderWasEnded, setRenderWasEnded] = useState(false)
   const dispatch = useDispatch()
-  dispatch(setCurrentPage({ currentPage: PLAYLIST }))
+  //   dispatch(setCurrentPage({ currentPage: PLAYLIST }))
 
   dispatch(setIsLoading({ isLoading: true }))
   const { data, isLoading, isError, error } = useGetPlayListQuery()
@@ -22,7 +21,6 @@ export default function Main() {
   if (renderWasEnded) {
     console.log(`Обработка после рендера D=${data} L=${isLoading} E=${isError}`)
     if (isError) {
-      dispatch(setIsLoading({ isLoading: false }))
       dispatch(setErrorMessage({ errorMessage: error.error }))
       console.dir(error.error)
     } else {
@@ -35,10 +33,11 @@ export default function Main() {
         dispatch(setIsLoading({ isLoading: false }))
       }
     }
-    useEffect(() => {
-      console.log('MAIN was loaded')
-      setRenderWasEnded(true)
-    }, [])
   }
+  useEffect(() => {
+    console.log('MAIN рендер завершен')
+    setRenderWasEnded(true)
+  }, [])
+
   return <MainPage />
 }

@@ -61,9 +61,11 @@ export default function AuthPage({ isLoginMode = false }) {
         localStorage.setItem('accessToken', JSON.stringify(token?.access))
         navigate('/', { replace: true })
       } catch (apiError) {
+        // localStorage.setItem('userPleer', JSON.stringify({ username: 'Olga' }))
         setError(error + apiError.message)
       }
     } catch (apiError) {
+      //   localStorage.setItem('userPleer', JSON.stringify({ username: 'Olga' }))
       setError(error + apiError.message)
     } finally {
       setIsButtonBlocked(false)

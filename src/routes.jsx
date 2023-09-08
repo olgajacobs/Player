@@ -8,6 +8,7 @@ import Favorites from './pages/favorites'
 import ProtectedRoute from './Components/protected-route'
 
 function AppRouts({ isLogined }) {
+  console.log('AppRouts отработал')
   return (
     <Routes>
       <Route path="/login" element={<Login />} />

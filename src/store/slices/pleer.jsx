@@ -10,7 +10,7 @@ const initialState = {
   showFooter: false,
   activPlayList: PLAYLIST,
   errorMessage: '',
-  currentPage: '',
+  currentPage: PLAYLIST,
   currentTrack: {},
   playlist: [],
   favorites: [],
