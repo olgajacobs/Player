@@ -1,7 +1,12 @@
+
 import AuthPage from '../../Components/AuthPage/AuthPage'
 
 export default function Login() {
-  const isLoginMode = true
+const isLoginMode=true
+  
 
-  return <AuthPage isLoginMode={isLoginMode} />
+  return (
+    <AuthPage isLoginMode={isLoginMode}/>
+  )
 }
+

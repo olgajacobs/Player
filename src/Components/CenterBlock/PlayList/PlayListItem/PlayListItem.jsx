@@ -2,13 +2,14 @@ import { useDispatch, useSelector } from 'react-redux'
 import styles from './PlayListItem.module.css'
 import Icon from '../../../Icon/Icon'
 import { timeFormat } from '../../../../util'
-import { setCurrentTrack } from '../../../../store/actions/creators/pleer'
+import { setCurrentTrack } from '../../../../store/slices/pleer'
 import { currentTrackSelector } from '../../../../store/selectors/pleer'
 
 function PlayListItem({ isLoading, song, toggler }) {
   //   const isLoading = useSelector(isLoadingSelector)
   const dispatch = useDispatch()
-  const handleSetCurrentTrack = () => dispatch(setCurrentTrack(song))
+  const handleSetCurrentTrack = () =>
+    dispatch(setCurrentTrack({ currentTrack: song }))
   const currentTrack = useSelector(currentTrackSelector)
   // console.log(`PLI${currentTrack} ${song}`)
   const isCurrentTrack = currentTrack?.id && currentTrack.id === song?.id

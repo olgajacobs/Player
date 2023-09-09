@@ -24,7 +24,7 @@ export const isShuffledSelector = (store) =>
   pleerSelector(store)?.isShuffled || false
 
 export const errorMessageSelector = (store) =>
-  pleerSelector(store)?.errorMeaasge || ''
+  pleerSelector(store)?.errorMessage || ''
 
 export const showFooterSelector = (store) =>
   pleerSelector(store)?.showFooter || false

@@ -18,7 +18,7 @@ export default function Filter() {
     </a>
   ))
   let yearFilter = Array.from(
-    new Set(playList.map((song) => song?.release_date?.substring(0, 4))),
+    new Set(playList.map((song) => song?.release_date?.substring(0, 4)))
   ).sort()
   yearFilter = yearFilter.map((releaseData) => (
     <a className={styles.filterItems} href="http://" key={uuidv4()}>
@@ -26,7 +26,7 @@ export default function Filter() {
     </a>
   ))
   let genreFilter = Array.from(
-    new Set(playList.map((song) => song.genre)),
+    new Set(playList.map((song) => song.genre))
   ).sort()
   genreFilter = genreFilter.map((genre) => (
     <a className={styles.filterItems} href="http://" key={uuidv4()}>

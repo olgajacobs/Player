@@ -1,7 +1,6 @@
 import { configureStore } from '@reduxjs/toolkit'
-import pleerReducer from './reducers/pleer'
+import pleerReducer from './slices/pleer'
 import { RTKApi } from '../RTKapi'
-// import { RTKApi } from '../RTKApi.js';
 
 const store = configureStore({
   reducer: {

@@ -104,7 +104,7 @@ export async function refreshAccessToken(refreshToken) {
       headers: {
         'content-type': 'application/json',
       },
-    },
+    }
   )
 
   if (response.status === 200) {
@@ -126,7 +126,7 @@ export const renewAccessToken = async () => {
   //   const dispatch = useDispatch()
   try {
     const newToken = await refreshAccessToken(
-      JSON.parse(localStorage.getItem('refreshToken')),
+      JSON.parse(localStorage.getItem('refreshToken'))
     )
     localStorage.setItem('accessToken', JSON.stringify(newToken?.access))
   } catch (error2) {

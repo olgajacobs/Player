@@ -14,7 +14,7 @@ import {
   setIsPlaying,
   toggleLoop,
   toggleShuffled,
-} from '../../../../store/actions/creators/pleer'
+} from '../../../../store/slices/pleer'
 
 function PlayerControls({
   audioRef,
@@ -27,36 +27,36 @@ function PlayerControls({
   const isShuffled = useSelector(isShuffledSelector)
   const currentTrack = useSelector(currentTrackSelector)
 
-  const dispatcher = useDispatch()
-  const handleNextTrack = () => dispatcher(nextTrack())
+  const dispatch = useDispatch()
+  const handleNextTrack = () => dispatch(nextTrack())
   const handlePrevTrack = () => {
     if (currentProgress <= 5) handleChangeProgress(0)
-    else dispatcher(prevTrack())
+    else dispatch(prevTrack())
   }
 
   const handleTogglePlaying = () => {
     if (isPlaying) {
       audioRef.current.pause()
-      dispatcher(setIsPlaying(false))
+      dispatch(setIsPlaying({ isPlaying: false }))
     } else {
       audioRef.current.play()
-      dispatcher(setIsPlaying(true))
+      dispatch(setIsPlaying({ isPlaying: true }))
     }
   }
 
   const handleToggleLoop = () => {
     changeLoop(!isLoop)
-    dispatcher(toggleLoop())
+    dispatch(toggleLoop())
   }
   const handleToggleShuffled = () => {
     changeLoop(!isLoop)
-    dispatcher(toggleShuffled())
+    dispatch(toggleShuffled())
   }
 
   useEffect(() => {
     console.log('PlayerControls')
     audioRef.current.play()
-    dispatcher(setIsPlaying(true))
+    dispatch(setIsPlaying({ isPlaying: true }))
   }, [currentTrack])
 
   return (

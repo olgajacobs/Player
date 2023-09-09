@@ -43,7 +43,7 @@ export default function AuthPage({ isLoginMode = false }) {
     else if (!repeatPassword) setError('Не заполнен повторный пароль')
     else if (password !== repeatPassword)
       setError(
-        `Пароль: ${password} и повторный пароль ${repeatPassword} не совпадают`,
+        `Пароль: ${password} и повторный пароль ${repeatPassword} не совпадают`
       )
     else registration()
   }
@@ -61,9 +61,11 @@ export default function AuthPage({ isLoginMode = false }) {
         localStorage.setItem('accessToken', JSON.stringify(token?.access))
         navigate('/', { replace: true })
       } catch (apiError) {
+        // localStorage.setItem('userPleer', JSON.stringify({ username: 'Olga' }))
         setError(error + apiError.message)
       }
     } catch (apiError) {
+      //   localStorage.setItem('userPleer', JSON.stringify({ username: 'Olga' }))
       setError(error + apiError.message)
     } finally {
       setIsButtonBlocked(false)

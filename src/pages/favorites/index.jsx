@@ -5,18 +5,17 @@ import { addLike } from '../../util'
 import {
   loadPlayList,
   setIsLoading,
-  setShuffledPlaylist,
   setCurrentPage,
   setErrorMessage,
-} from '../../store/actions/creators/pleer'
+} from '../../store/slices/pleer'
 import { useGetFavoritesQuery } from '../../RTKapi'
 import UserInContext from '../../contexts/context'
 import { FAVORITES } from '../../const'
 
 export default function Main() {
   const dispatch = useDispatch()
-  dispatch(setCurrentPage(FAVORITES))
-  dispatch(setIsLoading(true))
+  dispatch(setCurrentPage({ currentPage: FAVORITES }))
+  dispatch(setIsLoading({ isLoading: true }))
   const userInContext = useContext(UserInContext)
 
   const logout = () => {
@@ -27,7 +26,7 @@ export default function Main() {
   if (error) {
     if (error.status === 401 && !isLoading) {
       logout()
-    } else dispatch(setErrorMessage(error.message))
+    } else dispatch(setErrorMessage({ errorMessage: error.message }))
   }
 
   const playList =
@@ -36,9 +35,8 @@ export default function Main() {
       : undefined
   console.log(playList)
   if (!isLoading && !error?.message && data?.length) {
-    dispatch(loadPlayList(playList))
-    dispatch(setShuffledPlaylist())
-    dispatch(setIsLoading(false))
+    dispatch(loadPlayList({ playList }))
+    dispatch(setIsLoading({ isLoading: false }))
   }
   return <MainPage />
 }

@@ -47,21 +47,6 @@ export const RTKApi = createApi({
       }),
       providesTags: () => [TRACKS_TAG],
     }),
-    // addTrackProduct: build.mutation({
-    //     query: (body) => ({
-    //         url: 'goods',
-    //         method: 'POST',
-    //         body,
-    //     }),
-    // //     invalidatesTags: [{type: 'Products', id: 'LIST'}]
-    // }),
-    // deleteTrck: build.mutation({
-    //     query: (id) => ({
-    //         url: `goods/${id}`,
-    //         method: 'DELETE',
-    //     }),
-    //     // invalidatesTags: [{type: 'Products', id: 'LIST'}]
-    // })
   }),
 })
 

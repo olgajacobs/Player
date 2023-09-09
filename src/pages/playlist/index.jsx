@@ -6,7 +6,7 @@ function PlayList() {
   const params = useParams()
   const navigate = useNavigate()
   const playListName = playListNames.find(
-    (playList) => playList.id === Number(params.id),
+    (playList) => playList.id === Number(params.id)
   ).name
   const buttonClick = () => {
     navigate('/', { replace: true })

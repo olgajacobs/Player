@@ -8,12 +8,12 @@ import {
   isLoopSelector,
   currentTrackSelector,
 } from '../../store/selectors/pleer'
-import { nextTrack } from '../../store/actions/creators/pleer'
+import { nextTrack } from '../../store/slices/pleer'
 
 export default function Footer() {
   const audioRef = useRef(null)
   const [currentProgress, setCurrentProgress] = useState(
-    JSON.parse(localStorage.getItem('progress')),
+    JSON.parse(localStorage.getItem('progress'))
   )
   const handleChangeProgress = (value) => {
     audioRef.current.currentTime = value
@@ -21,7 +21,7 @@ export default function Footer() {
     setCurrentProgress(value)
   }
   const [duration, setDuration] = useState(0)
-  const dispatcher = useDispatch()
+  const dispatch = useDispatch()
   const isLoop = useSelector(isLoopSelector)
   const currentTrack = useSelector(currentTrackSelector)
 
@@ -43,7 +43,7 @@ export default function Footer() {
   }
   const handlerEnded = () => {
     if (!isLoop) {
-      dispatcher(nextTrack())
+      dispatch(nextTrack())
     }
   }
 
@@ -63,7 +63,7 @@ export default function Footer() {
           onChange={(e) => handleChangeProgress(Number(e.target.value))}
         />
         <div className={styles.time}>{`${timeFormat(
-          Math.floor(currentProgress),
+          Math.floor(currentProgress)
         )}/${timeFormat(Math.floor(duration))}`}</div>
       </div>
       <div className={styles.player__block}>
