@@ -1,0 +1,63 @@
+.main {
+  width: 100%;
+  display: block;
+  margin-bottom: 12px;
+}
+.playlist__track {
+  display: flex;
+  flex-direction: row;
+  justify-content: space-between;
+  align-items: center;
+  cursor: pointer;
+}
+
+.track__titleBlock {
+  display: flex;
+  flex-direction: row;
+  align-items: center;
+  width: 447px;
+}
+.track__title {
+  width: 380px;
+  height: 24px;
+}
+
+.track__link {
+  font-style: normal;
+  font-weight: 400;
+  font-size: 16px;
+  line-height: 24px;
+  color: #ffffff;
+}
+.track__author {
+  width: 321px;
+  height: 24px;
+}
+
+.track__album {
+  width: 245px;
+  height: 24px;
+}
+.track__albumLink {
+  color: #696969;
+}
+.track__time {
+  text-align: right;
+  color: #696969;
+  height: 24px;
+  /* width: 25px; */
+}
+.track__timeBlock {
+  display: flex;
+  flex-direction: row;
+}
+.grey {
+  background: #696969;
+}
+a {
+  color: white;
+}
+.currentSong {
+  background-color: gray;
+  color: crimson;
+}

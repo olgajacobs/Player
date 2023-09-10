@@ -1,43 +1,26 @@
 import { useDispatch } from 'react-redux'
-import { useEffect, useState } from 'react'
 import MainPage from '../../Components/MainPage/MainPage'
+import Skeleton from '../../Components/Skeleton/Skeleton'
 import { addLike } from '../../util'
-import {
-  loadPlayList,
-  setIsLoading,
-  setErrorMessage,
-} from '../../store/slices/pleer'
+import { loadPlayList } from '../../store/slices/pleer'
 import { useGetPlayListQuery } from '../../RTKapi'
-// import { PLAYLIST } from '../../const'
+import { PLAYLIST } from '../../const'
 
 export default function Main() {
-  const [renderWasEnded, setRenderWasEnded] = useState(false)
   const dispatch = useDispatch()
-  //   dispatch(setCurrentPage({ currentPage: PLAYLIST }))
-
-  dispatch(setIsLoading({ isLoading: true }))
-  const { data, isLoading, isError, error } = useGetPlayListQuery()
-  console.log(`Начало загрузки D=${data} L=${isLoading} E=${isError}`)
-  if (renderWasEnded) {
-    console.log(`Обработка после рендера D=${data} L=${isLoading} E=${isError}`)
-    if (isError) {
-      dispatch(setErrorMessage({ errorMessage: error.error }))
-      console.dir(error.error)
-    } else {
-      const playList =
-        !isLoading && !error?.message && data?.length
-          ? addLike(data)
-          : undefined
-      if (!isLoading && !isError && data?.length) {
-        dispatch(loadPlayList({ playList }))
-        dispatch(setIsLoading({ isLoading: false }))
-      }
-    }
+  const { data, error, isLoading, isError, isSuccess } = useGetPlayListQuery()
+  console.log(isLoading, isError, isSuccess)
+  if (isLoading) {
+    return <Skeleton isLoading={isLoading} />
   }
-  useEffect(() => {
-    console.log('MAIN рендер завершен')
-    setRenderWasEnded(true)
-  }, [])
+  if (isError) {
+    return <Skeleton errorMessage={error.error} />
+  }
+  if (isSuccess) {
+    const playList = addLike(data)
+    dispatch(loadPlayList({ playList, currentPage: PLAYLIST }))
+    return <MainPage />
+  }
 
-  return <MainPage />
+  return <Skeleton errorMessage="Прочие ошибки" />
 }

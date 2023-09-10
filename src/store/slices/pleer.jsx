@@ -22,12 +22,13 @@ const pleerSlice = createSlice({
   initialState,
   reducers: {
     loadPlayList(state, action) {
-      const { playList } = action.payload
-      if (state.currentPage === PLAYLIST) {
+      const { playList, currentPage } = action.payload
+      if (currentPage === PLAYLIST) {
         state.playlist = playList
       } else {
         state.favorites = playList
       }
+      state.currentPage = currentPage
       state.shuffledPlaylist = shuffle(state.playlist)
     },
 
