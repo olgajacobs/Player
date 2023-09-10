@@ -5,8 +5,7 @@ import { timeFormat } from '../../../../util'
 import { setCurrentTrack } from '../../../../store/slices/pleer'
 import { currentTrackSelector } from '../../../../store/selectors/pleer'
 
-function PlayListItem({ isLoading, song, toggler }) {
-  //   const isLoading = useSelector(isLoadingSelector)
+function PlayListItem({ song, toggler }) {
   const dispatch = useDispatch()
   const handleSetCurrentTrack = () =>
     dispatch(setCurrentTrack({ currentTrack: song }))
@@ -14,35 +13,6 @@ function PlayListItem({ isLoading, song, toggler }) {
   // console.log(`PLI${currentTrack} ${song}`)
   const isCurrentTrack = currentTrack?.id && currentTrack.id === song?.id
 
-  //   const handleToggleLike = song ? changeLike(song) : () => {}
-
-  if (isLoading)
-    return (
-      <div className={styles.main}>
-        <div className={styles.playlist__track}>
-          <div className={styles.track__titleBlock}>
-            <Icon
-              classDiv="track__title-image"
-              classSvg="track__title-svg"
-              iconName="note"
-              alt="music"
-            />
-            <div className={`${styles.track__title} ${styles.grey}`} />
-          </div>
-          <div className={`${styles.track__author} ${styles.grey}`} />
-          <div className={`${styles.track__album} ${styles.grey}`} />
-          <div className={styles.track__timeBlock}>
-            <Icon
-              classDiv=""
-              classSvg="track__time-svg"
-              iconName="like"
-              alt="time"
-            />
-            <span className={`${styles.track__time} ${styles.grey}`} />
-          </div>
-        </div>
-      </div>
-    )
   return (
     <div className={styles.main}>
       <div
