@@ -1,4 +1,4 @@
-import { useDispatch, useSelector } from 'react-redux'
+import { useSelector, useDispatch } from 'react-redux'
 import styles from './Icon.module.css'
 import { isPlayingSelector } from '../../store/selectors/pleer'
 import { toggleIsLiked } from '../../store/slices/pleer'
@@ -10,7 +10,8 @@ function Icon({
   iconName = '',
   action = null,
   isCurrentTrack = false,
-  song = {},
+  song = null,
+  toggler = null,
 }) {
   const dispatch = useDispatch()
 
@@ -28,11 +29,13 @@ function Icon({
   const handleClick = (e) => {
     e.stopPropagation()
     if (action) {
-      if (song) {
+      console.log(`isCurrent ${isCurrentTrack}`)
+      console.log(toggler)
+      if (toggler === '1' || isCurrentTrack) {
         console.log('Like is changed')
         dispatch(toggleIsLiked())
       }
-      //   action(song)
+      action(song)
     }
   }
   return (
@@ -43,7 +46,7 @@ function Icon({
       tabIndex="0"
       onKeyUp={() => {}}
     >
-      {isCurrentTrack ? (
+      {isCurrentTrack && !song ? (
         <div
           className={`${styles.sign} ${!isPlaying ? styles.pause : styles.run}`}
         />

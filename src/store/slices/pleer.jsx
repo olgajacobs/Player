@@ -95,7 +95,7 @@ const pleerSlice = createSlice({
       state.isLoop = !state.isLoop
     },
     toggleIsLiked(state) {
-      state.isLiked = !state.isLiked
+      state.currentTrack.isLiked = !state.currentTrack.isLiked
     },
   },
 })

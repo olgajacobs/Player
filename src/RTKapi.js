@@ -7,7 +7,9 @@ const getTokenFromLocalStorage = () =>
 export const RTKApi = createApi({
   reducerPath: 'RTKApi',
   tagTypes: ['Favorits'],
-  baseQuery: fetchBaseQuery({ baseUrl: 'https://painassasin.online/catalog/' }),
+  baseQuery: fetchBaseQuery({
+    baseUrl: 'https://skypro-music-api.skyeng.tech/catalog/',
+  }),
   endpoints: (build) => ({
     getFavorites: build.query({
       query: () => ({

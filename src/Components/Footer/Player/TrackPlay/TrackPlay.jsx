@@ -11,8 +11,7 @@ function TrackPlay() {
   const currentTrack = useSelector(currentTrackSelector)
   const disLike = changeLike(true)
   const like = changeLike(false)
-  console.log('-----------------------------')
-  console.log(currentTrack)
+  console.dir(`SSSSSSSSSSSSS ${currentTrack.isLiked}`)
   useEffect(() => {
     console.log(`uf в trackPlay: ${currentTrack.isLiked}`)
     setUpdateLike(!updateLike)
@@ -45,6 +44,7 @@ function TrackPlay() {
           action={like}
           iconName="like"
           alt="like"
+          toggler="1"
         />
         <Icon
           classDiv="track-play__dislike _btn-icon"
@@ -53,6 +53,7 @@ function TrackPlay() {
           song={currentTrack}
           action={disLike}
           alt="dislike"
+          toggler="1"
         />
       </div>
     </div>

@@ -1,13 +1,13 @@
-import { useSelector } from 'react-redux'
+// import { useSelector } from 'react-redux'
 import Search from './Search/Search'
 import Filter from './Filter/Filter'
 import PlayList from './PlayList/PlayList'
 import { PLAYLIST, FAVORITES } from '../../const'
 import styles from './CenterBlock.module.css'
-import { currentPageSelector } from '../../store/selectors/pleer'
+// import { currentPageSelector } from '../../store/selectors/pleer'
 
-export default function CenterBlock() {
-  const currentPage = useSelector(currentPageSelector)
+export default function CenterBlock({ playList, currentPage }) {
+  console.log('CenterBlock')
   return (
     <div className={styles.main}>
       <Search />
@@ -22,7 +22,7 @@ export default function CenterBlock() {
           <h2 className={styles.header}>Мой плейлист</h2>
         </section>
       )}
-      <PlayList />
+      <PlayList playList={playList} currentPage={currentPage} />
     </div>
   )
 }

@@ -2,7 +2,9 @@
 // import { setErrorMessage } from './store/actions/creators/pleer'
 
 export async function getPlayList() {
-  const response = await fetch('https://painassasin.online/catalog/track/all/')
+  const response = await fetch(
+    'https://skypro-music-api.skyeng.tech/catalog/track/all/'
+  )
   if (response.ok) {
     const data = await response.json()
     return data
@@ -13,17 +15,20 @@ export async function getPlayList() {
 }
 
 export async function registrateUser({ email, password, username }) {
-  const response = await fetch('https://painassasin.online/user/signup/', {
-    method: 'POST',
-    body: JSON.stringify({
-      email,
-      password,
-      username,
-    }),
-    headers: {
-      'content-type': 'application/json',
-    },
-  })
+  const response = await fetch(
+    'https://skypro-music-api.skyeng.tech/user/signup/',
+    {
+      method: 'POST',
+      body: JSON.stringify({
+        email,
+        password,
+        username,
+      }),
+      headers: {
+        'content-type': 'application/json',
+      },
+    }
+  )
 
   if (response.status === 201) {
     const data = await response.json()
@@ -44,16 +49,19 @@ export async function registrateUser({ email, password, username }) {
 }
 
 export async function autorizeUser({ email, password }) {
-  const response = await fetch('https://painassasin.online/user/login/', {
-    method: 'POST',
-    body: JSON.stringify({
-      email,
-      password,
-    }),
-    headers: {
-      'content-type': 'application/json',
-    },
-  })
+  const response = await fetch(
+    'https://skypro-music-api.skyeng.tech/user/login/',
+    {
+      method: 'POST',
+      body: JSON.stringify({
+        email,
+        password,
+      }),
+      headers: {
+        'content-type': 'application/json',
+      },
+    }
+  )
 
   if (response.status === 200) {
     const data = await response.json()
@@ -69,16 +77,19 @@ export async function autorizeUser({ email, password }) {
   } else throw new Error('Прочие ошибки сервера')
 }
 export async function getToken({ email, password }) {
-  const response = await fetch('https://painassasin.online/user/token/', {
-    method: 'POST',
-    body: JSON.stringify({
-      email,
-      password,
-    }),
-    headers: {
-      'content-type': 'application/json',
-    },
-  })
+  const response = await fetch(
+    'https://skypro-music-api.skyeng.tech/user/token/',
+    {
+      method: 'POST',
+      body: JSON.stringify({
+        email,
+        password,
+      }),
+      headers: {
+        'content-type': 'application/json',
+      },
+    }
+  )
 
   if (response.status === 200) {
     const data = await response.json()
@@ -95,7 +106,7 @@ export async function getToken({ email, password }) {
 }
 export async function refreshAccessToken(refreshToken) {
   const response = await fetch(
-    'https://painassasin.online/user/token/refresh/',
+    'https://skypro-music-api.skyeng.tech/user/token/refresh/',
     {
       method: 'POST',
       body: JSON.stringify({

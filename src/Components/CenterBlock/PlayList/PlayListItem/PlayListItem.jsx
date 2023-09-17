@@ -7,10 +7,11 @@ import { currentTrackSelector } from '../../../../store/selectors/pleer'
 
 function PlayListItem({ song, toggler }) {
   const dispatch = useDispatch()
+  const currentTrack = useSelector(currentTrackSelector)
+
   const handleSetCurrentTrack = () =>
     dispatch(setCurrentTrack({ currentTrack: song }))
-  const currentTrack = useSelector(currentTrackSelector)
-  // console.log(`PLI${currentTrack} ${song}`)
+
   const isCurrentTrack = currentTrack?.id && currentTrack.id === song?.id
 
   return (
@@ -51,6 +52,7 @@ function PlayListItem({ song, toggler }) {
             alt="time"
             action={toggler}
             song={song}
+            isCurrentTrack={isCurrentTrack}
           />
 
           <span className={styles.track__time}>

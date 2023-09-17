@@ -9,7 +9,7 @@ export default function Filter() {
   const [buttons, setButtons] = useState([false, false, false])
   const playList = useSelector(playListSelector)
   //   let [songFilter, yearFilter, genreFilter] = [['empty'], ['1958'], ['empty']]
-
+  //   console.log('Filter')
   if (!playList.length) return <div />
 
   const songFilter = playList.map((song) => (

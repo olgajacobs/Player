@@ -35,6 +35,7 @@ function PlayerControls({
   }
 
   const handleTogglePlaying = () => {
+    console.log(`ToggPlay isPlaying ${isPlaying}`)
     if (isPlaying) {
       audioRef.current.pause()
       dispatch(setIsPlaying({ isPlaying: false }))
@@ -57,7 +58,7 @@ function PlayerControls({
     console.log('PlayerControls')
     audioRef.current.play()
     dispatch(setIsPlaying({ isPlaying: true }))
-  }, [currentTrack])
+  }, [currentTrack.id])
 
   return (
     <div className={styles.main}>

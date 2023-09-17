@@ -1,20 +1,25 @@
-import { useSelector } from 'react-redux'
+import { useDispatch } from 'react-redux'
 import Icon from '../../Icon/Icon'
 import changeLike from '../../../customHooks/customHooks'
 import styles from './PlayList.module.css'
 import PlayListItem from './PlayListItem/PlayListItem'
-import {
-  currentPageSelector,
-  favoritesSelector,
-  playListSelector,
-} from '../../../store/selectors/pleer'
-import { PLAYLIST } from '../../../const'
+// import { favoritesSelector } from '../../../store/selectors/pleer'
+// import {
+//   currentPageSelector,
+//   favoritesSelector,
+//   playListSelector,
+// } from '../../../store/selectors/pleer'
+// import { PLAYLIST } from '../../../const'
+import { loadPlayList } from '../../../store/slices/pleer'
 
-export default function PlayList() {
-  const main = useSelector(playListSelector)
-  const favorites = useSelector(favoritesSelector)
-  const currentPage = useSelector(currentPageSelector)
-  const playList = currentPage === PLAYLIST ? main : favorites
+export default function PlayList({ playList, currentPage }) {
+  console.log('PlayList')
+  //   const main = useSelector(playListSelector)
+  //   const favorites = useSelector(favoritesSelector)
+  //   const currentPage = useSelector(currentPageSelector)
+  const dispatch = useDispatch()
+  dispatch(loadPlayList({ playList, currentPage }))
+  //   const pl = currentPage === PLAYLIST ? playList : favorites
   const disLike = changeLike(true)
   const like = changeLike(false)
 
