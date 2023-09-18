@@ -1,21 +1,19 @@
 import { useContext } from 'react'
-import { useSelector } from 'react-redux'
+// import { useSelector } from 'react-redux'
 import RightBlockItem from './RightBlockItem/RigthBlockItem'
 import styles from './RightBlock.module.css'
 import UserInContext from '../../contexts/context'
 import Icon from '../Icon/Icon'
-import { isLoadingSelector } from '../../store/selectors/pleer'
+// import { isLoadingSelector } from '../../store/selectors/pleer'
 
 function RightBlock() {
   const userInContext = useContext(UserInContext)
-  const isLoading = useSelector(isLoadingSelector)
-  const personal =
-    !isLoading && userInContext.user.id ? userInContext.user?.username : ''
+  //   const isLoading = useSelector(isLoadingSelector)
+  const personal = userInContext.user?.username
 
   const logout = () => {
     localStorage.removeItem('userPleer')
     userInContext.setUser(undefined)
-    console.log('logout')
   }
   return (
     <div className={styles.main}>
