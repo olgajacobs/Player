@@ -12,21 +12,17 @@ export default function Skeleton({ isLoading = false, errorMessage = null }) {
         <RightBlock />
       </div>
 
-      {isLoading && (
-        <div className={styles.shadow}>
-          <p className={styles.loading}>Loading...</p>
-        </div>
-      )}
-      {errorMessage && (
-        <div className={styles.shadow}>
+      <div className={styles.shadow}>
+        {isLoading && <p className={styles.loading}>Loading...</p>}
+        {errorMessage && (
           <div>
             <p className={styles.error}>
               Не удалось загрузить плейлист, попробуйте позже!
             </p>
             <p className={styles.error}>{`Ошибка: ${errorMessage}`}</p>
           </div>
-        </div>
-      )}
+        )}
+      </div>
     </div>
   )
 }
