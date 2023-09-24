@@ -11,9 +11,9 @@ function TrackPlay() {
   const currentTrack = useSelector(currentTrackSelector)
   const disLike = changeLike(true)
   const like = changeLike(false)
-  console.dir(`SSSSSSSSSSSSS ${currentTrack.isLiked}`)
+  //   console.dir(`SSSSSSSSSSSSS ${currentTrack.isLiked}`)
   useEffect(() => {
-    console.log(`uf в trackPlay: ${currentTrack.isLiked}`)
+    // console.log(`uf в trackPlay: ${currentTrack.isLiked}`)
     setUpdateLike(!updateLike)
   }, [currentTrack.isLiked])
   return (

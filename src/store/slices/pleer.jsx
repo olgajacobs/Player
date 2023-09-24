@@ -76,6 +76,7 @@ const pleerSlice = createSlice({
       state.isLoading = action.payload.isLoading
     },
     setIsPlaying(state, action) {
+      console.log(`isPlaying changed ${action.payload.isPlaying}`)
       state.isPlaying = action.payload.isPlaying
     },
     setActivePlayList(state, action) {
