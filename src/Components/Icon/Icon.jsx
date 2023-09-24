@@ -32,7 +32,6 @@ function Icon({
       console.log(`isCurrent ${isCurrentTrack}`)
       console.log(toggler)
       if (toggler === '1' || isCurrentTrack) {
-        console.log('Like is changed')
         dispatch(toggleIsLiked())
       }
       action(song)
