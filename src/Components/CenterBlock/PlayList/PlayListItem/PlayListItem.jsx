@@ -8,13 +8,14 @@ import { currentTrackSelector } from '../../../../store/selectors/pleer'
 function PlayListItem({ song, toggler }) {
   const dispatch = useDispatch()
   const currentTrack = useSelector(currentTrackSelector)
+  const isCurrentTrack = currentTrack?.id && currentTrack.id === song?.id
 
   const handleSetCurrentTrack = () => {
-    dispatch(setCurrentTrack({ currentTrack: song }))
-    dispatch(setIsPlaying({ isPlaying: true }))
+    if (!isCurrentTrack) {
+      dispatch(setCurrentTrack({ currentTrack: song }))
+      dispatch(setIsPlaying({ isPlaying: true }))
+    }
   }
-
-  const isCurrentTrack = currentTrack?.id && currentTrack.id === song?.id
 
   return (
     <div className={styles.main}>
