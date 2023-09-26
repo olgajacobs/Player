@@ -35,7 +35,6 @@ function PlayerControls({
   }
 
   const handleTogglePlaying = () => {
-    console.log(`ToggPlay isPlaying ${isPlaying}`)
     if (isPlaying) {
       audioRef.current.pause()
       dispatch(setIsPlaying({ isPlaying: false }))
@@ -55,9 +54,10 @@ function PlayerControls({
   }
 
   useEffect(() => {
-    console.log('PlayerControls')
-    audioRef.current.play()
-    dispatch(setIsPlaying({ isPlaying: true }))
+    if (isPlaying) {
+      audioRef.current.play()
+      //   dispatch(setIsPlaying({ isPlaying: true }))
+    }
   }, [currentTrack.id])
 
   return (

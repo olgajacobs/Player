@@ -24,6 +24,7 @@ export default function AuthPage({ isLoginMode = false }) {
 
       try {
         const token = await getToken({ email, password })
+        console.log('Tokens updated')
         localStorage.setItem('refreshToken', JSON.stringify(token?.refresh))
         localStorage.setItem('accessToken', JSON.stringify(token?.access))
         navigate('/', { replace: true })
@@ -54,18 +55,17 @@ export default function AuthPage({ isLoginMode = false }) {
       const user = await autorizeUser({ email, password })
       localStorage.setItem('userPleer', JSON.stringify(user))
       userInContext.setUser(user)
-
+      console.log('user updated')
       try {
         const token = await getToken({ email, password })
+        console.log('Tokens updated')
         localStorage.setItem('refreshToken', JSON.stringify(token?.refresh))
         localStorage.setItem('accessToken', JSON.stringify(token?.access))
         navigate('/', { replace: true })
       } catch (apiError) {
-        // localStorage.setItem('userPleer', JSON.stringify({ username: 'Olga' }))
         setError(error + apiError.message)
       }
     } catch (apiError) {
-      //   localStorage.setItem('userPleer', JSON.stringify({ username: 'Olga' }))
       setError(error + apiError.message)
     } finally {
       setIsButtonBlocked(false)

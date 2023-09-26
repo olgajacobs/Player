@@ -1,4 +1,3 @@
-import { useEffect } from 'react'
 // import { useDispatch } from 'react-redux'
 import MainPage from '../../Components/MainPage/MainPage'
 import Skeleton from '../../Components/Skeleton/Skeleton'
@@ -12,10 +11,6 @@ export default function Main() {
   const { data, error, isLoading, isError, isSuccess, isFetching } =
     useGetPlayListQuery()
   console.log(isLoading, isError, isSuccess, isFetching)
-
-  useEffect(() => {
-    console.log('useEffect')
-  }, [])
 
   if (isLoading) {
     return <Skeleton isLoading={isLoading} />

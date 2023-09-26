@@ -29,8 +29,6 @@ function Icon({
   const handleClick = (e) => {
     e.stopPropagation()
     if (action) {
-      console.log(`isCurrent ${isCurrentTrack}`)
-      console.log(toggler)
       if (toggler === '1' || isCurrentTrack) {
         dispatch(toggleIsLiked())
       }

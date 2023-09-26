@@ -2,17 +2,20 @@ import { useDispatch, useSelector } from 'react-redux'
 import styles from './PlayListItem.module.css'
 import Icon from '../../../Icon/Icon'
 import { timeFormat } from '../../../../util'
-import { setCurrentTrack } from '../../../../store/slices/pleer'
+import { setCurrentTrack, setIsPlaying } from '../../../../store/slices/pleer'
 import { currentTrackSelector } from '../../../../store/selectors/pleer'
 
 function PlayListItem({ song, toggler }) {
   const dispatch = useDispatch()
   const currentTrack = useSelector(currentTrackSelector)
-
-  const handleSetCurrentTrack = () =>
-    dispatch(setCurrentTrack({ currentTrack: song }))
-
   const isCurrentTrack = currentTrack?.id && currentTrack.id === song?.id
+
+  const handleSetCurrentTrack = () => {
+    if (!isCurrentTrack) {
+      dispatch(setCurrentTrack({ currentTrack: song }))
+      dispatch(setIsPlaying({ isPlaying: true }))
+    }
+  }
 
   return (
     <div className={styles.main}>
