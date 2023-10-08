@@ -1,12 +1,10 @@
 import { createApi, fetchBaseQuery } from '@reduxjs/toolkit/query/react'
-import { setAuth } from './store/slices/auth'
 
 const baseQueryWithReauth = async (args, api, extraOptions) => {
   const baseQuery = fetchBaseQuery({
     baseUrl: 'https://skypro-music-api.skyeng.tech',
-    prepareHeaders: (headers, { getState }) => {
-      const token = getState().auth.access
-      // Чтобы выключить отображение debug логов в консоли браузера, включите уровень Verbose\Debug в консоли разработчика
+    prepareHeaders: (headers) => {
+      const token = JSON.parse(localStorage.getItem('accessToken')) ?? null
       console.debug('Использую токен из стора', { token })
       if (token) {
         headers.set('authorization', `Bearer ${token}`)
@@ -26,17 +24,18 @@ const baseQueryWithReauth = async (args, api, extraOptions) => {
 
   // Ниже обрабатываем 401 код
   // Функция которая отчищает данные о юзере в сторе и отправляет на страницу логина
+
   const forceLogout = () => {
     console.debug('Принудительная авторизация!')
-    api.dispatch(setAuth(null))
-    window.location.navigate('/login')
+    localStorage.removeItem('userPleer')
+    window.location.assign('/login')
   }
 
   // Функция getState возвращает состояние redux стейта целиком, ее нам предоставляет rtk query, она прилетает параметром запроса в функцию
-  const { auth } = api.getState()
-  console.debug('Данные пользователя в сторе', { auth })
+  const refreshToken = JSON.parse(localStorage.getItem('refreshToken')) ?? null
+  console.debug('Данные пользователя в сторе', { refreshToken })
   // Если в сторе нет refresh токена, то помочь пользователю мы уже ничем не сможем, разлогиниваем его и отправляем авторизоваться руками
-  if (!auth.refresh) {
+  if (!refreshToken) {
     return forceLogout()
   }
 
@@ -46,7 +45,7 @@ const baseQueryWithReauth = async (args, api, extraOptions) => {
       url: '/user/token/refresh/',
       method: 'POST',
       body: {
-        refresh: auth.refresh,
+        refresh: refreshToken,
       },
     },
     api,
@@ -59,8 +58,7 @@ const baseQueryWithReauth = async (args, api, extraOptions) => {
   }
 
   // Мы наконец получили новый access токен, сохраняем его в стор, чтобы последующие запросы могли его использовать внутри prepareHeaders
-  api.dispatch(setAuth({ ...auth, access: refreshResult.data.access }))
-
+  localStorage.setItem('accessToken', JSON.stringify(refreshResult.data.access))
   const retryResult = await baseQuery(args, api, extraOptions)
 
   // Если повторный запрос выполнился с 401 кодом, то что-то совсем пошло не так, отправляем на принудительную ручную авторизацию
@@ -82,21 +80,21 @@ export const RTKApi = createApi({
   endpoints: (build) => ({
     getFavorites: build.query({
       query: () => ({
-        url: `track/favorite/all/`,
+        url: `catalog/track/favorite/all/`,
         method: 'GET',
       }),
       providesTags: () => [TRACKS_TAG],
     }),
     deleteFavorite: build.mutation({
       query: ({ id }) => ({
-        url: `track/${id}/favorite/`,
+        url: `catalog/track/${id}/favorite/`,
         method: 'DELETE',
       }),
       invalidatesTags: [TRACKS_TAG],
     }),
     addFavorite: build.mutation({
       query: ({ id, body }) => ({
-        url: `track/${id}/favorite/`,
+        url: `catalog/track/${id}/favorite/`,
         method: 'POST',
         body,
       }),
@@ -104,7 +102,7 @@ export const RTKApi = createApi({
     }),
     getPlayList: build.query({
       query: () => ({
-        url: `track/all/`,
+        url: `catalog/track/all/`,
         method: 'GET',
       }),
       providesTags: () => [TRACKS_TAG],
